@@ -12,6 +12,17 @@
 - **符号词典**：按 13 个数学领域整理的双语符号表（LaTeX / Unicode / Lean / SymPy 对照），支持搜索与复制；
 - **例子库**：可直接载入执行的研究生级例题（分析、代数、范畴、逻辑、拓扑、绘图等）。
 
+## 安装
+
+- 从 GitHub 源码安装（推荐，固定提交见发布页）：
+
+```bash
+dsh plugin --profile desktop add github:FileXego/dsh-mathlab
+```
+
+- npm 包名为 `dsh-mathlab`（发布后可用 `dsh plugin --profile desktop add dsh-mathlab`）。
+- 安装后重启/重载 DSH；侧边栏出现 **数学研究台**。
+
 ## 使用方式
 
 ### 在 Web 界面
@@ -115,6 +126,8 @@ Python 不可用时，面板会显示"引擎启动中 / 引擎不可用"，`math
 Lean 安装（任选其一）：安装 [elan](https://github.com/leanprover/elan) 后执行 `elan toolchain install stable`，或把 `lean`/`lake` 加入 PATH；插件会自动探测。
 
 ## 架构
+
+分层、宿主边界与“高内聚低耦合”说明见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。
 
 ```
 dsh-mathlab (bundle)
