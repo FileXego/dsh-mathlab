@@ -1,0 +1,867 @@
+{
+  "snippets": [
+    {
+      "id": "irrational-sqrt2",
+      "title": "sqrt(2) is irrational",
+      "title_zh": "√2 是无理数",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "theorem sqrt_two_irrational : Irrational (Real.sqrt 2) := by\n  simpa using irrational_sqrt_two\n",
+      "explanation": "Mathlib already proves the irrationality of the square root of two as irrational_sqrt_two; simpa only adjusts the statement.",
+      "explanation_zh": "Mathlib 中已有 irrational_sqrt_two 证明 √2 的无理性；simpa 只负责调整命题形式。",
+      "tags": [
+        "number theory",
+        "irrational",
+        "real"
+      ]
+    },
+    {
+      "id": "and-commute",
+      "title": "Conjunction commutes",
+      "title_zh": "合取交换律",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (p q : Prop) : p ∧ q → q ∧ p := by\n  intro h\n  exact ⟨h.2, h.1⟩\n",
+      "explanation": "A proof of p ∧ q is a pair; swap the two components to get q ∧ p.",
+      "explanation_zh": "p ∧ q 的证明是一个对；交换两个分量即得 q ∧ p。",
+      "tags": [
+        "logic",
+        "Prop",
+        "And"
+      ]
+    },
+    {
+      "id": "or-intro",
+      "title": "Introducing a disjunction",
+      "title_zh": "引入析取",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (p q : Prop) (hp : p) : p ∨ q := Or.inl hp\n",
+      "explanation": "To prove p ∨ q it suffices to prove one side; Or.inl and Or.inr are the two injections.",
+      "explanation_zh": "要证 p ∨ q 只需证明其中一边；Or.inl 与 Or.inr 是两个嵌入。",
+      "tags": [
+        "logic",
+        "Or"
+      ]
+    },
+    {
+      "id": "contradiction-elim",
+      "title": "From p and not p",
+      "title_zh": "由 p 与 ¬p",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (p : Prop) (hp : p) (hnp : ¬p) : False := hnp hp\n",
+      "explanation": "Not p is defined as p → False, so applying it to a proof of p yields False.",
+      "explanation_zh": "¬p 定义为 p → False，因此把它作用于 p 的证明得到 False。",
+      "tags": [
+        "logic",
+        "Not",
+        "False"
+      ]
+    },
+    {
+      "id": "forall-elim",
+      "title": "Instantiating a universal statement",
+      "title_zh": "全称命题的实例化",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (α : Type) (P : α → Prop) : (∀ x, P x) → ∀ y, P y :=\n  fun h y => h y\n",
+      "explanation": "A proof of ∀ x, P x is a function, so it can be applied to any term y to get P y.",
+      "explanation_zh": "∀ x, P x 的证明是一个函数，可作用于任意项 y 得到 P y。",
+      "tags": [
+        "logic",
+        "forall",
+        "dependent types"
+      ]
+    },
+    {
+      "id": "equality-symm",
+      "title": "Symmetry of equality",
+      "title_zh": "等式的对称性",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (a b : ℕ) (h : a = b) : b = a := h.symm\n",
+      "explanation": "Equality is an equivalence relation; Eq.symm, Eq.trans and rfl give symmetry, transitivity and reflexivity.",
+      "explanation_zh": "相等是等价关系；Eq.symm、Eq.trans 与 rfl 分别给出对称、传递与自反。",
+      "tags": [
+        "equality",
+        "Eq"
+      ]
+    },
+    {
+      "id": "simp-add-zero",
+      "title": "Simplifying n + 0",
+      "title_zh": "化简 n + 0",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (n : ℕ) : n + 0 = n := by simp\n",
+      "explanation": "The simplifier rewrites with the standard lemma Nat.add_zero.",
+      "explanation_zh": "simp 使用标准引理 Nat.add_zero 完成重写。",
+      "tags": [
+        "simp",
+        "natural numbers"
+      ]
+    },
+    {
+      "id": "rw-basic",
+      "title": "Rewriting with an equation",
+      "title_zh": "用等式重写",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (a b : ℕ) (h : a = b) : a + 1 = b + 1 := by rw [h]\n",
+      "explanation": "rw [h] replaces a by b in the goal using the equation h.",
+      "explanation_zh": "rw [h] 用等式 h 把目标中的 a 替换为 b。",
+      "tags": [
+        "rw",
+        "tactics"
+      ]
+    },
+    {
+      "id": "apply-exact",
+      "title": "Applying a hypothesis and closing",
+      "title_zh": "应用假设并关闭目标",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (p q : Prop) (hpq : p → q) (hp : p) : q := by\n  apply hpq\n  exact hp\n",
+      "explanation": "apply hpq reduces the goal q to p; exact hp then supplies the proof.",
+      "explanation_zh": "apply hpq 把目标 q 归约为 p；exact hp 再给出证明。",
+      "tags": [
+        "tactics",
+        "apply",
+        "exact"
+      ]
+    },
+    {
+      "id": "induction-sum-odd",
+      "title": "Sum of the first n odd numbers",
+      "title_zh": "前 n 个奇数之和",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "open Finset\n\ntheorem sum_odd (n : ℕ) : (∑ i in range n, (2 * i + 1)) = n ^ 2 := by\n  induction n with\n  | zero => simp\n  | succ n ih =>\n    rw [sum_range_succ, ih]\n    ring\n",
+      "explanation": "Induction on n; the successor step uses Finset.sum_range_succ and ring after the induction hypothesis.",
+      "explanation_zh": "对 n 归纳；后继步使用 Finset.sum_range_succ 与归纳假设，再用 ring 收尾。",
+      "tags": [
+        "Finset",
+        "induction",
+        "Finset.sum_range_succ"
+      ]
+    },
+    {
+      "id": "structure-def",
+      "title": "Defining a structure",
+      "title_zh": "定义结构体",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "structure Point where\n  x : ℝ\n  y : ℝ\n\nexample : Point := { x := 0, y := 0 }\n",
+      "explanation": "structure bundles named fields and generates projections Point.x and Point.y.",
+      "explanation_zh": "structure 打包带名域，并生成投影 Point.x 与 Point.y。",
+      "tags": [
+        "structure",
+        "syntax"
+      ]
+    },
+    {
+      "id": "inductive-def",
+      "title": "An inductive predicate",
+      "title_zh": "归纳谓词",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "inductive Even : ℕ → Prop\n  | zero : Even 0\n  | add_two : ∀ n, Even n → Even (n + 2)\n\nexample : Even 4 := Even.add_two 2 (Even.add_two 0 Even.zero)\n",
+      "explanation": "Inductive types are declared by their constructors; proofs are built by applying them.",
+      "explanation_zh": "归纳类型由构造子声明；证明通过应用构造子构造。",
+      "tags": [
+        "inductive",
+        "syntax"
+      ]
+    },
+    {
+      "id": "typeclass-def",
+      "title": "Declaring a typeclass and instance",
+      "title_zh": "声明类型类与实例",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "class HasNorm (α : Type) where\n  norm : α → ℝ\n\ninstance : HasNorm ℝ := ⟨fun x => x⟩\n",
+      "explanation": "class declares a typeclass; instance registers an implementation for typeclass resolution.",
+      "explanation_zh": "class 声明类型类；instance 为类型类解析注册实现。",
+      "tags": [
+        "typeclass",
+        "class",
+        "instance"
+      ]
+    },
+    {
+      "id": "calc-block",
+      "title": "Chaining equalities with calc",
+      "title_zh": "用 calc 串联等式",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (a b c : ℕ) (hab : a = b) (hbc : b = c) : a = c := by\n  calc\n    a = b := hab\n    _ = c := hbc\n",
+      "explanation": "calc blocks display a chain of relations, each step justified by a proof term.",
+      "explanation_zh": "calc 块展示一串关系，每一步都由证明项支持。",
+      "tags": [
+        "calc",
+        "syntax"
+      ]
+    },
+    {
+      "id": "fib-match",
+      "title": "Fibonacci by pattern matching",
+      "title_zh": "用模式匹配定义斐波那契",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "def fib : ℕ → ℕ\n  | 0 => 0\n  | 1 => 1\n  | Nat.succ (Nat.succ n) => fib (Nat.succ n) + fib n\n\nexample : fib 5 = 5 := by decide\n",
+      "explanation": "Structural recursion on the two predecessors; decide evaluates the closed numeral computation.",
+      "explanation_zh": "对两个前驱作结构递归；decide 求值闭项计算。",
+      "tags": [
+        "match",
+        "pattern matching",
+        "Nat"
+      ]
+    },
+    {
+      "id": "do-option",
+      "title": "do-notation with Option",
+      "title_zh": "Option 的 do 记号",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example : Option ℕ := do\n  let x ← some 2\n  let y ← some 3\n  pure (x + y)\n",
+      "explanation": "do-notation sequences monadic computations; here the Option monad short-circuits on none.",
+      "explanation_zh": "do 记号按单子顺序组合计算；此处 Option 单子在 none 处短路。",
+      "tags": [
+        "do",
+        "monad",
+        "Option"
+      ]
+    },
+    {
+      "id": "list-length-append",
+      "title": "Length of an appended list",
+      "title_zh": "连接列表的长度",
+      "level": "beginner",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (l₁ l₂ : List ℕ) : (l₁ ++ l₂).length = l₁.length + l₂.length :=\n  List.length_append l₁ l₂\n",
+      "explanation": "Mathlib's List.length_append is exactly the statement that length is additive over ++.",
+      "explanation_zh": "Mathlib 的 List.length_append 正说明长度对 ++ 可加。",
+      "tags": [
+        "List",
+        "length",
+        "append"
+      ]
+    },
+    {
+      "id": "group-mul-inv",
+      "title": "Multiplying by an inverse",
+      "title_zh": "乘以逆元",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example {G : Type*} [Group G] (a : G) : a * a⁻¹ = 1 :=\n  mul_inv_cancel a\n",
+      "explanation": "mul_inv_cancel is the group axiom a * a⁻¹ = 1, available for any Group instance.",
+      "explanation_zh": "mul_inv_cancel 即群公理 a * a⁻¹ = 1，对任意 Group 实例成立。",
+      "tags": [
+        "algebra",
+        "group",
+        "inverse"
+      ]
+    },
+    {
+      "id": "continuous-comp",
+      "title": "Continuity of a polynomial",
+      "title_zh": "多项式的连续性",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example : Continuous fun x : ℝ => x ^ 2 + 1 := by\n  continuity\n",
+      "explanation": "The continuity tactic closes goals built from continuous operations (addition, powers, constants).",
+      "explanation_zh": "continuity 策略可关闭由连续运算（加法、幂、常量）构成的目标。",
+      "tags": [
+        "analysis",
+        "continuity",
+        "Continuous"
+      ]
+    },
+    {
+      "id": "hasderiv-pow",
+      "title": "Derivative of x squared",
+      "title_zh": "x 平方的导数",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (x : ℝ) : HasDerivAt (fun y : ℝ => y ^ 2) (2 * x) x := by\n  simpa using hasDerivAt_pow 2 x\n",
+      "explanation": "hasDerivAt_pow gives the derivative n * x^(n-1); simpa specialises it to n = 2.",
+      "explanation_zh": "hasDerivAt_pow 给出导数 n * x^(n-1)；simpa 将其特化到 n = 2。",
+      "tags": [
+        "analysis",
+        "derivative",
+        "HasDerivAt"
+      ]
+    },
+    {
+      "id": "tendsto-id",
+      "title": "Identity tends to infinity",
+      "title_zh": "恒等映射趋于无穷",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "open Filter\n\nexample : Tendsto (fun x : ℝ => x) atTop atTop := tendsto_id\n",
+      "explanation": "At the atTop filter the identity map is a tendsto map; tendsto_id is the generic lemma.",
+      "explanation_zh": "在 atTop 滤子下恒等映射是 tendsto 映射；tendsto_id 是通用引理。",
+      "tags": [
+        "analysis",
+        "limits",
+        "Filter.Tendsto"
+      ]
+    },
+    {
+      "id": "tendsto-const",
+      "title": "Constant sequence has its limit",
+      "title_zh": "常数序列的极限",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "open Filter\n\nexample (c : ℝ) : Tendsto (fun _ : ℝ => c) atTop (nhds c) := tendsto_const_nhds\n",
+      "explanation": "A constant function converges to that constant in the neighbourhood filter nhds c.",
+      "explanation_zh": "常函数收敛到该常数（邻域滤子 nhds c）。",
+      "tags": [
+        "analysis",
+        "limits",
+        "Filter.Tendsto"
+      ]
+    },
+    {
+      "id": "set-union-mem",
+      "title": "Membership in a union",
+      "title_zh": "属于并集",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (α : Type) (s t : Set α) (x : α) : x ∈ s ∪ t ↔ x ∈ s ∨ x ∈ t := by\n  simp\n",
+      "explanation": "simp normalises set membership through the defining equivalences of union.",
+      "explanation_zh": "simp 依据并集的定义等价关系规范化集合隶属。",
+      "tags": [
+        "set theory",
+        "Set",
+        "union"
+      ]
+    },
+    {
+      "id": "set-subset-union",
+      "title": "A set is a subset of its union",
+      "title_zh": "集合包含于其并集",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (α : Type) (s t : Set α) : s ⊆ s ∪ t := by\n  intro x hx\n  exact Or.inl hx\n",
+      "explanation": "Subset goals are introduced pointwise; membership in the left summand gives membership in the union.",
+      "explanation_zh": "子集目标按点引入；属于左边加项即属于并集。",
+      "tags": [
+        "set theory",
+        "Set",
+        "subset"
+      ]
+    },
+    {
+      "id": "function-injective",
+      "title": "Using injectivity",
+      "title_zh": "使用单射性",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (f : ℕ → ℕ) (hf : Function.Injective f) (a b : ℕ) (h : f a = f b) : a = b :=\n  hf h\n",
+      "explanation": "Function.Injective f unfolds to f a = f b → a = b, so injectivity can be applied directly.",
+      "explanation_zh": "Function.Injective f 展开为 f a = f b → a = b，可直接应用。",
+      "tags": [
+        "functions",
+        "Function.Injective"
+      ]
+    },
+    {
+      "id": "nat-prime-seven",
+      "title": "7 is prime",
+      "title_zh": "7 是素数",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example : Nat.Prime 7 := by decide\n",
+      "explanation": "Primality of natural numerals is decidable, so kernel reduction by decide proves it.",
+      "explanation_zh": "自然数素性是可行的判定问题，decide 以内核归约完成证明。",
+      "tags": [
+        "number theory",
+        "Nat.Prime"
+      ]
+    },
+    {
+      "id": "nat-prime-two",
+      "title": "2 is prime",
+      "title_zh": "2 是素数",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example : Nat.Prime 2 := Nat.prime_two\n",
+      "explanation": "Mathlib provides Nat.prime_two as a named theorem for the smallest prime.",
+      "explanation_zh": "Mathlib 以命名定理 Nat.prime_two 给出最小素数。",
+      "tags": [
+        "number theory",
+        "Nat.Prime"
+      ]
+    },
+    {
+      "id": "dvd-trans",
+      "title": "Transitivity of divisibility",
+      "title_zh": "整除的传递性",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (a b c : ℕ) (h₁ : a ∣ b) (h₂ : b ∣ c) : a ∣ c :=\n  dvd_trans h₁ h₂\n",
+      "explanation": "dvd_trans states that divisibility is transitive.",
+      "explanation_zh": "dvd_trans 说明整除关系具有传递性。",
+      "tags": [
+        "number theory",
+        "divisibility"
+      ]
+    },
+    {
+      "id": "finset-sum-range-succ",
+      "title": "Sum over range (n+1)",
+      "title_zh": "range(n+1) 上的求和",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "open Finset\n\nexample (f : ℕ → ℕ) (n : ℕ) :\n    ∑ i in range (n + 1), f i = ∑ i in range n, f i + f n :=\n  sum_range_succ f n\n",
+      "explanation": "Finset.sum_range_succ peels the last term off a sum over range (n + 1).",
+      "explanation_zh": "Finset.sum_range_succ 把 range(n+1) 求和中的最后一项分离出来。",
+      "tags": [
+        "combinatorics",
+        "Finset",
+        "Finset.sum_range_succ"
+      ]
+    },
+    {
+      "id": "nat-choose",
+      "title": "A binomial coefficient",
+      "title_zh": "一个二项式系数",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example : Nat.choose 6 3 = 20 := by decide\n",
+      "explanation": "Nat.choose n k is the binomial coefficient; decide evaluates the closed numeral expression.",
+      "explanation_zh": "Nat.choose n k 是二项式系数；decide 求值闭数值表达式。",
+      "tags": [
+        "combinatorics",
+        "Nat.choose"
+      ]
+    },
+    {
+      "id": "ideal-add",
+      "title": "Ideals are closed under addition",
+      "title_zh": "理想对加法封闭",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (R : Type*) [CommRing R] (I : Ideal R) (x y : R) (hx : x ∈ I) (hy : y ∈ I) :\n    x + y ∈ I :=\n  I.add_mem hx hy\n",
+      "explanation": "Ideal.add_mem is the subgroup closure of an ideal under addition.",
+      "explanation_zh": "Ideal.add_mem 是理想作为加法子群的封闭性。",
+      "tags": [
+        "algebra",
+        "Ideal",
+        "ring"
+      ]
+    },
+    {
+      "id": "subgroup-mul",
+      "title": "Subgroups are closed under multiplication",
+      "title_zh": "子群对乘法封闭",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example {G : Type*} [Group G] (H : Subgroup G) (x y : H) : x * y ∈ H :=\n  H.mul_mem x.2 y.2\n",
+      "explanation": "Subgroup.mul_mem combines the carrier proofs x.2, y.2 into a proof that the product lies in H.",
+      "explanation_zh": "Subgroup.mul_mem 把载体证明 x.2、y.2 合成乘积属于 H 的证明。",
+      "tags": [
+        "algebra",
+        "Subgroup",
+        "group"
+      ]
+    },
+    {
+      "id": "polynomial-eval",
+      "title": "Evaluating the polynomial X",
+      "title_zh": "求值多项式 X",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example : (Polynomial.X : Polynomial ℤ).eval 3 = 3 := by\n  simp\n",
+      "explanation": "The evaluation homomorphism sends the indeterminate X to the argument; simp knows eval_X.",
+      "explanation_zh": "求值同态把不定元 X 映到参数；simp 了解 eval_X。",
+      "tags": [
+        "algebra",
+        "Polynomial"
+      ]
+    },
+    {
+      "id": "det2-selfcontained",
+      "title": "A 2x2 determinant",
+      "title_zh": "2x2 行列式",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "def det2 (a b c d : ℚ) : ℚ := a * d - b * c\n\nexample : det2 1 2 3 4 = -2 := by\n  norm_num [det2]\n",
+      "explanation": "A self-contained definition of the 2x2 determinant avoids any Matrix API assumptions.",
+      "explanation_zh": "自包含地定义 2x2 行列式，避免依赖 Matrix API 细节。",
+      "tags": [
+        "linear algebra",
+        "determinant"
+      ]
+    },
+    {
+      "id": "category-functor",
+      "title": "A functor fixes its object map",
+      "title_zh": "函子固定对象映射",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "open CategoryTheory\n\nexample (C D : Type*) [Category C] [Category D] (F : C ⥤ D) : F.obj = F.obj := rfl\n",
+      "explanation": "A functor F : C ⥤ D has an object map F.obj; the equality is definitional.",
+      "explanation_zh": "函子 F : C ⥤ D 的对象映射为 F.obj；该等式按定义成立。",
+      "tags": [
+        "category theory",
+        "Functor"
+      ]
+    },
+    {
+      "id": "natural-transformation",
+      "title": "Components of a natural transformation",
+      "title_zh": "自然变换的分量",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "open CategoryTheory\n\nexample {C D : Type*} [Category C] [Category D] (F G : C ⥤ D) (α : F ⟶ G) :\n    α.app = α.app := rfl\n",
+      "explanation": "F ⟶ G is CategoryTheory.NatTrans F G; its component at an object is α.app.",
+      "explanation_zh": "F ⟶ G 即 CategoryTheory.NatTrans F G；其在对象处的分量为 α.app。",
+      "tags": [
+        "category theory",
+        "NatTrans"
+      ]
+    },
+    {
+      "id": "adjunction",
+      "title": "An adjunction is a structure",
+      "title_zh": "伴随是结构",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "open CategoryTheory\n\nexample {C D : Type*} [Category C] [Category D] (F : C ⥤ D) (G : D ⥤ C)\n    (adj : F ⊣ G) : F ⊣ G := adj\n",
+      "explanation": "The notation F ⊣ G is CategoryTheory.Adjunction F G, packaging unit and counit with triangle identities.",
+      "explanation_zh": "记号 F ⊣ G 即 CategoryTheory.Adjunction F G，包含单位、余单位与三角恒等式。",
+      "tags": [
+        "category theory",
+        "Adjunction"
+      ]
+    },
+    {
+      "id": "measure-integral",
+      "title": "An integral is well typed",
+      "title_zh": "积分的类型正确性",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "open MeasureTheory\n\nexample (μ : Measure ℝ) (f : ℝ → ℝ) : ∫ x, f x ∂μ = ∫ x, f x ∂μ := rfl\n",
+      "explanation": "The Bochner integral ∫ x, f x ∂μ is notation for MeasureTheory.integral μ f; the equality is rfl.",
+      "explanation_zh": "Bochner 积分 ∫ x, f x ∂μ 是 MeasureTheory.integral μ f 的记号；等式按定义成立。",
+      "tags": [
+        "analysis",
+        "measure theory",
+        "MeasureTheory.integral"
+      ]
+    },
+    {
+      "id": "measurable-id",
+      "title": "The identity is measurable",
+      "title_zh": "恒等映射可测",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example : Measurable (fun x : ℝ => x) := measurable_id\n",
+      "explanation": "measurable_id is the generic measurability of the identity map on any measurable space.",
+      "explanation_zh": "measurable_id 给出任意可测空间上恒等映射的可测性。",
+      "tags": [
+        "analysis",
+        "measure theory",
+        "Measurable"
+      ]
+    },
+    {
+      "id": "simplegraph-empty",
+      "title": "The empty simple graph",
+      "title_zh": "空简单图",
+      "level": "intermediate",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (V : Type*) : SimpleGraph V := ⊥\n",
+      "explanation": "SimpleGraph V has a bottom element ⊥, the graph with no edges; ⊤ is the complete graph.",
+      "explanation_zh": "SimpleGraph V 有底元 ⊥（无边图）；⊤ 为完全图。",
+      "tags": [
+        "combinatorics",
+        "SimpleGraph"
+      ]
+    },
+    {
+      "id": "integral-zero-simp",
+      "title": "Integral of the zero function",
+      "title_zh": "零函数的积分",
+      "level": "advanced",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "open MeasureTheory\n\nexample : ∫ _x : ℝ, (0 : ℝ) ∂volume = 0 := by\n  simp\n",
+      "explanation": "The integral is additive and the simp set contains integral_zero; volume is Lebesgue measure on ℝ.",
+      "explanation_zh": "积分具有可加性，simp 集含 integral_zero；volume 为 ℝ 上的勒贝格测度。",
+      "tags": [
+        "analysis",
+        "measure theory",
+        "integral"
+      ]
+    },
+    {
+      "id": "continuous-linear-map",
+      "title": "Continuous linear maps are continuous",
+      "title_zh": "连续线性映射是连续的",
+      "level": "advanced",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (f : ℝ →L[ℝ] ℝ) : Continuous f := f.continuous\n",
+      "explanation": "Bundled continuous linear maps carry their continuity proof as the projection f.continuous.",
+      "explanation_zh": "打包的连续线性映射把连续性证明作为投影 f.continuous 携带。",
+      "tags": [
+        "analysis",
+        "ContinuousLinearMap"
+      ]
+    },
+    {
+      "id": "linear-map-id",
+      "title": "The identity linear map",
+      "title_zh": "恒等线性映射",
+      "level": "advanced",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (V : Type*) [AddCommGroup V] [Module ℚ V] :\n    (LinearMap.id : V →ₗ[ℚ] V) = LinearMap.id := rfl\n",
+      "explanation": "LinearMap.id is the identity endomorphism of a module; its type is fixed by the annotation.",
+      "explanation_zh": "LinearMap.id 是模的恒等自同态；其类型由类型标注固定。",
+      "tags": [
+        "linear algebra",
+        "LinearMap"
+      ]
+    },
+    {
+      "id": "finset-card-range",
+      "title": "Cardinality of range n",
+      "title_zh": "range n 的基数",
+      "level": "advanced",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "open Finset\n\nexample (n : ℕ) : (range n).card = n := card_range n\n",
+      "explanation": "Finset.card_range is the standard statement that {0, ..., n-1} has n elements.",
+      "explanation_zh": "Finset.card_range 是 {0, …, n-1} 含 n 个元素的标准表述。",
+      "tags": [
+        "combinatorics",
+        "Finset",
+        "cardinality"
+      ]
+    },
+    {
+      "id": "nat-factorial-pos",
+      "title": "Factorials are positive",
+      "title_zh": "阶乘为正",
+      "level": "advanced",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (n : ℕ) : 0 < n.factorial := n.factorial_pos\n",
+      "explanation": "Nat.factorial_pos is the positivity theorem for the factorial function.",
+      "explanation_zh": "Nat.factorial_pos 是阶乘函数的正性定理。",
+      "tags": [
+        "combinatorics",
+        "Nat.factorial"
+      ]
+    },
+    {
+      "id": "classical-by-contra",
+      "title": "Proof by contradiction",
+      "title_zh": "反证法",
+      "level": "advanced",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (p : Prop) : ¬¬p → p := by\n  intro h\n  by_contra hp\n  exact h hp\n",
+      "explanation": "by_contra closes a classical proof by assuming the negation and deriving False.",
+      "explanation_zh": "by_contra 通过假设否定并推出 False 来完成经典证明。",
+      "tags": [
+        "logic",
+        "classical",
+        "by_contra"
+      ]
+    },
+    {
+      "id": "tauto",
+      "title": "De Morgan as a tautology",
+      "title_zh": "德摩根律作为重言式",
+      "level": "advanced",
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "code": "example (p q : Prop) : ¬(p ∧ q) ↔ ¬p ∨ ¬q := by\n  tauto\n",
+      "explanation": "tauto proves propositional tautologies by classical truth-table search.",
+      "explanation_zh": "tauto 通过经典真值表搜索证明命题重言式。",
+      "tags": [
+        "logic",
+        "tauto",
+        "Mathlib.Tactic"
+      ]
+    },
+    {
+      "id": "omega-basic",
+      "title": "Linear arithmetic on Nat",
+      "title_zh": "自然数上的线性算术",
+      "level": "advanced",
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "code": "example (a b : ℕ) (h : a + b = 5) : b + a = 5 := by\n  omega\n",
+      "explanation": "omega decides Presburger arithmetic goals, including nonlinear-looking ones after normalisation.",
+      "explanation_zh": "omega 判定 Presburger 算术目标；规范化后也能处理表面非线性的式子。",
+      "tags": [
+        "tactics",
+        "omega",
+        "Mathlib.Tactic"
+      ]
+    },
+    {
+      "id": "linarith-basic",
+      "title": "Linear arithmetic on reals",
+      "title_zh": "实数上的线性算术",
+      "level": "advanced",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (x : ℝ) (h : x < 3) : x < 4 := by\n  linarith\n",
+      "explanation": "linarith combines hypotheses linearly to derive the goal inequality.",
+      "explanation_zh": "linarith 线性组合假设以推出目标不等式。",
+      "tags": [
+        "tactics",
+        "linarith",
+        "analysis"
+      ]
+    },
+    {
+      "id": "ring-basic",
+      "title": "A binomial identity",
+      "title_zh": "二项式恒等式",
+      "level": "advanced",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "example (x y : ℝ) : (x + y) ^ 2 = x ^ 2 + 2 * x * y + y ^ 2 := by\n  ring\n",
+      "explanation": "ring normalises both sides in a commutative (semi)ring and checks equality.",
+      "explanation_zh": "ring 在交换半环中规范化两端并检查相等。",
+      "tags": [
+        "tactics",
+        "ring",
+        "algebra"
+      ]
+    },
+    {
+      "id": "monoid-hom-double",
+      "title": "A self-contained additive monoid hom",
+      "title_zh": "自包含的加法幺半群同态",
+      "level": "advanced",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "def double : ℕ →+ ℕ where\n  toFun := fun n => n + n\n  map_zero' := rfl\n  map_add' := by\n    intro a b\n    omega\n",
+      "explanation": "AddMonoidHom is a structure with toFun, map_zero' and map_add'; omega verifies the additivity law.",
+      "explanation_zh": "AddMonoidHom 是含 toFun、map_zero' 与 map_add' 的结构；omega 验证加法性。",
+      "tags": [
+        "algebra",
+        "MonoidHom",
+        "structure"
+      ]
+    },
+    {
+      "id": "category-composite",
+      "title": "Composition of functors",
+      "title_zh": "函子的复合",
+      "level": "advanced",
+      "imports": [
+        "Mathlib"
+      ],
+      "code": "open CategoryTheory\n\nexample {C D E : Type*} [Category C] [Category D] [Category E]\n    (F : C ⥤ D) (G : D ⥤ E) : C ⥤ E := F ⋙ G\n",
+      "explanation": "Functor composition is written ⋙; the composite of F : C ⥤ D and G : D ⥤ E is C ⥤ E.",
+      "explanation_zh": "函子复合作 ⋙；F : C ⥤ D 与 G : D ⥤ E 的复合为 C ⥤ E。",
+      "tags": [
+        "category theory",
+        "Functor",
+        "composition"
+      ]
+    }
+  ]
+}

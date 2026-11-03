@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="MathLab">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e3a8a"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+    <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a5f3fc"/>
+      <stop offset="1" stop-color="#f0abfc"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="56" fill="url(#bg)"/>
+  <g fill="none" stroke="url(#stroke)" stroke-width="9" stroke-linecap="round">
+    <path d="M96 78 C96 60 116 58 120 74 C124 92 118 168 124 182 C128 194 146 192 148 176" />
+    <path d="M168 96 L216 168" />
+    <path d="M168 168 L216 96" />
+  </g>
+  <g fill="#e0f2fe">
+    <circle cx="72" cy="196" r="12"/>
+    <circle cx="184" cy="132" r="12"/>
+    <circle cx="96" cy="92" r="12"/>
+  </g>
+  <g fill="none" stroke="#67e8f9" stroke-width="6" stroke-linecap="round">
+    <path d="M84 184 L176 140"/>
+    <path d="M84 100 L88 180"/>
+  </g>
+</svg>

@@ -1,0 +1,1886 @@
+{
+  "examples": [
+    {
+      "id": "gaussian-integral",
+      "title": "Gaussian integral",
+      "title_zh": "高斯积分",
+      "field": "analysis",
+      "panel": "compute",
+      "description": "Evaluate the classic Gaussian integral with SymPy.",
+      "description_zh": "用 SymPy 计算经典高斯积分。",
+      "action": {
+        "op": "calc.integrate",
+        "args": {
+          "expr": "exp(-x**2)",
+          "var": "x",
+          "lower": "-oo",
+          "upper": "oo"
+        }
+      },
+      "expect": "sqrt(pi)"
+    },
+    {
+      "id": "dirichlet-integral",
+      "title": "Dirichlet integral",
+      "title_zh": "狄利克雷积分",
+      "field": "analysis",
+      "panel": "compute",
+      "description": "Integrate sin(x)/x over the positive half-line; the value is pi/2.",
+      "description_zh": "在正半轴上积分 sin(x)/x，结果为 pi/2。",
+      "action": {
+        "op": "calc.integrate",
+        "args": {
+          "expr": "sin(x)/x",
+          "var": "x",
+          "lower": "0",
+          "upper": "oo"
+        }
+      },
+      "expect": "pi/2"
+    },
+    {
+      "id": "sinc-limit",
+      "title": "Fundamental limit sin(x)/x",
+      "title_zh": "基本极限 sin(x)/x",
+      "field": "analysis",
+      "panel": "compute",
+      "description": "The sinc function tends to 1 at zero; the engine returns the limit expression.",
+      "description_zh": "sinc 函数在 0 处的极限为 1。",
+      "action": {
+        "op": "calc.limit",
+        "args": {
+          "expr": "sin(x)/x",
+          "var": "x",
+          "point": "0"
+        }
+      },
+      "expect": "1"
+    },
+    {
+      "id": "e-limit",
+      "title": "Euler limit definition of e",
+      "title_zh": "e 的欧拉极限定义",
+      "field": "analysis",
+      "panel": "compute",
+      "description": "Show that (1 + 1/x)^x tends to Euler's number e as x tends to infinity.",
+      "description_zh": "展示 (1 + 1/x)^x 当 x 趋于无穷时趋近欧拉数 e。",
+      "action": {
+        "op": "calc.limit",
+        "args": {
+          "expr": "(1 + 1/x)**x",
+          "var": "x",
+          "point": "oo"
+        }
+      },
+      "expect": "E"
+    },
+    {
+      "id": "exp-taylor",
+      "title": "Taylor series of exp(x)",
+      "title_zh": "exp(x) 的泰勒级数",
+      "field": "analysis",
+      "panel": "compute",
+      "description": "Expand exp(x) around 0 up to order 6.",
+      "description_zh": "将 exp(x) 在 0 处展开到 6 阶。",
+      "action": {
+        "op": "calc.series",
+        "args": {
+          "expr": "exp(x)",
+          "var": "x",
+          "point": "0",
+          "order": 6
+        }
+      },
+      "expect": "1 + x + x**2/2 + x**3/6 + x**4/24 + x**5/120"
+    },
+    {
+      "id": "basel-problem",
+      "title": "Basel problem",
+      "title_zh": "巴塞尔问题",
+      "field": "analysis",
+      "panel": "compute",
+      "description": "Sum the reciprocals of the squares; Euler's result is pi^2/6.",
+      "description_zh": "平方倒数之和；欧拉结果为 pi^2/6。",
+      "action": {
+        "op": "calc.sum",
+        "args": {
+          "expr": "1/n**2",
+          "var": "n",
+          "lower": 1,
+          "upper": "oo"
+        }
+      },
+      "expect": "pi**2/6"
+    },
+    {
+      "id": "geometric-series",
+      "title": "Geometric series",
+      "title_zh": "几何级数",
+      "field": "analysis",
+      "panel": "compute",
+      "description": "Sum (1/2)^n from n = 0; the series converges to 2.",
+      "description_zh": "从 n = 0 求 (1/2)^n 的和，级数收敛到 2。",
+      "action": {
+        "op": "calc.sum",
+        "args": {
+          "expr": "1/2**n",
+          "var": "n",
+          "lower": 0,
+          "upper": "oo"
+        }
+      },
+      "expect": "2"
+    },
+    {
+      "id": "harmonic-oscillator",
+      "title": "Harmonic oscillator ODE",
+      "title_zh": "谐振子常微分方程",
+      "field": "analysis",
+      "panel": "compute",
+      "description": "Solve y'' + y = 0 with y(0) = 1 and y'(0) = 0; the solution is cos(x).",
+      "description_zh": "求解 y'' + y = 0，初值 y(0)=1、y'(0)=0，解为 cos(x)。",
+      "action": {
+        "op": "calc.dsolve",
+        "args": {
+          "eq": "y'' + y = 0",
+          "func": "y",
+          "var": "x",
+          "ics": [
+            {
+              "x": 0,
+              "y": 1
+            },
+            {
+              "x": 0,
+              "dy": 0
+            }
+          ]
+        }
+      },
+      "expect": "y = cos(x)"
+    },
+    {
+      "id": "telescoping-product",
+      "title": "Telescoping product",
+      "title_zh": "望远镜乘积",
+      "field": "analysis",
+      "panel": "compute",
+      "description": "The product of (1 + 1/k) for k = 1..n telescopes to n + 1.",
+      "description_zh": "k = 1..n 时 (1 + 1/k) 的乘积望远镜相消，结果为 n + 1。",
+      "action": {
+        "op": "calc.product",
+        "args": {
+          "expr": "1 + 1/k",
+          "var": "k",
+          "lower": 1,
+          "upper": "n"
+        }
+      },
+      "expect": "n + 1"
+    },
+    {
+      "id": "product-rule",
+      "title": "Product rule",
+      "title_zh": "乘积法则",
+      "field": "analysis",
+      "panel": "compute",
+      "description": "Differentiate x*sin(x) with respect to x.",
+      "description_zh": "对 x*sin(x) 关于 x 求导。",
+      "action": {
+        "op": "calc.diff",
+        "args": {
+          "expr": "x*sin(x)",
+          "var": "x"
+        }
+      },
+      "expect": "x*cos(x) + sin(x)"
+    },
+    {
+      "id": "det-2x2",
+      "title": "Determinant of a 2x2 matrix",
+      "title_zh": "2x2 矩阵的行列式",
+      "field": "linear-algebra",
+      "panel": "linalg",
+      "description": "Compute det([[1,2],[3,4]]); this matrix scales signed area by -2.",
+      "description_zh": "计算 det([[1,2],[3,4]])，其有向面积伸缩因子为 -2。",
+      "action": {
+        "op": "calc.matrix",
+        "args": {
+          "op": "det",
+          "matrix": [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        }
+      },
+      "expect": "-2"
+    },
+    {
+      "id": "eigen-diagonal",
+      "title": "Eigenvalues of a diagonal matrix",
+      "title_zh": "对角矩阵的特征值",
+      "field": "linear-algebra",
+      "panel": "linalg",
+      "description": "A diagonal matrix has its diagonal entries as eigenvalues.",
+      "description_zh": "对角矩阵的特征值即其对角元。",
+      "action": {
+        "op": "calc.matrix",
+        "args": {
+          "op": "eigen",
+          "matrix": [
+            [
+              2,
+              0
+            ],
+            [
+              0,
+              3
+            ]
+          ]
+        }
+      },
+      "expect": "eigenvalues 2, 3"
+    },
+    {
+      "id": "rank-dependent-rows",
+      "title": "Rank of a dependent matrix",
+      "title_zh": "行相关矩阵的秩",
+      "field": "linear-algebra",
+      "panel": "linalg",
+      "description": "The second row is twice the first, so the rank drops to 1.",
+      "description_zh": "第二行是第一行的两倍，因此秩降为 1。",
+      "action": {
+        "op": "calc.matrix",
+        "args": {
+          "op": "rank",
+          "matrix": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              2,
+              4,
+              6
+            ]
+          ]
+        }
+      },
+      "expect": "1"
+    },
+    {
+      "id": "svd-diagonal",
+      "title": "Singular value decomposition",
+      "title_zh": "奇异值分解",
+      "field": "linear-algebra",
+      "panel": "linalg",
+      "description": "For a diagonal matrix the singular values are the absolute diagonal entries, sorted descending.",
+      "description_zh": "对角矩阵的奇异值是其对角元绝对值按降序排列。",
+      "action": {
+        "op": "calc.matrix",
+        "args": {
+          "op": "svd",
+          "matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              2
+            ]
+          ]
+        }
+      },
+      "expect": "singular values 2, 1"
+    },
+    {
+      "id": "solve-linear-system",
+      "title": "Solving a linear system",
+      "title_zh": "求解线性方程组",
+      "field": "linear-algebra",
+      "panel": "linalg",
+      "description": "Solve 2x + y = 3, x + 3y = 5 using the matrix form.",
+      "description_zh": "用矩阵形式求解 2x + y = 3、x + 3y = 5。",
+      "action": {
+        "op": "calc.matrix",
+        "args": {
+          "op": "solve",
+          "matrix": [
+            [
+              2,
+              1
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "rhs": [
+            3,
+            5
+          ]
+        }
+      },
+      "expect": "x = 4/5, y = 7/5"
+    },
+    {
+      "id": "charpoly-2x2",
+      "title": "Characteristic polynomial",
+      "title_zh": "特征多项式",
+      "field": "linear-algebra",
+      "panel": "linalg",
+      "description": "Compute det(lambda*I - A) for A = [[0,1],[-2,-3]].",
+      "description_zh": "对 A = [[0,1],[-2,-3]] 计算 det(lambda*I - A)。",
+      "action": {
+        "op": "calc.matrix",
+        "args": {
+          "op": "charpoly",
+          "matrix": [
+            [
+              0,
+              1
+            ],
+            [
+              -2,
+              -3
+            ]
+          ]
+        }
+      },
+      "expect": "lambda**2 + 3*lambda + 2"
+    },
+    {
+      "id": "s3-order",
+      "title": "Order of S3 from generators",
+      "title_zh": "由生成元计算 S3 的阶",
+      "field": "algebra",
+      "panel": "algebra",
+      "description": "The 3-cycle (1 2 3) and the transposition (1 2) generate the symmetric group S3 of order 6.",
+      "description_zh": "3-轮换 (1 2 3) 与对换 (1 2) 生成 6 阶对称群 S3。",
+      "action": {
+        "op": "algebra.group",
+        "args": {
+          "op": "order",
+          "generators": [
+            [
+              [
+                1,
+                2,
+                3
+              ]
+            ],
+            [
+              [
+                1,
+                2
+              ]
+            ]
+          ],
+          "n": 3
+        }
+      },
+      "expect": "6"
+    },
+    {
+      "id": "d4-center",
+      "title": "Centre of the dihedral group D4",
+      "title_zh": "二面体群 D4 的中心",
+      "field": "algebra",
+      "panel": "algebra",
+      "description": "For D4 generated by the rotation (1 2 3 4) and the reflection (2 4), the centre is {e, r^2}.",
+      "description_zh": "由旋转 (1 2 3 4) 与反射 (2 4) 生成的 D4，其中心为 {e, r²}。",
+      "action": {
+        "op": "algebra.group",
+        "args": {
+          "op": "center",
+          "generators": [
+            [
+              [
+                1,
+                2,
+                3,
+                4
+              ]
+            ],
+            [
+              [
+                2,
+                4
+              ]
+            ]
+          ],
+          "n": 4
+        }
+      },
+      "expect": "order 2: {e, (1 3)(2 4)}"
+    },
+    {
+      "id": "a4-order",
+      "title": "Order of the alternating group A4",
+      "title_zh": "交错群 A4 的阶",
+      "field": "algebra",
+      "panel": "algebra",
+      "description": "A4 is generated by (1 2 3) and (1 2)(3 4); its order is 12.",
+      "description_zh": "A4 由 (1 2 3) 与 (1 2)(3 4) 生成，阶为 12。",
+      "action": {
+        "op": "algebra.group",
+        "args": {
+          "op": "order",
+          "generators": [
+            [
+              [
+                1,
+                2,
+                3
+              ]
+            ],
+            [
+              [
+                1,
+                2
+              ],
+              [
+                3,
+                4
+              ]
+            ]
+          ],
+          "n": 4
+        }
+      },
+      "expect": "12"
+    },
+    {
+      "id": "s3-quotient-a3",
+      "title": "Quotient S3/A3",
+      "title_zh": "商群 S3/A3",
+      "field": "algebra",
+      "panel": "algebra",
+      "description": "S3 modulo the normal subgroup A3 (generated by a 3-cycle) is cyclic of order 2.",
+      "description_zh": "S3 模去由 3-轮换生成的正规子群 A3，得到 2 阶循环群。",
+      "action": {
+        "op": "algebra.group",
+        "args": {
+          "op": "quotient",
+          "generators": [
+            [
+              [
+                1,
+                2,
+                3
+              ]
+            ],
+            [
+              [
+                1,
+                2
+              ]
+            ]
+          ],
+          "normal": [
+            [
+              [
+                1,
+                2,
+                3
+              ]
+            ]
+          ],
+          "n": 3
+        }
+      },
+      "expect": "C2: order 2, abelian"
+    },
+    {
+      "id": "gf4-multiplication",
+      "title": "Multiplication in GF(4)",
+      "title_zh": "GF(4) 中的乘法",
+      "field": "algebra",
+      "panel": "algebra",
+      "description": "In GF(4) = F2[x]/(x^2+x+1), compute (x+1)^2; the answer is x.",
+      "description_zh": "在 GF(4) = F2[x]/(x²+x+1) 中计算 (x+1)²，结果为 x。",
+      "action": {
+        "op": "algebra.finitefield",
+        "args": {
+          "p": 2,
+          "n": 2,
+          "op": "mul",
+          "a": [
+            1,
+            1
+          ],
+          "b": [
+            1,
+            1
+          ]
+        }
+      },
+      "expect": "x"
+    },
+    {
+      "id": "z12-units",
+      "title": "Units of Z/12Z",
+      "title_zh": "Z/12Z 的单位群",
+      "field": "algebra",
+      "panel": "algebra",
+      "description": "The invertible residue classes modulo 12 are exactly those coprime to 12.",
+      "description_zh": "模 12 可逆的剩余类恰为与 12 互素的类。",
+      "action": {
+        "op": "algebra.ring",
+        "args": {
+          "op": "units",
+          "n": 12
+        }
+      },
+      "expect": "{1, 5, 7, 11}"
+    },
+    {
+      "id": "small-category-laws",
+      "title": "Validating a small category",
+      "title_zh": "验证小范畴",
+      "field": "category",
+      "panel": "category",
+      "description": "Check identity and associativity laws for the free arrow category A -> B.",
+      "description_zh": "检验自由箭头范畴 A -> B 的恒等与结合律。",
+      "action": {
+        "op": "category.validate",
+        "args": {
+          "category": {
+            "objects": [
+              {
+                "id": "A",
+                "label": "A"
+              },
+              {
+                "id": "B",
+                "label": "B"
+              }
+            ],
+            "morphisms": [
+              {
+                "id": "idA",
+                "dom": "A",
+                "cod": "A",
+                "label": "id_A"
+              },
+              {
+                "id": "idB",
+                "dom": "B",
+                "cod": "B",
+                "label": "id_B"
+              },
+              {
+                "id": "f",
+                "dom": "A",
+                "cod": "B",
+                "label": "f"
+              }
+            ],
+            "identities": [
+              {
+                "object": "A",
+                "morphism": "idA"
+              },
+              {
+                "object": "B",
+                "morphism": "idB"
+              }
+            ],
+            "compositions": [
+              {
+                "first": "idA",
+                "second": "idA",
+                "result": "idA"
+              },
+              {
+                "first": "idA",
+                "second": "f",
+                "result": "f"
+              },
+              {
+                "first": "f",
+                "second": "idB",
+                "result": "f"
+              },
+              {
+                "first": "idB",
+                "second": "idB",
+                "result": "idB"
+              }
+            ]
+          }
+        }
+      },
+      "expect": "valid: 2 objects, 3 morphisms"
+    },
+    {
+      "id": "category-composition",
+      "title": "Composing with an identity",
+      "title_zh": "与恒等态射复合",
+      "field": "category",
+      "panel": "category",
+      "description": "In the free arrow category, f followed by id_B is f again.",
+      "description_zh": "在自由箭头范畴中，先 f 后 id_B 仍是 f。",
+      "action": {
+        "op": "category.compose",
+        "args": {
+          "category": {
+            "objects": [
+              {
+                "id": "A",
+                "label": "A"
+              },
+              {
+                "id": "B",
+                "label": "B"
+              }
+            ],
+            "morphisms": [
+              {
+                "id": "idA",
+                "dom": "A",
+                "cod": "A",
+                "label": "id_A"
+              },
+              {
+                "id": "idB",
+                "dom": "B",
+                "cod": "B",
+                "label": "id_B"
+              },
+              {
+                "id": "f",
+                "dom": "A",
+                "cod": "B",
+                "label": "f"
+              }
+            ],
+            "identities": [
+              {
+                "object": "A",
+                "morphism": "idA"
+              },
+              {
+                "object": "B",
+                "morphism": "idB"
+              }
+            ],
+            "compositions": [
+              {
+                "first": "idA",
+                "second": "idA",
+                "result": "idA"
+              },
+              {
+                "first": "idA",
+                "second": "f",
+                "result": "f"
+              },
+              {
+                "first": "f",
+                "second": "idB",
+                "result": "f"
+              },
+              {
+                "first": "idB",
+                "second": "idB",
+                "result": "idB"
+              }
+            ]
+          },
+          "first": "f",
+          "second": "idB"
+        }
+      },
+      "expect": "f"
+    },
+    {
+      "id": "functor-check",
+      "title": "A functor between free-arrow categories",
+      "title_zh": "自由箭头范畴之间的函子",
+      "field": "category",
+      "panel": "category",
+      "description": "Map A -> B to A' -> B'; the identity and composition laws hold.",
+      "description_zh": "把 A -> B 映到 A' -> B'，恒等与复合律均成立。",
+      "action": {
+        "op": "category.functor",
+        "args": {
+          "source": {
+            "objects": [
+              {
+                "id": "A",
+                "label": "A"
+              },
+              {
+                "id": "B",
+                "label": "B"
+              }
+            ],
+            "morphisms": [
+              {
+                "id": "idA",
+                "dom": "A",
+                "cod": "A",
+                "label": "id_A"
+              },
+              {
+                "id": "idB",
+                "dom": "B",
+                "cod": "B",
+                "label": "id_B"
+              },
+              {
+                "id": "f",
+                "dom": "A",
+                "cod": "B",
+                "label": "f"
+              }
+            ],
+            "identities": [
+              {
+                "object": "A",
+                "morphism": "idA"
+              },
+              {
+                "object": "B",
+                "morphism": "idB"
+              }
+            ],
+            "compositions": [
+              {
+                "first": "idA",
+                "second": "idA",
+                "result": "idA"
+              },
+              {
+                "first": "idA",
+                "second": "f",
+                "result": "f"
+              },
+              {
+                "first": "f",
+                "second": "idB",
+                "result": "f"
+              },
+              {
+                "first": "idB",
+                "second": "idB",
+                "result": "idB"
+              }
+            ]
+          },
+          "target": {
+            "objects": [
+              {
+                "id": "A'",
+                "label": "A'"
+              },
+              {
+                "id": "B'",
+                "label": "B'"
+              }
+            ],
+            "morphisms": [
+              {
+                "id": "idA'",
+                "dom": "A'",
+                "cod": "A'",
+                "label": "id_A'"
+              },
+              {
+                "id": "idB'",
+                "dom": "B'",
+                "cod": "B'",
+                "label": "id_B'"
+              },
+              {
+                "id": "u",
+                "dom": "A'",
+                "cod": "B'",
+                "label": "u"
+              }
+            ],
+            "identities": [
+              {
+                "object": "A'",
+                "morphism": "idA'"
+              },
+              {
+                "object": "B'",
+                "morphism": "idB'"
+              }
+            ],
+            "compositions": [
+              {
+                "first": "idA'",
+                "second": "idA'",
+                "result": "idA'"
+              },
+              {
+                "first": "idA'",
+                "second": "u",
+                "result": "u"
+              },
+              {
+                "first": "u",
+                "second": "idB'",
+                "result": "u"
+              },
+              {
+                "first": "idB'",
+                "second": "idB'",
+                "result": "idB'"
+              }
+            ]
+          },
+          "onObjects": [
+            {
+              "from": "A",
+              "to": "A'"
+            },
+            {
+              "from": "B",
+              "to": "B'"
+            }
+          ],
+          "onMorphisms": [
+            {
+              "from": "idA",
+              "to": "idA'"
+            },
+            {
+              "from": "idB",
+              "to": "idB'"
+            },
+            {
+              "from": "f",
+              "to": "u"
+            }
+          ]
+        }
+      },
+      "expect": "valid"
+    },
+    {
+      "id": "natural-transformation",
+      "title": "A natural transformation to an idempotent",
+      "title_zh": "到幂等态射的自然变换",
+      "field": "category",
+      "panel": "category",
+      "description": "F sends f to id_X while G sends it to the idempotent e; choosing both components to be e makes the naturality square commute (e ∘ e = e ∘ id).",
+      "description_zh": "F 把 f 映为 id_X，G 把 f 映为幂等元 e；取两个分量均为 e 时自然性方块交换（e ∘ e = e ∘ id）。",
+      "action": {
+        "op": "category.natural",
+        "args": {
+          "source": {
+            "objects": [
+              {
+                "id": "A",
+                "label": "A"
+              },
+              {
+                "id": "B",
+                "label": "B"
+              }
+            ],
+            "morphisms": [
+              {
+                "id": "idA",
+                "dom": "A",
+                "cod": "A",
+                "label": "id_A"
+              },
+              {
+                "id": "idB",
+                "dom": "B",
+                "cod": "B",
+                "label": "id_B"
+              },
+              {
+                "id": "f",
+                "dom": "A",
+                "cod": "B",
+                "label": "f"
+              }
+            ],
+            "identities": [
+              {
+                "object": "A",
+                "morphism": "idA"
+              },
+              {
+                "object": "B",
+                "morphism": "idB"
+              }
+            ],
+            "compositions": [
+              {
+                "first": "idA",
+                "second": "idA",
+                "result": "idA"
+              },
+              {
+                "first": "idA",
+                "second": "f",
+                "result": "f"
+              },
+              {
+                "first": "f",
+                "second": "idB",
+                "result": "f"
+              },
+              {
+                "first": "idB",
+                "second": "idB",
+                "result": "idB"
+              }
+            ]
+          },
+          "target": {
+            "objects": [
+              {
+                "id": "X",
+                "label": "X"
+              }
+            ],
+            "morphisms": [
+              {
+                "id": "idX",
+                "dom": "X",
+                "cod": "X",
+                "label": "id_X"
+              },
+              {
+                "id": "e",
+                "dom": "X",
+                "cod": "X",
+                "label": "e"
+              }
+            ],
+            "identities": [
+              {
+                "object": "X",
+                "morphism": "idX"
+              }
+            ],
+            "compositions": [
+              {
+                "first": "idX",
+                "second": "idX",
+                "result": "idX"
+              },
+              {
+                "first": "idX",
+                "second": "e",
+                "result": "e"
+              },
+              {
+                "first": "e",
+                "second": "idX",
+                "result": "e"
+              },
+              {
+                "first": "e",
+                "second": "e",
+                "result": "e"
+              }
+            ]
+          },
+          "F": {
+            "onObjects": [
+              {
+                "from": "A",
+                "to": "X"
+              },
+              {
+                "from": "B",
+                "to": "X"
+              }
+            ],
+            "onMorphisms": [
+              {
+                "from": "idA",
+                "to": "idX"
+              },
+              {
+                "from": "idB",
+                "to": "idX"
+              },
+              {
+                "from": "f",
+                "to": "idX"
+              }
+            ]
+          },
+          "G": {
+            "onObjects": [
+              {
+                "from": "A",
+                "to": "X"
+              },
+              {
+                "from": "B",
+                "to": "X"
+              }
+            ],
+            "onMorphisms": [
+              {
+                "from": "idA",
+                "to": "idX"
+              },
+              {
+                "from": "idB",
+                "to": "idX"
+              },
+              {
+                "from": "f",
+                "to": "e"
+              }
+            ]
+          },
+          "components": [
+            {
+              "object": "A",
+              "morphism": "e"
+            },
+            {
+              "object": "B",
+              "morphism": "e"
+            }
+          ]
+        }
+      },
+      "expect": "valid: e ∘ e = e ∘ id_X"
+    },
+    {
+      "id": "pullback-in-set",
+      "title": "Pullback in Set",
+      "title_zh": "集合范畴中的拉回",
+      "field": "category",
+      "panel": "category",
+      "description": "Pull back A -f-> C <-g- B. With f = (a1->c1, a2->c2) and g = (b1->c1, b2->c1) the pullback is {(a1,b1), (a1,b2)}.",
+      "description_zh": "拉回 A -f-> C <-g- B。取 f = (a1→c1, a2→c2)、g = (b1→c1, b2→c1)，拉回对象为 {(a1,b1), (a1,b2)}。",
+      "action": {
+        "op": "category.limit",
+        "args": {
+          "kind": "pullback",
+          "A": [
+            "a1",
+            "a2"
+          ],
+          "B": [
+            "b1",
+            "b2"
+          ],
+          "C": [
+            "c1",
+            "c2"
+          ],
+          "f": [
+            "c1",
+            "c2"
+          ],
+          "g": [
+            "c1",
+            "c1"
+          ]
+        }
+      },
+      "expect": "{(a1,b1), (a1,b2)}"
+    },
+    {
+      "id": "product-in-set",
+      "title": "Product in Set",
+      "title_zh": "集合范畴中的积",
+      "field": "category",
+      "panel": "category",
+      "description": "The categorical product of a 2-element and a 2-element set has 4 elements.",
+      "description_zh": "两个二元集合的范畴积有 4 个元素。",
+      "action": {
+        "op": "category.limit",
+        "args": {
+          "kind": "product",
+          "sets": {
+            "A": [
+              "a1",
+              "a2"
+            ],
+            "B": [
+              "b1",
+              "b2"
+            ]
+          }
+        }
+      },
+      "expect": "4 pairs"
+    },
+    {
+      "id": "commutative-diagram",
+      "title": "Commutative diagram check",
+      "title_zh": "交换图表检验",
+      "field": "category",
+      "panel": "category",
+      "description": "In the three-object category, both paths A -> B -> C and A -> C compose to h, so the diagram commutes.",
+      "description_zh": "在三对象范畴中，路径 A→B→C 与 A→C 的复合都等于 h，故图表交换。",
+      "action": {
+        "op": "category.verify_diagram",
+        "args": {
+          "category": {
+            "objects": [
+              {
+                "id": "A",
+                "label": "A"
+              },
+              {
+                "id": "B",
+                "label": "B"
+              },
+              {
+                "id": "C",
+                "label": "C"
+              }
+            ],
+            "morphisms": [
+              {
+                "id": "idA",
+                "dom": "A",
+                "cod": "A",
+                "label": "id_A"
+              },
+              {
+                "id": "idB",
+                "dom": "B",
+                "cod": "B",
+                "label": "id_B"
+              },
+              {
+                "id": "idC",
+                "dom": "C",
+                "cod": "C",
+                "label": "id_C"
+              },
+              {
+                "id": "f",
+                "dom": "A",
+                "cod": "B",
+                "label": "f"
+              },
+              {
+                "id": "g",
+                "dom": "B",
+                "cod": "C",
+                "label": "g"
+              },
+              {
+                "id": "h",
+                "dom": "A",
+                "cod": "C",
+                "label": "h = g ∘ f"
+              }
+            ],
+            "identities": [
+              {
+                "object": "A",
+                "morphism": "idA"
+              },
+              {
+                "object": "B",
+                "morphism": "idB"
+              },
+              {
+                "object": "C",
+                "morphism": "idC"
+              }
+            ],
+            "compositions": [
+              {
+                "first": "idA",
+                "second": "idA",
+                "result": "idA"
+              },
+              {
+                "first": "idA",
+                "second": "f",
+                "result": "f"
+              },
+              {
+                "first": "idA",
+                "second": "h",
+                "result": "h"
+              },
+              {
+                "first": "f",
+                "second": "idB",
+                "result": "f"
+              },
+              {
+                "first": "f",
+                "second": "g",
+                "result": "h"
+              },
+              {
+                "first": "idB",
+                "second": "idB",
+                "result": "idB"
+              },
+              {
+                "first": "idB",
+                "second": "g",
+                "result": "g"
+              },
+              {
+                "first": "g",
+                "second": "idC",
+                "result": "g"
+              },
+              {
+                "first": "h",
+                "second": "idC",
+                "result": "h"
+              },
+              {
+                "first": "idC",
+                "second": "idC",
+                "result": "idC"
+              }
+            ]
+          },
+          "pairs": [
+            {
+              "from": "A",
+              "to": "C"
+            }
+          ]
+        }
+      },
+      "expect": "ok: both paths give h"
+    },
+    {
+      "id": "de-morgan",
+      "title": "De Morgan's law",
+      "title_zh": "德摩根律",
+      "field": "logic",
+      "panel": "logic",
+      "description": "Prove the classical equivalence ~(A & B) <-> (~A | ~B) in natural deduction.",
+      "description_zh": "在自然演绎中证明经典等价 ~(A & B) <-> (~A | ~B)。",
+      "action": {
+        "op": "logic.prove",
+        "args": {
+          "premises": [],
+          "goal": "~(A & B) <-> (~A | ~B)"
+        }
+      },
+      "expect": "valid"
+    },
+    {
+      "id": "modus-ponens-truth-table",
+      "title": "Modus ponens truth table",
+      "title_zh": "肯定前件真值表",
+      "field": "logic",
+      "panel": "logic",
+      "description": "((A -> B) & A) -> B is a tautology; the truth table has 4 rows and every row is true.",
+      "description_zh": "((A -> B) & A) -> B 是重言式；真值表 4 行全真。",
+      "action": {
+        "op": "logic.truthtable",
+        "args": {
+          "formula": "(A -> B) & A -> B"
+        }
+      },
+      "expect": "tautology"
+    },
+    {
+      "id": "syllogism-fol",
+      "title": "Barbara syllogism",
+      "title_zh": "巴巴拉三段论",
+      "field": "logic",
+      "panel": "logic",
+      "description": "From forall x (P(x) -> Q(x)), forall x (Q(x) -> R(x)) and P(a), derive R(a) by bounded model search.",
+      "description_zh": "由 ∀x(P(x)→Q(x))、∀x(Q(x)→R(x)) 与 P(a) 推出 R(a)（有界模型搜索）。",
+      "action": {
+        "op": "logic.prove_fol",
+        "args": {
+          "premises": [
+            "forall x. (P(x) -> Q(x))",
+            "forall x. (Q(x) -> R(x))",
+            "P(a)"
+          ],
+          "goal": "R(a)",
+          "domainSize": 2
+        }
+      },
+      "expect": "valid"
+    },
+    {
+      "id": "modal-s5",
+      "title": "Modal reflexivity in S5",
+      "title_zh": "S5 中的模态自反性",
+      "field": "logic",
+      "panel": "logic",
+      "description": "Check []A -> A in the modal frame S5; reflexivity makes it valid.",
+      "description_zh": "在模态框架 S5 中检验 []A -> A；自反性使其有效。",
+      "action": {
+        "op": "logic.modal",
+        "args": {
+          "frame": "S5",
+          "formula": "[]A -> A",
+          "worlds": 3
+        }
+      },
+      "expect": "valid"
+    },
+    {
+      "id": "formula-equivalence",
+      "title": "Implication as a disjunction",
+      "title_zh": "蕴涵的析取形式",
+      "field": "logic",
+      "panel": "logic",
+      "description": "Show that A -> B is logically equivalent to ~A | B.",
+      "description_zh": "证明 A -> B 与 ~A | B 逻辑等价。",
+      "action": {
+        "op": "logic.equivalent",
+        "args": {
+          "a": "A -> B",
+          "b": "~A | B"
+        }
+      },
+      "expect": "equivalent"
+    },
+    {
+      "id": "fol-parse",
+      "title": "Parsing a first-order formula",
+      "title_zh": "解析一阶公式",
+      "field": "logic",
+      "panel": "logic",
+      "description": "Parse forall x (P(x) -> Q(x)) and report its AST, free variables and LaTeX rendering.",
+      "description_zh": "解析 ∀x(P(x)→Q(x))，给出语法树、自由变元与 LaTeX 渲染。",
+      "action": {
+        "op": "logic.parse",
+        "args": {
+          "formula": "forall x. (P(x) -> Q(x))",
+          "logic": "fol"
+        }
+      },
+      "expect": "well-formed; no free variables"
+    },
+    {
+      "id": "lean-sqrt2",
+      "title": "Lean: sqrt(2) is irrational",
+      "title_zh": "Lean：√2 是无理数",
+      "field": "lean",
+      "panel": "lean",
+      "description": "Load the Mathlib proof that the square root of 2 is irrational.",
+      "description_zh": "载入 Mathlib 中 √2 为无理数的证明。",
+      "action": {
+        "op": "lean.snippets",
+        "args": {
+          "id": "irrational-sqrt2"
+        }
+      },
+      "expect": "theorem using irrational_sqrt_two"
+    },
+    {
+      "id": "lean-group-inverse",
+      "title": "Lean: group inverse laws",
+      "title_zh": "Lean：群的逆元律",
+      "field": "lean",
+      "panel": "lean",
+      "description": "Load a Mathlib snippet proving a * a⁻¹ = 1 in an arbitrary group.",
+      "description_zh": "载入任意群中 a * a⁻¹ = 1 的 Mathlib 证明片段。",
+      "action": {
+        "op": "lean.snippets",
+        "args": {
+          "id": "group-mul-inv"
+        }
+      },
+      "expect": "mul_inv_cancel"
+    },
+    {
+      "id": "lean-continuity",
+      "title": "Lean: continuity of a polynomial",
+      "title_zh": "Lean：多项式的连续性",
+      "field": "lean",
+      "panel": "lean",
+      "description": "Load a Mathlib snippet showing x^2 + 1 is continuous.",
+      "description_zh": "载入展示 x² + 1 连续的 Mathlib 证明片段。",
+      "action": {
+        "op": "lean.snippets",
+        "args": {
+          "id": "continuous-comp"
+        }
+      },
+      "expect": "Continuous.add / continuous_pow"
+    },
+    {
+      "id": "circle-homology",
+      "title": "Homology of the circle",
+      "title_zh": "圆周的同调",
+      "field": "topology",
+      "panel": "topology",
+      "description": "Triangulate S1 by a 3-cycle graph; H0 = Z, H1 = Z, so betti = [1, 1].",
+      "description_zh": "用三角形图剖分 S1；H0 = Z、H1 = Z，故 betti = [1, 1]。",
+      "action": {
+        "op": "topology.homology",
+        "args": {
+          "simplices": {
+            "0": [
+              [
+                "a"
+              ],
+              [
+                "b"
+              ],
+              [
+                "c"
+              ]
+            ],
+            "1": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "b",
+                "c"
+              ],
+              [
+                "c",
+                "a"
+              ]
+            ]
+          }
+        }
+      },
+      "expect": "betti [1, 1]"
+    },
+    {
+      "id": "graph-fundamental-group",
+      "title": "Fundamental group of a graph",
+      "title_zh": "图的群",
+      "field": "topology",
+      "panel": "topology",
+      "description": "The cycle graph on a, b, c is connected with one independent cycle, so pi1 is free of rank 1 and betti1 = 1.",
+      "description_zh": "a、b、c 构成的圈图连通且有一个独立圈，故 pi1 是秩 1 自由群、betti1 = 1。",
+      "action": {
+        "op": "topology.fundamental_group",
+        "args": {
+          "vertices": [
+            "a",
+            "b",
+            "c"
+          ],
+          "edges": [
+            [
+              "a",
+              "b"
+            ],
+            [
+              "b",
+              "c"
+            ],
+            [
+              "c",
+              "a"
+            ]
+          ]
+        }
+      },
+      "expect": "free group on 1 generator; betti1 = 1"
+    },
+    {
+      "id": "sphere-curvature",
+      "title": "Curvature of the unit sphere",
+      "title_zh": "单位球面的曲率",
+      "field": "geometry",
+      "panel": "topology",
+      "description": "With metric diag(1, sin(theta)^2), the scalar curvature of the unit 2-sphere is 2.",
+      "description_zh": "取度量 diag(1, sin²θ)，单位 2-球面的标量曲率为 2。",
+      "action": {
+        "op": "geometry.curvature",
+        "args": {
+          "coords": [
+            "theta",
+            "phi"
+          ],
+          "metric": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "sin(theta)**2"
+            ]
+          ]
+        }
+      },
+      "expect": "scalar curvature 2"
+    },
+    {
+      "id": "torus-christoffel",
+      "title": "Christoffel symbols of a torus",
+      "title_zh": "环面的克里斯托费尔符号",
+      "field": "geometry",
+      "panel": "topology",
+      "description": "For ds^2 = R^2 du^2 + (r + R cos u)^2 dv^2, the nonzero symbols are Gamma^u_vv and Gamma^v_uv.",
+      "description_zh": "对 ds² = R²du² + (r + R cos u)²dv²，非零符号为 Γ^u_vv 与 Γ^v_uv。",
+      "action": {
+        "op": "geometry.christoffel",
+        "args": {
+          "coords": [
+            "u",
+            "v"
+          ],
+          "metric": [
+            [
+              "R**2",
+              "0"
+            ],
+            [
+              "0",
+              "(r + R*cos(u))**2"
+            ]
+          ]
+        }
+      },
+      "expect": "Gamma^u_vv = (r + R cos u) sin u / R, Gamma^v_uv = -R sin u / (r + R cos u)"
+    },
+    {
+      "id": "lie-bracket",
+      "title": "Lie bracket of two vector fields",
+      "title_zh": "两个向量场的李括号",
+      "field": "geometry",
+      "panel": "topology",
+      "description": "For X = d/dx and Y = x d/dy, the bracket [X, Y] is d/dy, i.e. components (0, 1).",
+      "description_zh": "取 X = ∂/∂x、Y = x ∂/∂y，李括号 [X, Y] = ∂/∂y，即分量 (0, 1)。",
+      "action": {
+        "op": "geometry.lie_bracket",
+        "args": {
+          "coords": [
+            "x",
+            "y"
+          ],
+          "X": [
+            "1",
+            "0"
+          ],
+          "Y": [
+            "0",
+            "x"
+          ]
+        }
+      },
+      "expect": "[X, Y] = (0, 1)"
+    },
+    {
+      "id": "exterior-derivative",
+      "title": "Exterior derivative of a 0-form",
+      "title_zh": "0 形式的外微分",
+      "field": "geometry",
+      "panel": "topology",
+      "description": "For f = x^2 y, df = 2xy dx + x^2 dy; components are reported as a 1-form.",
+      "description_zh": "对 f = x²y，df = 2xy dx + x² dy；结果以 1 形式分量给出。",
+      "action": {
+        "op": "geometry.exterior_derivative",
+        "args": {
+          "coords": [
+            "x",
+            "y"
+          ],
+          "components": {
+            "0": "x**2*y"
+          },
+          "formDegree": 0
+        }
+      },
+      "expect": "(2*x*y, x**2)"
+    },
+    {
+      "id": "damped-sine",
+      "title": "Damped sine wave",
+      "title_zh": "阻尼正弦波",
+      "field": "analysis",
+      "panel": "plot",
+      "description": "Sample the damped oscillation exp(-0.2x) sin(5x) on [-2, 10].",
+      "description_zh": "在 [-2, 10] 上采样阻尼振荡 exp(-0.2x) sin(5x)。",
+      "action": {
+        "op": "plot.sample",
+        "args": {
+          "expr": "exp(-0.2*x)*sin(5*x)",
+          "var": "x",
+          "range": [
+            -2,
+            10
+          ],
+          "samples": 400
+        }
+      }
+    },
+    {
+      "id": "lissajous",
+      "title": "Lissajous figure",
+      "title_zh": "利萨茹图形",
+      "field": "geometry",
+      "panel": "plot",
+      "description": "Plot the parametric curve (sin 3t, sin 4t), a 3:4 Lissajous knot.",
+      "description_zh": "绘制参数曲线 (sin 3t, sin 4t)，即 3:4 利萨茹图形。",
+      "action": {
+        "op": "plot.parametric",
+        "args": {
+          "x": "sin(3*t)",
+          "y": "sin(4*t)",
+          "t": "t",
+          "range": [
+            0,
+            6.2832
+          ],
+          "samples": 400
+        }
+      }
+    },
+    {
+      "id": "polar-rose",
+      "title": "Four-petal rose",
+      "title_zh": "四瓣玫瑰线",
+      "field": "geometry",
+      "panel": "plot",
+      "description": "Plot the polar curve r = cos(4 theta); it has four petals.",
+      "description_zh": "绘制极坐标曲线 r = cos(4θ)，共四瓣。",
+      "action": {
+        "op": "plot.polar",
+        "args": {
+          "r": "cos(4*theta)",
+          "theta": "theta",
+          "range": [
+            0,
+            6.2832
+          ],
+          "samples": 400
+        }
+      }
+    },
+    {
+      "id": "implicit-circle",
+      "title": "Implicit conic",
+      "title_zh": "隐式圆锥曲线",
+      "field": "geometry",
+      "panel": "plot",
+      "description": "Plot the implicit curve x^2 + y^2 - 4 = 0, the circle of radius 2.",
+      "description_zh": "绘制隐式曲线 x² + y² - 4 = 0，即半径为 2 的圆。",
+      "action": {
+        "op": "plot.implicit",
+        "args": {
+          "expr": "x**2 + y**2 - 4",
+          "xRange": [
+            -3,
+            3
+          ],
+          "yRange": [
+            -3,
+            3
+          ],
+          "grid": 120
+        }
+      }
+    },
+    {
+      "id": "saddle-surface",
+      "title": "Saddle surface",
+      "title_zh": "马鞍面",
+      "field": "analysis",
+      "panel": "plot",
+      "description": "Sample the graph of z = x^2 - y^2 for a 3D wireframe rendering.",
+      "description_zh": "采样 z = x² - y² 的图像用于 3D 线框渲染。",
+      "action": {
+        "op": "plot.surface3d",
+        "args": {
+          "expr": "x**2 - y**2",
+          "xVar": "x",
+          "yVar": "y",
+          "xRange": [
+            -2,
+            2
+          ],
+          "yRange": [
+            -2,
+            2
+          ],
+          "n": 30
+        }
+      }
+    },
+    {
+      "id": "normal-pdf",
+      "title": "Standard normal density at 0",
+      "title_zh": "标准正态分布在 0 处的密度",
+      "field": "probability",
+      "panel": "compute",
+      "description": "The standard normal density at 0 is 1/sqrt(2*pi) ≈ 0.3989.",
+      "description_zh": "标准正态分布在 0 处的密度为 1/√(2π) ≈ 0.3989。",
+      "action": {
+        "op": "prob.dist",
+        "args": {
+          "dist": "normal",
+          "params": {
+            "mu": 0,
+            "sigma": 1
+          },
+          "op": "pdf",
+          "x": 0
+        }
+      },
+      "expect": "1/sqrt(2*pi) ≈ 0.3989"
+    },
+    {
+      "id": "normal-second-moment",
+      "title": "Second moment of N(0,1)",
+      "title_zh": "N(0,1) 的二阶矩",
+      "field": "probability",
+      "panel": "compute",
+      "description": "For a standard normal variable, E[X^2] = Var(X) = 1.",
+      "description_zh": "标准正态随机变量满足 E[X²] = Var(X) = 1。",
+      "action": {
+        "op": "prob.expectation",
+        "args": {
+          "expr": "x**2",
+          "dist": "normal",
+          "params": {
+            "mu": 0,
+            "sigma": 1
+          }
+        }
+      },
+      "expect": "1"
+    },
+    {
+      "id": "quadratic-minimum",
+      "title": "Minimising a quadratic",
+      "title_zh": "最小化二次函数",
+      "field": "analysis",
+      "panel": "compute",
+      "description": "Minimise (x-1)^2 + (y-2)^2 numerically; the minimum is 0 at (1, 2).",
+      "description_zh": "数值最小化 (x-1)² + (y-2)²；最小值 0 在 (1, 2) 处取得。",
+      "action": {
+        "op": "opt.minimize",
+        "args": {
+          "expr": "(x-1)**2 + (y-2)**2",
+          "vars": [
+            "x",
+            "y"
+          ],
+          "start": [
+            0,
+            0
+          ]
+        }
+      },
+      "expect": "point [1, 2], value 0"
+    },
+    {
+      "id": "fibonacci-20",
+      "title": "The 20th Fibonacci number",
+      "title_zh": "第 20 个斐波那契数",
+      "field": "number",
+      "panel": "compute",
+      "description": "Compute F(20) with F(0)=0, F(1)=1.",
+      "description_zh": "计算 F(20)，约定 F(0)=0、F(1)=1。",
+      "action": {
+        "op": "calc.number",
+        "args": {
+          "op": "fibonacci",
+          "n": 20
+        }
+      },
+      "expect": "6765"
+    },
+    {
+      "id": "binomial-10-3",
+      "title": "Binomial coefficient C(10,3)",
+      "title_zh": "二项式系数 C(10,3)",
+      "field": "combinatorics",
+      "panel": "compute",
+      "description": "Count the 3-element subsets of a 10-element set.",
+      "description_zh": "计数 10 元集合的 3 元子集个数。",
+      "action": {
+        "op": "calc.number",
+        "args": {
+          "op": "binomial",
+          "n": 10,
+          "k": 3
+        }
+      },
+      "expect": "120"
+    },
+    {
+      "id": "totient-36",
+      "title": "Euler totient of 36",
+      "title_zh": "36 的欧拉函数",
+      "field": "number",
+      "panel": "compute",
+      "description": "phi(36) = 36 (1 - 1/2)(1 - 1/3) = 12.",
+      "description_zh": "phi(36) = 36 (1 - 1/2)(1 - 1/3) = 12。",
+      "action": {
+        "op": "calc.number",
+        "args": {
+          "op": "totient",
+          "n": 36
+        }
+      },
+      "expect": "12"
+    },
+    {
+      "id": "factor-quartic",
+      "title": "Factoring x^4 - 1",
+      "title_zh": "因式分解 x^4 - 1",
+      "field": "algebra",
+      "panel": "compute",
+      "description": "Factor x^4 - 1 over the rationals; it splits into (x-1)(x+1)(x^2+1).",
+      "description_zh": "在有理数域上因式分解 x⁴ - 1，得到 (x-1)(x+1)(x²+1)。",
+      "action": {
+        "op": "calc.factor",
+        "args": {
+          "expr": "x**4 - 1"
+        }
+      },
+      "expect": "(x - 1)*(x + 1)*(x**2 + 1)"
+    },
+    {
+      "id": "graph-triangle",
+      "title": "Components of a triangle graph",
+      "title_zh": "三角形图的连通分量",
+      "field": "combinatorics",
+      "panel": "compute",
+      "description": "The graph on a, b, c with all three edges is connected, so it has one component.",
+      "description_zh": "a、b、c 三点两两相连的图是连通的，故有 1 个连通分量。",
+      "action": {
+        "op": "graph.analyze",
+        "args": {
+          "edges": [
+            [
+              "a",
+              "b"
+            ],
+            [
+              "b",
+              "c"
+            ],
+            [
+              "c",
+              "a"
+            ]
+          ],
+          "directed": false,
+          "op": "components"
+        }
+      },
+      "expect": "1 component"
+    }
+  ]
+}

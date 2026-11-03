@@ -1,0 +1,7 @@
+node_modules/
+engine/__pycache__/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+scripts/.tmp*

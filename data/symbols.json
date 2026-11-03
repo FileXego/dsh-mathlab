@@ -1,0 +1,4681 @@
+{
+  "fields": [
+    {
+      "id": "logic",
+      "label": "Logic",
+      "label_zh": "逻辑"
+    },
+    {
+      "id": "set",
+      "label": "Set Theory",
+      "label_zh": "集合论"
+    },
+    {
+      "id": "number",
+      "label": "Number Systems & Number Theory",
+      "label_zh": "数系与数论"
+    },
+    {
+      "id": "analysis",
+      "label": "Analysis",
+      "label_zh": "分析"
+    },
+    {
+      "id": "algebra",
+      "label": "Algebra",
+      "label_zh": "代数"
+    },
+    {
+      "id": "linear-algebra",
+      "label": "Linear Algebra",
+      "label_zh": "线性代数"
+    },
+    {
+      "id": "topology",
+      "label": "Topology",
+      "label_zh": "拓扑"
+    },
+    {
+      "id": "geometry",
+      "label": "Geometry",
+      "label_zh": "几何"
+    },
+    {
+      "id": "category",
+      "label": "Category Theory",
+      "label_zh": "范畴论"
+    },
+    {
+      "id": "probability",
+      "label": "Probability",
+      "label_zh": "概率"
+    },
+    {
+      "id": "differential",
+      "label": "Differential Geometry",
+      "label_zh": "微分几何"
+    },
+    {
+      "id": "combinatorics",
+      "label": "Combinatorics",
+      "label_zh": "组合数学"
+    },
+    {
+      "id": "lean",
+      "label": "Lean & Mathlib",
+      "label_zh": "Lean 与 Mathlib"
+    }
+  ],
+  "symbols": [
+    {
+      "id": "negation",
+      "symbol": "¬",
+      "latex": "\\neg p",
+      "unicode": "¬",
+      "name": "negation",
+      "name_zh": "否定",
+      "field": "logic",
+      "description": "Negates a proposition: ¬p is true exactly when p is false.",
+      "description_zh": "命题的否定：¬p 为真当且仅当 p 为假。",
+      "tags": [
+        "logic",
+        "connective"
+      ],
+      "lean": "Not",
+      "sympy": "Not"
+    },
+    {
+      "id": "conjunction",
+      "symbol": "∧",
+      "latex": "p \\wedge q",
+      "unicode": "∧",
+      "name": "conjunction",
+      "name_zh": "合取",
+      "field": "logic",
+      "description": "p ∧ q is true exactly when both p and q are true.",
+      "description_zh": "p ∧ q 当且仅当 p、q 同时为真时为真。",
+      "tags": [
+        "logic",
+        "connective"
+      ],
+      "lean": "And",
+      "sympy": "And"
+    },
+    {
+      "id": "disjunction",
+      "symbol": "∨",
+      "latex": "p \\vee q",
+      "unicode": "∨",
+      "name": "disjunction",
+      "name_zh": "析取",
+      "field": "logic",
+      "description": "p ∨ q is true when at least one of p, q is true.",
+      "description_zh": "p ∨ q 当 p、q 至少一个为真时为真。",
+      "tags": [
+        "logic",
+        "connective"
+      ],
+      "lean": "Or",
+      "sympy": "Or"
+    },
+    {
+      "id": "implication",
+      "symbol": "→",
+      "latex": "p \\to q",
+      "unicode": "→",
+      "name": "material implication",
+      "name_zh": "实质蕴涵",
+      "field": "logic",
+      "description": "p → q is false only in the case where p is true and q is false.",
+      "description_zh": "p → q 仅在 p 真而 q 假时为假。",
+      "tags": [
+        "logic",
+        "connective"
+      ],
+      "sympy": "Implies"
+    },
+    {
+      "id": "biconditional",
+      "symbol": "↔",
+      "latex": "p \\leftrightarrow q",
+      "unicode": "↔",
+      "name": "biconditional",
+      "name_zh": "双条件",
+      "field": "logic",
+      "description": "p ↔ q abbreviates (p → q) ∧ (q → p); the two propositions have equal truth values.",
+      "description_zh": "p ↔ q 是 (p → q) ∧ (q → p) 的缩写，表示两命题真值相同。",
+      "tags": [
+        "logic",
+        "connective"
+      ],
+      "lean": "Iff",
+      "sympy": "Equivalent"
+    },
+    {
+      "id": "universal-quantifier",
+      "symbol": "∀",
+      "latex": "\\forall x \\in S,\\ P(x)",
+      "unicode": "∀",
+      "name": "universal quantifier",
+      "name_zh": "全称量词",
+      "field": "logic",
+      "description": "∀x, P(x) asserts that P holds for every element of the domain.",
+      "description_zh": "∀x, P(x) 表示论域中每个元素都满足 P。",
+      "tags": [
+        "logic",
+        "quantifier"
+      ]
+    },
+    {
+      "id": "existential-quantifier",
+      "symbol": "∃",
+      "latex": "\\exists x,\\ P(x)",
+      "unicode": "∃",
+      "name": "existential quantifier",
+      "name_zh": "存在量词",
+      "field": "logic",
+      "description": "∃x, P(x) asserts that at least one element satisfies P.",
+      "description_zh": "∃x, P(x) 表示至少存在一个元素满足 P。",
+      "tags": [
+        "logic",
+        "quantifier"
+      ]
+    },
+    {
+      "id": "unique-existential",
+      "symbol": "∃!",
+      "latex": "\\exists! x,\\ P(x)",
+      "unicode": "∃!",
+      "name": "unique existence",
+      "name_zh": "唯一存在",
+      "field": "logic",
+      "description": "There is exactly one x with P(x).",
+      "description_zh": "恰好存在一个 x 使 P(x) 成立。",
+      "tags": [
+        "logic",
+        "quantifier"
+      ],
+      "lean": "ExistsUnique"
+    },
+    {
+      "id": "syntactic-turnstile",
+      "symbol": "⊢",
+      "latex": "\\Gamma \\vdash \\varphi",
+      "unicode": "⊢",
+      "name": "syntactic turnstile",
+      "name_zh": "句法可证号",
+      "field": "logic",
+      "description": "Γ ⊢ φ means φ is derivable from the assumptions Γ by the rules of the proof system.",
+      "description_zh": "Γ ⊢ φ 表示 φ 可由假设集 Γ 按证明系统规则推出。",
+      "tags": [
+        "logic",
+        "proof-theory"
+      ]
+    },
+    {
+      "id": "semantic-models",
+      "symbol": "⊨",
+      "latex": "\\Gamma \\models \\varphi",
+      "unicode": "⊨",
+      "name": "semantic entailment",
+      "name_zh": "语义蕴含",
+      "field": "logic",
+      "description": "Every model that satisfies all of Γ also satisfies φ.",
+      "description_zh": "所有满足 Γ 中全部公式的模型都满足 φ。",
+      "tags": [
+        "logic",
+        "model-theory"
+      ]
+    },
+    {
+      "id": "truth-constant",
+      "symbol": "⊤",
+      "latex": "\\top",
+      "unicode": "⊤",
+      "name": "truth constant (tautology)",
+      "name_zh": "真值常元",
+      "field": "logic",
+      "description": "The always-true proposition; unit of conjunction.",
+      "description_zh": "恒真命题，是合取的单位元。",
+      "tags": [
+        "logic",
+        "connective"
+      ],
+      "lean": "True",
+      "sympy": "true"
+    },
+    {
+      "id": "falsity-constant",
+      "symbol": "⊥",
+      "latex": "\\bot",
+      "unicode": "⊥",
+      "name": "falsity constant (contradiction)",
+      "name_zh": "假值常元",
+      "field": "logic",
+      "description": "The always-false proposition; unit of disjunction.",
+      "description_zh": "恒假命题，是析取的单位元。",
+      "tags": [
+        "logic",
+        "connective"
+      ],
+      "lean": "False",
+      "sympy": "false"
+    },
+    {
+      "id": "necessity-box",
+      "symbol": "□",
+      "latex": "\\Box p",
+      "unicode": "□",
+      "name": "necessity operator",
+      "name_zh": "必然算子",
+      "field": "logic",
+      "description": "In modal logic □p holds at a world when p holds at every accessible world.",
+      "description_zh": "模态逻辑中 □p 在世界 w 为真当且仅当 p 在所有可达世界为真。",
+      "tags": [
+        "logic",
+        "modal"
+      ]
+    },
+    {
+      "id": "possibility-diamond",
+      "symbol": "◇",
+      "latex": "\\Diamond p",
+      "unicode": "◇",
+      "name": "possibility operator",
+      "name_zh": "可能算子",
+      "field": "logic",
+      "description": "Dual of necessity: ◇p ≡ ¬□¬p; p holds at some accessible world.",
+      "description_zh": "必然算子的对偶：◇p ≡ ¬□¬p，表示存在可达世界使 p 为真。",
+      "tags": [
+        "logic",
+        "modal"
+      ]
+    },
+    {
+      "id": "lambda-abstraction",
+      "symbol": "λ",
+      "latex": "\\lambda x.\\ t",
+      "unicode": "λ",
+      "name": "lambda abstraction",
+      "name_zh": "λ 抽象",
+      "field": "logic",
+      "description": "Anonymous function binding x in the term t.",
+      "description_zh": "匿名函数，在项 t 中绑定变量 x。",
+      "tags": [
+        "logic",
+        "type-theory"
+      ],
+      "lean": "fun",
+      "aka": [
+        "λx.t"
+      ]
+    },
+    {
+      "id": "dependent-pi-type",
+      "symbol": "Π",
+      "latex": "\\Pi_{x:A} B(x)",
+      "unicode": "Π",
+      "name": "dependent function (Pi) type",
+      "name_zh": "依赖函数类型",
+      "field": "logic",
+      "description": "Generalizes A → B so that the codomain may depend on the input.",
+      "description_zh": "推广函数类型 A → B，使陪域可依赖于输入。",
+      "tags": [
+        "logic",
+        "type-theory"
+      ]
+    },
+    {
+      "id": "dependent-sigma-type",
+      "symbol": "Σ",
+      "latex": "\\Sigma_{x:A} B(x)",
+      "unicode": "Σ",
+      "name": "dependent pair (Sigma) type",
+      "name_zh": "依赖对类型",
+      "field": "logic",
+      "description": "Elements are pairs (a, b) with a : A and b : B(a).",
+      "description_zh": "元素为对 (a, b)，其中 a : A、b : B(a)。",
+      "tags": [
+        "logic",
+        "type-theory"
+      ],
+      "lean": "Sigma"
+    },
+    {
+      "id": "iota-description",
+      "symbol": "℩",
+      "latex": "\\iota x.\\ P(x)",
+      "unicode": "℩",
+      "name": "definite description",
+      "name_zh": "摹状词",
+      "field": "logic",
+      "description": "The unique x satisfying P(x), when it exists (Hilbert's iota operator).",
+      "description_zh": "满足 P(x) 的唯一 x（希尔伯特 iota 算子）。",
+      "tags": [
+        "logic",
+        "type-theory"
+      ]
+    },
+    {
+      "id": "sheffer-stroke",
+      "symbol": "↑",
+      "latex": "p \\uparrow q",
+      "unicode": "↑",
+      "name": "NAND (Sheffer stroke)",
+      "name_zh": "与非",
+      "field": "logic",
+      "description": "p ↑ q ≡ ¬(p ∧ q); NAND alone is functionally complete.",
+      "description_zh": "p ↑ q ≡ ¬(p ∧ q)；仅用与非即可表达所有真值函数。",
+      "tags": [
+        "logic",
+        "connective"
+      ]
+    },
+    {
+      "id": "peirce-arrow",
+      "symbol": "↓",
+      "latex": "p \\downarrow q",
+      "unicode": "↓",
+      "name": "NOR (Peirce arrow)",
+      "name_zh": "或非",
+      "field": "logic",
+      "description": "p ↓ q ≡ ¬(p ∨ q); NOR alone is functionally complete.",
+      "description_zh": "p ↓ q ≡ ¬(p ∨ q)；仅用或非即可表达所有真值函数。",
+      "tags": [
+        "logic",
+        "connective"
+      ]
+    },
+    {
+      "id": "exclusive-or",
+      "symbol": "⊕",
+      "latex": "p \\oplus q",
+      "unicode": "⊕",
+      "name": "exclusive or",
+      "name_zh": "异或",
+      "field": "logic",
+      "description": "True when exactly one of p and q is true.",
+      "description_zh": "当 p、q 恰有一个为真时为真。",
+      "tags": [
+        "logic",
+        "connective"
+      ],
+      "sympy": "Xor"
+    },
+    {
+      "id": "capture-avoiding-substitution",
+      "symbol": "[t/x]",
+      "latex": "\\varphi[t/x]",
+      "unicode": "[t/x]",
+      "name": "substitution instance",
+      "name_zh": "代入实例",
+      "field": "logic",
+      "description": "φ[t/x] replaces every free occurrence of x in φ by the term t, avoiding variable capture.",
+      "description_zh": "把 φ 中 x 的所有自由出现替换为项 t，并避免变量捕获。",
+      "tags": [
+        "logic",
+        "proof-theory"
+      ]
+    },
+    {
+      "id": "sequent-arrow",
+      "symbol": "⇒",
+      "latex": "\\Gamma \\Rightarrow \\Delta",
+      "unicode": "⇒",
+      "name": "sequent arrow",
+      "name_zh": "相继式箭头",
+      "field": "logic",
+      "description": "Meta-level arrow separating the antecedent Γ from the succedent Δ in a sequent.",
+      "description_zh": "在相继式中分隔前件 Γ 与后件 Δ 的元语言箭头。",
+      "tags": [
+        "logic",
+        "proof-theory"
+      ]
+    },
+    {
+      "id": "therefore-sign",
+      "symbol": "∴",
+      "latex": "\\therefore",
+      "unicode": "∴",
+      "name": "therefore sign",
+      "name_zh": "所以号",
+      "field": "logic",
+      "description": "Marks an inferred conclusion in an informal proof.",
+      "description_zh": "在非形式证明中标记推出的结论。",
+      "tags": [
+        "logic",
+        "proof-theory"
+      ]
+    },
+    {
+      "id": "because-sign",
+      "symbol": "∵",
+      "latex": "\\because",
+      "unicode": "∵",
+      "name": "because sign",
+      "name_zh": "因为号",
+      "field": "logic",
+      "description": "Marks a reason or premise in an informal proof.",
+      "description_zh": "在非形式证明中标记理由或前提。",
+      "tags": [
+        "logic",
+        "proof-theory"
+      ]
+    },
+    {
+      "id": "discharged-assumption",
+      "symbol": "[φ]ⁿ",
+      "latex": "[\\varphi]^{n}",
+      "unicode": "[φ]ⁿ",
+      "name": "discharged assumption label",
+      "name_zh": "假设解除标记",
+      "field": "logic",
+      "description": "In natural deduction, brackets mark an assumption that later inference rules discharge.",
+      "description_zh": "自然演绎中用方括号标记可被后续规则解除的假设。",
+      "tags": [
+        "logic",
+        "proof-theory"
+      ]
+    },
+    {
+      "id": "end-of-proof",
+      "symbol": "∎",
+      "latex": "\\blacksquare",
+      "unicode": "∎",
+      "name": "end-of-proof marker",
+      "name_zh": "证毕记号",
+      "field": "logic",
+      "description": "The QED / Halmos symbol closing a completed proof.",
+      "description_zh": "结束证明的 QED（哈尔莫斯）符号。",
+      "tags": [
+        "logic",
+        "proof-theory"
+      ]
+    },
+    {
+      "id": "free-variables",
+      "symbol": "FV(φ)",
+      "latex": "\\mathrm{FV}(\\varphi)",
+      "unicode": "FV(φ)",
+      "name": "set of free variables",
+      "name_zh": "自由变元集",
+      "field": "logic",
+      "description": "The variables occurring in φ that are not bound by a quantifier.",
+      "description_zh": "公式 φ 中未被量词约束的变元集合。",
+      "tags": [
+        "logic",
+        "proof-theory"
+      ]
+    },
+    {
+      "id": "definitional-equality",
+      "symbol": "≡",
+      "latex": "\\equiv",
+      "unicode": "≡",
+      "name": "definitional equality",
+      "name_zh": "定义相等",
+      "field": "logic",
+      "description": "In type theory t ≡ u means t and u are definitionally equal: they reduce to a common form.",
+      "description_zh": "类型论中 t ≡ u 表示 t 与 u 定义相等：二者归约到同一形式。",
+      "tags": [
+        "logic",
+        "type-theory"
+      ]
+    },
+    {
+      "id": "empty-set",
+      "symbol": "∅",
+      "latex": "\\varnothing",
+      "unicode": "∅",
+      "name": "empty set",
+      "name_zh": "空集",
+      "field": "set",
+      "description": "The unique set with no elements: ∀x, x ∉ ∅.",
+      "description_zh": "不含任何元素的集合：∀x, x ∉ ∅。",
+      "tags": [
+        "set",
+        "basic"
+      ]
+    },
+    {
+      "id": "set-membership",
+      "symbol": "∈",
+      "latex": "\\in",
+      "unicode": "∈",
+      "name": "element membership",
+      "name_zh": "属于",
+      "field": "set",
+      "description": "a ∈ A means a is an element of the set A.",
+      "description_zh": "a ∈ A 表示 a 是集合 A 的元素。",
+      "tags": [
+        "set",
+        "basic"
+      ],
+      "lean": "Membership.mem",
+      "sympy": "Contains"
+    },
+    {
+      "id": "non-membership",
+      "symbol": "∉",
+      "latex": "\\notin",
+      "unicode": "∉",
+      "name": "non-membership",
+      "name_zh": "不属于",
+      "field": "set",
+      "description": "a ∉ A means a is not an element of A.",
+      "description_zh": "a ∉ A 表示 a 不是集合 A 的元素。",
+      "tags": [
+        "set",
+        "basic"
+      ]
+    },
+    {
+      "id": "subset",
+      "symbol": "⊆",
+      "latex": "\\subseteq",
+      "unicode": "⊆",
+      "name": "subset",
+      "name_zh": "子集",
+      "field": "set",
+      "description": "A ⊆ B means every element of A lies in B.",
+      "description_zh": "A ⊆ B 表示 A 的每个元素都属于 B。",
+      "tags": [
+        "set",
+        "basic"
+      ],
+      "lean": "Set.Subset"
+    },
+    {
+      "id": "proper-subset",
+      "symbol": "⊂",
+      "latex": "\\subsetneq",
+      "unicode": "⊂",
+      "name": "proper subset",
+      "name_zh": "真子集",
+      "field": "set",
+      "description": "A ⊂ B means A ⊆ B and A ≠ B.",
+      "description_zh": "A ⊂ B 表示 A ⊆ B 且 A ≠ B。",
+      "tags": [
+        "set",
+        "basic"
+      ]
+    },
+    {
+      "id": "set-union",
+      "symbol": "∪",
+      "latex": "A \\cup B",
+      "unicode": "∪",
+      "name": "union",
+      "name_zh": "并集",
+      "field": "set",
+      "description": "Elements belonging to A or to B (or both).",
+      "description_zh": "属于 A 或属于 B（或二者）的元素构成的集合。",
+      "tags": [
+        "set",
+        "operations"
+      ],
+      "lean": "Set.union"
+    },
+    {
+      "id": "set-intersection",
+      "symbol": "∩",
+      "latex": "A \\cap B",
+      "unicode": "∩",
+      "name": "intersection",
+      "name_zh": "交集",
+      "field": "set",
+      "description": "Elements belonging to both A and B.",
+      "description_zh": "同时属于 A 和 B 的元素构成的集合。",
+      "tags": [
+        "set",
+        "operations"
+      ],
+      "lean": "Set.inter"
+    },
+    {
+      "id": "set-difference",
+      "symbol": "∖",
+      "latex": "A \\setminus B",
+      "unicode": "∖",
+      "name": "set difference",
+      "name_zh": "差集",
+      "field": "set",
+      "description": "Elements of A that are not elements of B.",
+      "description_zh": "属于 A 但不属于 B 的元素。",
+      "tags": [
+        "set",
+        "operations"
+      ],
+      "lean": "Set.diff"
+    },
+    {
+      "id": "symmetric-difference",
+      "symbol": "△",
+      "latex": "A \\triangle B",
+      "unicode": "△",
+      "name": "symmetric difference",
+      "name_zh": "对称差",
+      "field": "set",
+      "description": "Elements in exactly one of A, B; equals (A∖B) ∪ (B∖A).",
+      "description_zh": "恰属于 A、B 中一个的元素，等于 (A∖B) ∪ (B∖A)。",
+      "tags": [
+        "set",
+        "operations"
+      ]
+    },
+    {
+      "id": "power-set",
+      "symbol": "℘",
+      "latex": "\\mathcal{P}(A)",
+      "unicode": "℘",
+      "name": "power set",
+      "name_zh": "幂集",
+      "field": "set",
+      "description": "The set of all subsets of A, of cardinality 2 to the power card(A) for finite A.",
+      "description_zh": "A 的所有子集构成的集合，有限时基数为 2 的 card(A) 次幂。",
+      "tags": [
+        "set",
+        "basic"
+      ]
+    },
+    {
+      "id": "cartesian-product",
+      "symbol": "×",
+      "latex": "A \\times B",
+      "unicode": "×",
+      "name": "cartesian product",
+      "name_zh": "笛卡尔积",
+      "field": "set",
+      "description": "The set of all ordered pairs (a, b) with a ∈ A, b ∈ B.",
+      "description_zh": "所有有序对 (a, b)（a ∈ A，b ∈ B）的集合。",
+      "tags": [
+        "set",
+        "basic"
+      ],
+      "lean": "Set.prod"
+    },
+    {
+      "id": "ordered-pair",
+      "symbol": "⟨x,y⟩",
+      "latex": "\\langle x, y \\rangle",
+      "unicode": "⟨x,y⟩",
+      "name": "ordered pair",
+      "name_zh": "有序对",
+      "field": "set",
+      "description": "⟨x, y⟩ has x as first coordinate and y as second; ⟨x,y⟩ = ⟨u,v⟩ iff x = u and y = v.",
+      "description_zh": "⟨x, y⟩ 以 x 为第一坐标、y 为第二坐标；两有序对相等当且仅当对应坐标相等。",
+      "tags": [
+        "set",
+        "basic"
+      ],
+      "lean": "Prod"
+    },
+    {
+      "id": "cardinality-card",
+      "symbol": "#A",
+      "latex": "\\lvert A \\rvert",
+      "unicode": "#A",
+      "name": "cardinality",
+      "name_zh": "基数",
+      "field": "set",
+      "description": "The number of elements of a finite set; generalised to cardinal numbers by bijections.",
+      "description_zh": "有限集合的元素个数；一般情形下用双射等价类定义基数。",
+      "tags": [
+        "set",
+        "cardinality"
+      ],
+      "lean": "Cardinal.mk"
+    },
+    {
+      "id": "aleph-zero",
+      "symbol": "ℵ₀",
+      "latex": "\\aleph_0",
+      "unicode": "ℵ₀",
+      "name": "aleph null",
+      "name_zh": "阿列夫零",
+      "field": "set",
+      "description": "The cardinality of the natural numbers, the smallest infinite cardinal.",
+      "description_zh": "自然数集的基数，是最小的无限基数。",
+      "tags": [
+        "set",
+        "cardinality"
+      ],
+      "lean": "Cardinal.aleph0"
+    },
+    {
+      "id": "continuum-cardinality",
+      "symbol": "𝔠",
+      "latex": "\\mathfrak{c}",
+      "unicode": "𝔠",
+      "name": "cardinality of the continuum",
+      "name_zh": "连续统基数",
+      "field": "set",
+      "description": "The cardinality of ℝ, equal to 2^ℵ₀.",
+      "description_zh": "实数集的基数，等于 2^ℵ₀。",
+      "tags": [
+        "set",
+        "cardinality"
+      ],
+      "lean": "Cardinal.continuum"
+    },
+    {
+      "id": "set-complement",
+      "symbol": "Aᶜ",
+      "latex": "A^{\\complement}",
+      "unicode": "Aᶜ",
+      "name": "complement",
+      "name_zh": "补集",
+      "field": "set",
+      "description": "Relative to a fixed universe U, the elements of U not in A.",
+      "description_zh": "在固定全集 U 下，属于 U 而不属于 A 的元素。",
+      "tags": [
+        "set",
+        "operations"
+      ],
+      "lean": "Set.compl"
+    },
+    {
+      "id": "binary-relation",
+      "symbol": "R⊆A×A",
+      "latex": "R \\subseteq A \\times A",
+      "unicode": "R⊆A×A",
+      "name": "binary relation on a set",
+      "name_zh": "集合上的二元关系",
+      "field": "set",
+      "description": "A subset of A × A; (a,b) ∈ R is written a R b.",
+      "description_zh": "A × A 的子集；(a,b) ∈ R 记作 a R b。",
+      "tags": [
+        "set",
+        "relations"
+      ]
+    },
+    {
+      "id": "transitive-closure",
+      "symbol": "R⁺",
+      "latex": "R^{+}",
+      "unicode": "R⁺",
+      "name": "transitive closure",
+      "name_zh": "传递闭包",
+      "field": "set",
+      "description": "The smallest transitive relation containing R; equivalently ∪_{n≥1} Rⁿ.",
+      "description_zh": "包含 R 的最小传递关系，等价于 ∪_{n≥1} Rⁿ。",
+      "tags": [
+        "set",
+        "relations"
+      ],
+      "lean": "Relation.TransGen"
+    },
+    {
+      "id": "natural-numbers",
+      "symbol": "ℕ",
+      "latex": "\\mathbb{N}",
+      "unicode": "ℕ",
+      "name": "natural numbers",
+      "name_zh": "自然数集",
+      "field": "number",
+      "description": "The counting numbers 0, 1, 2, … with addition, multiplication and order.",
+      "description_zh": "计数数集 0, 1, 2, …，带有加法、乘法与序结构。",
+      "tags": [
+        "number",
+        "number-system"
+      ],
+      "lean": "Nat"
+    },
+    {
+      "id": "integers",
+      "symbol": "ℤ",
+      "latex": "\\mathbb{Z}",
+      "unicode": "ℤ",
+      "name": "integers",
+      "name_zh": "整数集",
+      "field": "number",
+      "description": "The ring of positive, zero and negative whole numbers.",
+      "description_zh": "正整数、零与负整数构成的环。",
+      "tags": [
+        "number",
+        "number-system"
+      ],
+      "lean": "Int"
+    },
+    {
+      "id": "rationals",
+      "symbol": "ℚ",
+      "latex": "\\mathbb{Q}",
+      "unicode": "ℚ",
+      "name": "rational numbers",
+      "name_zh": "有理数集",
+      "field": "number",
+      "description": "Fractions a/b with a, b ∈ ℤ and b ≠ 0; an ordered field.",
+      "description_zh": "形如 a/b（a, b ∈ ℤ，b ≠ 0）的数；是有序域。",
+      "tags": [
+        "number",
+        "number-system"
+      ],
+      "lean": "Rat"
+    },
+    {
+      "id": "real-numbers",
+      "symbol": "ℝ",
+      "latex": "\\mathbb{R}",
+      "unicode": "ℝ",
+      "name": "real numbers",
+      "name_zh": "实数集",
+      "field": "number",
+      "description": "The complete ordered field, constructed from ℚ by Dedekind cuts or Cauchy sequences.",
+      "description_zh": "完备有序域，可由戴德金分割或柯西序列从 ℚ 构造。",
+      "tags": [
+        "number",
+        "number-system"
+      ],
+      "lean": "Real"
+    },
+    {
+      "id": "complex-numbers",
+      "symbol": "ℂ",
+      "latex": "\\mathbb{C}",
+      "unicode": "ℂ",
+      "name": "complex numbers",
+      "name_zh": "复数集",
+      "field": "number",
+      "description": "Numbers a + bi with a, b ∈ ℝ; an algebraically closed field.",
+      "description_zh": "形如 a + bi（a, b ∈ ℝ）的数；是代数闭域。",
+      "tags": [
+        "number",
+        "number-system"
+      ],
+      "lean": "Complex"
+    },
+    {
+      "id": "quaternions",
+      "symbol": "ℍ",
+      "latex": "\\mathbb{H}",
+      "unicode": "ℍ",
+      "name": "quaternions",
+      "name_zh": "四元数",
+      "field": "number",
+      "description": "The non-commutative division algebra ℝ + ℝi + ℝj + ℝk with i² = j² = k² = ijk = −1.",
+      "description_zh": "非交换可除代数 ℝ + ℝi + ℝj + ℝk，满足 i² = j² = k² = ijk = −1。",
+      "tags": [
+        "number",
+        "number-system"
+      ],
+      "lean": "Quaternion"
+    },
+    {
+      "id": "finite-prime-field",
+      "symbol": "𝔽_p",
+      "latex": "\\mathbb{F}_p",
+      "unicode": "𝔽_p",
+      "name": "prime field",
+      "name_zh": "素域",
+      "field": "number",
+      "description": "The field ℤ/pℤ for a prime p; every finite field contains some 𝔽_p.",
+      "description_zh": "p 为素数时的域 ℤ/pℤ；每个有限域都包含某个 𝔽_p。",
+      "tags": [
+        "number",
+        "number-system"
+      ],
+      "lean": "ZMod"
+    },
+    {
+      "id": "divides",
+      "symbol": "∣",
+      "latex": "a \\mid b",
+      "unicode": "∣",
+      "name": "divides",
+      "name_zh": "整除",
+      "field": "number",
+      "description": "a ∣ b means there is an integer k with b = ak.",
+      "description_zh": "a ∣ b 表示存在整数 k 使 b = ak。",
+      "tags": [
+        "number",
+        "divisibility"
+      ],
+      "lean": "Dvd.dvd"
+    },
+    {
+      "id": "congruence",
+      "symbol": "≡",
+      "latex": "a \\equiv b \\pmod{n}",
+      "unicode": "≡",
+      "name": "congruence modulo n",
+      "name_zh": "模 n 同余",
+      "field": "number",
+      "description": "a ≡ b (mod n) means n divides a − b; an equivalence relation on ℤ.",
+      "description_zh": "a ≡ b (mod n) 表示 n 整除 a − b；是 ℤ 上的等价关系。",
+      "tags": [
+        "number",
+        "divisibility"
+      ],
+      "lean": "Int.ModEq"
+    },
+    {
+      "id": "floor",
+      "symbol": "⌊x⌋",
+      "latex": "\\lfloor x \\rfloor",
+      "unicode": "⌊x⌋",
+      "name": "floor",
+      "name_zh": "下取整",
+      "field": "number",
+      "description": "The greatest integer not exceeding the real number x.",
+      "description_zh": "不超过实数 x 的最大整数。",
+      "tags": [
+        "number",
+        "rounding"
+      ],
+      "lean": "Int.floor"
+    },
+    {
+      "id": "ceiling",
+      "symbol": "⌈x⌉",
+      "latex": "\\lceil x \\rceil",
+      "unicode": "⌈x⌉",
+      "name": "ceiling",
+      "name_zh": "上取整",
+      "field": "number",
+      "description": "The least integer not smaller than the real number x.",
+      "description_zh": "不小于实数 x 的最小整数。",
+      "tags": [
+        "number",
+        "rounding"
+      ],
+      "lean": "Int.ceil"
+    },
+    {
+      "id": "greatest-common-divisor",
+      "symbol": "gcd(a,b)",
+      "latex": "\\gcd(a,b)",
+      "unicode": "gcd(a,b)",
+      "name": "greatest common divisor",
+      "name_zh": "最大公因数",
+      "field": "number",
+      "description": "The largest positive integer dividing both a and b.",
+      "description_zh": "同时整除 a 与 b 的最大正整数。",
+      "tags": [
+        "number",
+        "arithmetic"
+      ],
+      "lean": "Nat.gcd"
+    },
+    {
+      "id": "least-common-multiple",
+      "symbol": "lcm(a,b)",
+      "latex": "\\operatorname{lcm}(a,b)",
+      "unicode": "lcm(a,b)",
+      "name": "least common multiple",
+      "name_zh": "最小公倍数",
+      "field": "number",
+      "description": "The smallest positive integer divisible by both a and b.",
+      "description_zh": "同时被 a 与 b 整除的最小正整数。",
+      "tags": [
+        "number",
+        "arithmetic"
+      ],
+      "lean": "Nat.lcm"
+    },
+    {
+      "id": "p-adic-valuation",
+      "symbol": "v_p",
+      "latex": "v_p(n)",
+      "unicode": "v_p",
+      "name": "p-adic valuation",
+      "name_zh": "p 进赋值",
+      "field": "number",
+      "description": "The exponent of the prime p in the factorisation of n; a discrete valuation.",
+      "description_zh": "n 的素因子分解中 p 的指数；是一个离散赋值。",
+      "tags": [
+        "number",
+        "arithmetic"
+      ],
+      "lean": "padicValNat"
+    },
+    {
+      "id": "irrational-number",
+      "symbol": "x∉ℚ",
+      "latex": "x \\notin \\mathbb{Q}",
+      "unicode": "x∉ℚ",
+      "name": "irrational number",
+      "name_zh": "无理数",
+      "field": "number",
+      "description": "A real number that is not rational, e.g. √2 or π.",
+      "description_zh": "不是有理数的实数，例如 √2、π。",
+      "tags": [
+        "number",
+        "arithmetic"
+      ],
+      "lean": "Irrational"
+    },
+    {
+      "id": "euler-number",
+      "symbol": "e",
+      "latex": "\\mathrm{e}",
+      "unicode": "e",
+      "name": "Euler's number",
+      "name_zh": "欧拉数",
+      "field": "number",
+      "description": "The base of the natural logarithm, e = lim(1+1/n)ⁿ = Σ 1/k! ≈ 2.71828.",
+      "description_zh": "自然对数的底，e = lim(1+1/n)ⁿ = Σ 1/k! ≈ 2.71828。",
+      "tags": [
+        "number",
+        "constant"
+      ],
+      "lean": "Real.exp",
+      "sympy": "E",
+      "note": "positive transcendental",
+      "note_zh": "正超越数"
+    },
+    {
+      "id": "imaginary-unit",
+      "symbol": "i",
+      "latex": "\\mathrm{i}",
+      "unicode": "i",
+      "name": "imaginary unit",
+      "name_zh": "虚数单位",
+      "field": "number",
+      "description": "The element i of ℂ with i² = −1.",
+      "description_zh": "ℂ 中满足 i² = −1 的元素。",
+      "tags": [
+        "number",
+        "constant"
+      ],
+      "lean": "Complex.I"
+    },
+    {
+      "id": "pi",
+      "symbol": "π",
+      "latex": "\\pi",
+      "unicode": "π",
+      "name": "pi",
+      "name_zh": "圆周率",
+      "field": "number",
+      "description": "Ratio of a circle's circumference to its diameter, ≈ 3.14159; transcendental.",
+      "description_zh": "圆周长与直径之比，≈ 3.14159；是超越数。",
+      "tags": [
+        "number",
+        "constant"
+      ],
+      "lean": "Real.pi"
+    },
+    {
+      "id": "square-root",
+      "symbol": "√",
+      "latex": "\\sqrt{x}",
+      "unicode": "√",
+      "name": "square root",
+      "name_zh": "平方根",
+      "field": "number",
+      "description": "The non-negative y with y² = x, for x ≥ 0.",
+      "description_zh": "对 x ≥ 0，满足 y² = x 的非负 y。",
+      "tags": [
+        "number",
+        "arithmetic"
+      ],
+      "lean": "Real.sqrt"
+    },
+    {
+      "id": "real-part",
+      "symbol": "ℜ",
+      "latex": "\\Re z",
+      "unicode": "ℜ",
+      "name": "real part",
+      "name_zh": "实部",
+      "field": "number",
+      "description": "The real component x of a complex number z = x + iy.",
+      "description_zh": "复数 z = x + iy 的实部 x。",
+      "tags": [
+        "number",
+        "complex"
+      ],
+      "lean": "Complex.re",
+      "sympy": "re"
+    },
+    {
+      "id": "imaginary-part",
+      "symbol": "ℑ",
+      "latex": "\\Im z",
+      "unicode": "ℑ",
+      "name": "imaginary part",
+      "name_zh": "虚部",
+      "field": "number",
+      "description": "The real coefficient y in the decomposition z = x + iy.",
+      "description_zh": "分解 z = x + iy 中的实系数 y。",
+      "tags": [
+        "number",
+        "complex"
+      ],
+      "lean": "Complex.im",
+      "sympy": "im"
+    },
+    {
+      "id": "less-or-equal",
+      "symbol": "≤",
+      "latex": "\\le",
+      "unicode": "≤",
+      "name": "less than or equal",
+      "name_zh": "小于等于",
+      "field": "number",
+      "description": "Partial order relation: x ≤ y iff x < y or x = y.",
+      "description_zh": "偏序关系：x ≤ y 当且仅当 x < y 或 x = y。",
+      "tags": [
+        "number",
+        "order"
+      ],
+      "lean": "LE.le",
+      "sympy": "le"
+    },
+    {
+      "id": "greater-or-equal",
+      "symbol": "≥",
+      "latex": "\\ge",
+      "unicode": "≥",
+      "name": "greater than or equal",
+      "name_zh": "大于等于",
+      "field": "number",
+      "description": "The converse order relation: x ≥ y iff y ≤ x.",
+      "description_zh": "反向序关系：x ≥ y 当且仅当 y ≤ x。",
+      "tags": [
+        "number",
+        "order"
+      ],
+      "sympy": "ge"
+    },
+    {
+      "id": "not-equal",
+      "symbol": "≠",
+      "latex": "\\neq",
+      "unicode": "≠",
+      "name": "not equal",
+      "name_zh": "不等于",
+      "field": "number",
+      "description": "x ≠ y abbreviates ¬(x = y); inequality of two objects.",
+      "description_zh": "x ≠ y 是 ¬(x = y) 的缩写；表示两个对象不相等。",
+      "tags": [
+        "number",
+        "order"
+      ],
+      "lean": "Ne",
+      "sympy": "Ne"
+    },
+    {
+      "id": "approximately-equal",
+      "symbol": "≈",
+      "latex": "\\approx",
+      "unicode": "≈",
+      "name": "approximately equal",
+      "name_zh": "约等于",
+      "field": "number",
+      "description": "Used for numerical approximations or asymptotic closeness within a stated tolerance.",
+      "description_zh": "用于数值近似或在给定误差内的渐近接近。",
+      "tags": [
+        "number",
+        "order"
+      ]
+    },
+    {
+      "id": "definite-integral",
+      "symbol": "∫",
+      "latex": "\\int_a^b f(x)\\,dx",
+      "unicode": "∫",
+      "name": "definite integral",
+      "name_zh": "定积分",
+      "field": "analysis",
+      "description": "Integral of f over [a,b]: limit of Riemann sums, equal to signed area under the graph.",
+      "description_zh": "f 在 [a,b] 上的积分：黎曼和的极限，等于图像下的有向面积。",
+      "tags": [
+        "analysis",
+        "integration"
+      ],
+      "lean": "MeasureTheory.integral",
+      "sympy": "Integral"
+    },
+    {
+      "id": "indefinite-integral",
+      "symbol": "∫",
+      "latex": "\\int f(x)\\,dx",
+      "unicode": "∫",
+      "name": "indefinite integral (antiderivative)",
+      "name_zh": "不定积分（原函数）",
+      "field": "analysis",
+      "description": "A function F with F′ = f; determined up to an additive constant.",
+      "description_zh": "满足 F′ = f 的函数 F；相差一个可加常数。",
+      "tags": [
+        "analysis",
+        "integration"
+      ],
+      "sympy": "Integral"
+    },
+    {
+      "id": "contour-integral",
+      "symbol": "∮",
+      "latex": "\\oint_\\gamma f(z)\\,dz",
+      "unicode": "∮",
+      "name": "contour integral",
+      "name_zh": "围道积分",
+      "field": "analysis",
+      "description": "Integral of a complex function along a closed curve γ; basis of Cauchy theory and residues.",
+      "description_zh": "复函数沿闭曲线 γ 的积分；柯西理论与留数理论的基础。",
+      "tags": [
+        "analysis",
+        "complex-analysis"
+      ]
+    },
+    {
+      "id": "riemann-stieltjes-integral",
+      "symbol": "∫",
+      "latex": "\\int_a^b f\\,d\\alpha",
+      "unicode": "∫",
+      "name": "Riemann–Stieltjes integral",
+      "name_zh": "黎曼-斯蒂尔切斯积分",
+      "field": "analysis",
+      "description": "Refines the Riemann integral by integrating against a monotonically increasing integrator α.",
+      "description_zh": "以单调递增的积分函数 α 对 f 积分，是黎曼积分的推广。",
+      "tags": [
+        "analysis",
+        "integration"
+      ]
+    },
+    {
+      "id": "lebesgue-integral",
+      "symbol": "∫",
+      "latex": "\\int_X f\\,d\\mu",
+      "unicode": "∫",
+      "name": "Lebesgue integral",
+      "name_zh": "勒贝格积分",
+      "field": "analysis",
+      "description": "Integral of a measurable function against a measure μ; extends the Riemann integral.",
+      "description_zh": "可测函数关于测度 μ 的积分；推广了黎曼积分。",
+      "tags": [
+        "analysis",
+        "measure-theory"
+      ],
+      "lean": "MeasureTheory.integral",
+      "sympy": "Integral"
+    },
+    {
+      "id": "sum-notation",
+      "symbol": "∑",
+      "latex": "\\sum_{i=1}^{n} a_i",
+      "unicode": "∑",
+      "name": "summation",
+      "name_zh": "求和号",
+      "field": "analysis",
+      "description": "Sum of the terms a_1 + a_2 + … + a_n; generalises to arbitrary index sets.",
+      "description_zh": "各项之和 a_1 + a_2 + … + a_n；可推广到任意指标集。",
+      "tags": [
+        "analysis",
+        "series"
+      ],
+      "lean": "Finset.sum",
+      "sympy": "Sum"
+    },
+    {
+      "id": "product-notation",
+      "symbol": "∏",
+      "latex": "\\prod_{i=1}^{n} a_i",
+      "unicode": "∏",
+      "name": "product notation",
+      "name_zh": "求积号",
+      "field": "analysis",
+      "description": "Product a_1 · a_2 ⋯ a_n of finitely many factors.",
+      "description_zh": "有限多个因子的乘积 a_1 · a_2 ⋯ a_n。",
+      "tags": [
+        "analysis",
+        "series"
+      ],
+      "lean": "Finset.prod",
+      "sympy": "Product"
+    },
+    {
+      "id": "limit",
+      "symbol": "lim",
+      "latex": "\\lim_{x \\to a} f(x)",
+      "unicode": "lim",
+      "name": "limit",
+      "name_zh": "极限",
+      "field": "analysis",
+      "description": "The value f(x) approaches as x approaches a; does not require f(a) to be defined.",
+      "description_zh": "当 x 趋于 a 时 f(x) 所趋近的值；不要求 f(a) 有定义。",
+      "tags": [
+        "analysis",
+        "limits"
+      ],
+      "lean": "Filter.Tendsto",
+      "sympy": "Limit"
+    },
+    {
+      "id": "limit-superior",
+      "symbol": "limsup",
+      "latex": "\\limsup_{n\\to\\infty} a_n",
+      "unicode": "limsup",
+      "name": "limit superior",
+      "name_zh": "上极限",
+      "field": "analysis",
+      "description": "The infimum over n of sup_{k≥n} a_k; the largest subsequential limit.",
+      "description_zh": "sup_{k≥n} a_k 关于 n 的下确界；最大的子列极限。",
+      "tags": [
+        "analysis",
+        "limits"
+      ],
+      "lean": "Filter.limsup"
+    },
+    {
+      "id": "limit-inferior",
+      "symbol": "liminf",
+      "latex": "\\liminf_{n\\to\\infty} a_n",
+      "unicode": "liminf",
+      "name": "limit inferior",
+      "name_zh": "下极限",
+      "field": "analysis",
+      "description": "The supremum over n of inf_{k≥n} a_k; the smallest subsequential limit.",
+      "description_zh": "inf_{k≥n} a_k 关于 n 的上确界；最小的子列极限。",
+      "tags": [
+        "analysis",
+        "limits"
+      ],
+      "lean": "Filter.liminf"
+    },
+    {
+      "id": "nth-derivative",
+      "symbol": "f⁽ⁿ⁾",
+      "latex": "f^{(n)}(x)",
+      "unicode": "f⁽ⁿ⁾",
+      "name": "n-th derivative",
+      "name_zh": "n 阶导数",
+      "field": "analysis",
+      "description": "The n-fold derivative of f, defined recursively from f′ = df/dx.",
+      "description_zh": "f 的 n 次导数，由 f′ = df/dx 递归定义。",
+      "tags": [
+        "analysis",
+        "differentiation"
+      ],
+      "lean": "iteratedDeriv",
+      "aka": [
+        "f^{(n)}"
+      ]
+    },
+    {
+      "id": "partial-derivative",
+      "symbol": "∂",
+      "latex": "\\frac{\\partial f}{\\partial x_i}",
+      "unicode": "∂",
+      "name": "partial derivative",
+      "name_zh": "偏导数",
+      "field": "analysis",
+      "description": "Derivative of a multivariable function with respect to one variable, others held fixed.",
+      "description_zh": "多元函数对某一变量、其余变量固定时的导数。",
+      "tags": [
+        "analysis",
+        "differentiation"
+      ],
+      "lean": "fderiv",
+      "aka": [
+        "D_i"
+      ]
+    },
+    {
+      "id": "gradient",
+      "symbol": "∇",
+      "latex": "\\nabla f",
+      "unicode": "∇",
+      "name": "gradient",
+      "name_zh": "梯度",
+      "field": "analysis",
+      "description": "The vector of all partial derivatives; points in the direction of steepest increase.",
+      "description_zh": "所有偏导数组成的向量，指向函数增长最快的方向。",
+      "tags": [
+        "analysis",
+        "differentiation"
+      ],
+      "sympy": "grad"
+    },
+    {
+      "id": "laplacian",
+      "symbol": "Δ",
+      "latex": "\\Delta f = \\nabla \\cdot \\nabla f",
+      "unicode": "Δ",
+      "name": "Laplacian",
+      "name_zh": "拉普拉斯算子",
+      "field": "analysis",
+      "description": "The divergence of the gradient; Δf = Σ ∂²f/∂x_i² in Cartesian coordinates.",
+      "description_zh": "梯度的散度；笛卡尔坐标下 Δf = Σ ∂²f/∂x_i²。",
+      "tags": [
+        "analysis",
+        "pde"
+      ]
+    },
+    {
+      "id": "epsilon-delta",
+      "symbol": "∀ε>0",
+      "latex": "\\forall \\varepsilon>0\\ \\exists \\delta>0",
+      "unicode": "∀ε>0",
+      "name": "epsilon–delta quantification",
+      "name_zh": "ε-δ 量词",
+      "field": "analysis",
+      "description": "Prototypical form of an analysis limit or continuity statement: for every tolerance ε one can find a δ.",
+      "description_zh": "分析中极限与连续性的典型表述：对任意精度 ε 可找到 δ。",
+      "tags": [
+        "analysis",
+        "limits"
+      ]
+    },
+    {
+      "id": "much-less-than",
+      "symbol": "≪",
+      "latex": "a \\ll b",
+      "unicode": "≪",
+      "name": "much less than",
+      "name_zh": "远小于",
+      "field": "analysis",
+      "description": "a is negligible relative to b: a/b → 0 in the relevant asymptotic regime.",
+      "description_zh": "a 相对 b 可忽略：在相应渐近意义下 a/b → 0。",
+      "tags": [
+        "analysis",
+        "asymptotics"
+      ]
+    },
+    {
+      "id": "asymptotic-equivalence",
+      "symbol": "≍",
+      "latex": "a_n \\asymp b_n",
+      "unicode": "≍",
+      "name": "asymptotically equivalent (order)",
+      "name_zh": "渐近同阶",
+      "field": "analysis",
+      "description": "a_n and b_n grow at the same rate, i.e. each is bounded by a constant multiple of the other.",
+      "description_zh": "a_n 与 b_n 同阶增长，即各自被对方的常数倍控制。",
+      "tags": [
+        "analysis",
+        "asymptotics"
+      ],
+      "lean": "Asymptotics.IsEquivalent"
+    },
+    {
+      "id": "big-o",
+      "symbol": "O",
+      "latex": "f = O(g)",
+      "unicode": "O",
+      "name": "big-O notation",
+      "name_zh": "大 O 记号",
+      "field": "analysis",
+      "description": "f grows no faster than g: \\lvert f\\rvert ≤ C\\lvert g\\rvert eventually.",
+      "description_zh": "f 的增长不快于 g：最终有 \\lvert f\\rvert ≤ C\\lvert g\\rvert。",
+      "tags": [
+        "analysis",
+        "asymptotics"
+      ],
+      "lean": "Asymptotics.IsBigO"
+    },
+    {
+      "id": "little-o",
+      "symbol": "o",
+      "latex": "f = o(g)",
+      "unicode": "o",
+      "name": "little-o notation",
+      "name_zh": "小 o 记号",
+      "field": "analysis",
+      "description": "f is negligible relative to g: f/g → 0.",
+      "description_zh": "f 相对 g 可忽略：f/g → 0。",
+      "tags": [
+        "analysis",
+        "asymptotics"
+      ],
+      "lean": "Asymptotics.IsLittleO"
+    },
+    {
+      "id": "big-theta",
+      "symbol": "Θ",
+      "latex": "f = \\Theta(g)",
+      "unicode": "Θ",
+      "name": "big-Theta notation",
+      "name_zh": "大 Θ 记号",
+      "field": "analysis",
+      "description": "f and g have the same growth order: f = O(g) and g = O(f).",
+      "description_zh": "f 与 g 同阶：f = O(g) 且 g = O(f)。",
+      "tags": [
+        "analysis",
+        "asymptotics"
+      ],
+      "lean": "Asymptotics.IsTheta"
+    },
+    {
+      "id": "infinite-series",
+      "symbol": "∑∞",
+      "latex": "\\sum_{n=0}^{\\infty} a_n",
+      "unicode": "∑∞",
+      "name": "infinite series",
+      "name_zh": "无穷级数",
+      "field": "analysis",
+      "description": "The limit of the partial sums Σ_{n=0}^{N} a_n as N → ∞, when it exists.",
+      "description_zh": "部分和 Σ_{n=0}^{N} a_n 当 N → ∞ 时的极限（若存在）。",
+      "tags": [
+        "analysis",
+        "series"
+      ],
+      "lean": "tsum"
+    },
+    {
+      "id": "taylor-series",
+      "symbol": "∑",
+      "latex": "\\sum_{k=0}^{n} \\frac{f^{(k)}(a)}{k!}(x-a)^k",
+      "unicode": "∑",
+      "name": "Taylor polynomial",
+      "name_zh": "泰勒多项式",
+      "field": "analysis",
+      "description": "The degree-n Taylor approximation of f around a; equals f when f is analytic at a.",
+      "description_zh": "f 在 a 附近的 n 次泰勒近似；当 f 在 a 解析时等于 f。",
+      "tags": [
+        "analysis",
+        "series"
+      ],
+      "sympy": "series"
+    },
+    {
+      "id": "norm",
+      "symbol": "‖x‖",
+      "latex": "\\lVert x \\rVert",
+      "unicode": "‖x‖",
+      "name": "norm",
+      "name_zh": "范数",
+      "field": "analysis",
+      "description": "A non-negative length function on a vector space: ‖x‖=0 iff x=0, homogeneous, triangle inequality.",
+      "description_zh": "向量空间上的非负长度函数：正定、齐次、满足三角不等式。",
+      "tags": [
+        "analysis",
+        "functional-analysis"
+      ],
+      "lean": "norm"
+    },
+    {
+      "id": "supremum",
+      "symbol": "sup",
+      "latex": "\\sup_{x \\in S} f(x)",
+      "unicode": "sup",
+      "name": "supremum",
+      "name_zh": "上确界",
+      "field": "analysis",
+      "description": "The least upper bound of a non-empty set bounded above.",
+      "description_zh": "非空有上界集合的最小上界。",
+      "tags": [
+        "analysis",
+        "order"
+      ],
+      "lean": "sSup"
+    },
+    {
+      "id": "infimum",
+      "symbol": "inf",
+      "latex": "\\inf_{x \\in S} f(x)",
+      "unicode": "inf",
+      "name": "infimum",
+      "name_zh": "下确界",
+      "field": "analysis",
+      "description": "The greatest lower bound of a non-empty set bounded below.",
+      "description_zh": "非空有下界集合的最大下界。",
+      "tags": [
+        "analysis",
+        "order"
+      ],
+      "lean": "sInf"
+    },
+    {
+      "id": "uniform-convergence",
+      "symbol": "⇉",
+      "latex": "f_n \\rightrightarrows f",
+      "unicode": "⇉",
+      "name": "uniform convergence",
+      "name_zh": "一致收敛",
+      "field": "analysis",
+      "description": "f_n → f uniformly if sup_x \\lvert f_n(x) − f(x)\\rvert → 0; stronger than pointwise convergence.",
+      "description_zh": "若 sup_x \\lvert f_n(x) − f(x)\\rvert → 0 则一致收敛；强于点态收敛。",
+      "tags": [
+        "analysis",
+        "convergence"
+      ],
+      "lean": "TendstoUniformly"
+    },
+    {
+      "id": "distance-metric",
+      "symbol": "d(x,y)",
+      "latex": "d(x,y)",
+      "unicode": "d(x,y)",
+      "name": "distance in a metric space",
+      "name_zh": "度量空间中的距离",
+      "field": "analysis",
+      "description": "A metric: positive definite, symmetric, and satisfying the triangle inequality.",
+      "description_zh": "满足正定、对称与三角不等式的度量。",
+      "tags": [
+        "analysis",
+        "metric-spaces"
+      ],
+      "lean": "dist"
+    },
+    {
+      "id": "infinity",
+      "symbol": "∞",
+      "latex": "\\infty",
+      "unicode": "∞",
+      "name": "infinity",
+      "name_zh": "无穷",
+      "field": "analysis",
+      "description": "The point at infinity in extended real arithmetic; indicates unbounded growth in limits and integrals.",
+      "description_zh": "扩展实数算术中的无穷远点；在极限与积分中表示无界增长。",
+      "tags": [
+        "analysis",
+        "limits"
+      ],
+      "sympy": "oo"
+    },
+    {
+      "id": "convolution-star",
+      "symbol": "∗",
+      "latex": "f * g",
+      "unicode": "∗",
+      "name": "convolution",
+      "name_zh": "卷积",
+      "field": "analysis",
+      "description": "(f∗g)(t) = ∫ f(τ) g(t−τ) dτ; the product making L¹ a Banach algebra.",
+      "description_zh": "(f∗g)(t) = ∫ f(τ) g(t−τ) dτ；使 L¹ 成为巴拿赫代数的乘积。",
+      "tags": [
+        "analysis",
+        "functional-analysis"
+      ],
+      "sympy": "convolve"
+    },
+    {
+      "id": "epsilon-delta-symbols",
+      "symbol": "ε, δ",
+      "latex": "\\varepsilon,\\ \\delta",
+      "unicode": "ε, δ",
+      "name": "epsilon and delta letters",
+      "name_zh": "ε 与 δ",
+      "field": "analysis",
+      "description": "Standard Greek letters for the tolerance ε and the response δ in limit and continuity proofs.",
+      "description_zh": "极限与连续性证明中表示精度 ε 与响应 δ 的标准希腊字母。",
+      "tags": [
+        "analysis",
+        "limits"
+      ]
+    },
+    {
+      "id": "group-operation",
+      "symbol": "⋅",
+      "latex": "\\cdot",
+      "unicode": "⋅",
+      "name": "group operation",
+      "name_zh": "群运算",
+      "field": "algebra",
+      "description": "The associative binary operation of a group, with unit and inverses.",
+      "description_zh": "群的结合二元运算，带单位元与逆元。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ]
+    },
+    {
+      "id": "identity-element",
+      "symbol": "e",
+      "latex": "e",
+      "unicode": "e",
+      "name": "identity element",
+      "name_zh": "单位元",
+      "field": "algebra",
+      "description": "The unique element e with e·g = g·e = g for every group element g.",
+      "description_zh": "对每个群元素 g 都有 e·g = g·e = g 的唯一元素 e。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "One.one"
+    },
+    {
+      "id": "inverse-element",
+      "symbol": "a⁻¹",
+      "latex": "a^{-1}",
+      "unicode": "a⁻¹",
+      "name": "inverse element",
+      "name_zh": "逆元",
+      "field": "algebra",
+      "description": "The element a⁻¹ with a·a⁻¹ = a⁻¹·a = e.",
+      "description_zh": "满足 a·a⁻¹ = a⁻¹·a = e 的元素 a⁻¹。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "Inv.inv"
+    },
+    {
+      "id": "group-pair",
+      "symbol": "(G,⋅)",
+      "latex": "(G,\\cdot)",
+      "unicode": "(G,⋅)",
+      "name": "group",
+      "name_zh": "群",
+      "field": "algebra",
+      "description": "A set with an associative operation, an identity and inverses.",
+      "description_zh": "带结合运算、单位元与逆元的集合。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "Group"
+    },
+    {
+      "id": "subgroup",
+      "symbol": "H≤G",
+      "latex": "H \\le G",
+      "unicode": "H≤G",
+      "name": "subgroup",
+      "name_zh": "子群",
+      "field": "algebra",
+      "description": "A subset closed under the group operation, identity and inverses.",
+      "description_zh": "对群运算、单位元与逆元封闭的子集。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "Subgroup"
+    },
+    {
+      "id": "normal-subgroup",
+      "symbol": "H⊲G",
+      "latex": "H \\triangleleft G",
+      "unicode": "H⊲G",
+      "name": "normal subgroup",
+      "name_zh": "正规子群",
+      "field": "algebra",
+      "description": "A subgroup H with gHg⁻¹ = H for all g; equivalently a kernel.",
+      "description_zh": "满足对所有 g 有 gHg⁻¹ = H 的子群；等价于某个同态的核。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "Subgroup.Normal"
+    },
+    {
+      "id": "generated-subgroup",
+      "symbol": "⟨S⟩",
+      "latex": "\\langle S \\rangle",
+      "unicode": "⟨S⟩",
+      "name": "subgroup generated by S",
+      "name_zh": "由 S 生成的子群",
+      "field": "algebra",
+      "description": "The smallest subgroup containing the set S.",
+      "description_zh": "包含集合 S 的最小子群。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "Subgroup.closure"
+    },
+    {
+      "id": "group-isomorphism",
+      "symbol": "≅",
+      "latex": "G \\cong H",
+      "unicode": "≅",
+      "name": "group isomorphism",
+      "name_zh": "群同构",
+      "field": "algebra",
+      "description": "A bijective group homomorphism; the groups are structurally identical.",
+      "description_zh": "双射的群同态；两群结构相同。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "MulEquiv"
+    },
+    {
+      "id": "group-homomorphism",
+      "symbol": "φ:G→H",
+      "latex": "\\varphi\\colon G \\to H",
+      "unicode": "φ:G→H",
+      "name": "group homomorphism",
+      "name_zh": "群同态",
+      "field": "algebra",
+      "description": "A map preserving the group operation: φ(ab) = φ(a)φ(b).",
+      "description_zh": "保持群运算的映射：φ(ab) = φ(a)φ(b)。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "MonoidHom"
+    },
+    {
+      "id": "kernel",
+      "symbol": "ker φ",
+      "latex": "\\ker \\varphi",
+      "unicode": "ker φ",
+      "name": "kernel",
+      "name_zh": "核",
+      "field": "algebra",
+      "description": "The normal subgroup of elements mapped to the identity.",
+      "description_zh": "被映到单位元的元素构成的正规子群。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "MonoidHom.ker"
+    },
+    {
+      "id": "image",
+      "symbol": "im φ",
+      "latex": "\\operatorname{im}\\varphi",
+      "unicode": "im φ",
+      "name": "image",
+      "name_zh": "像",
+      "field": "algebra",
+      "description": "The subgroup of all values φ(g); G/ker φ ≅ im φ.",
+      "description_zh": "所有 φ(g) 构成的子群；G/ker φ ≅ im φ。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "MonoidHom.range"
+    },
+    {
+      "id": "quotient-group",
+      "symbol": "G/N",
+      "latex": "G/N",
+      "unicode": "G/N",
+      "name": "quotient group",
+      "name_zh": "商群",
+      "field": "algebra",
+      "description": "The group of cosets of a normal subgroup N, with coset multiplication.",
+      "description_zh": "正规子群 N 的陪集构成的群，运算为陪集乘法。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "QuotientGroup"
+    },
+    {
+      "id": "direct-product",
+      "symbol": "×",
+      "latex": "G \\times H",
+      "unicode": "×",
+      "name": "direct product",
+      "name_zh": "直积",
+      "field": "algebra",
+      "description": "Componentwise group structure on the Cartesian product of two groups.",
+      "description_zh": "两个群笛卡尔积上的逐分量群结构。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ]
+    },
+    {
+      "id": "direct-sum",
+      "symbol": "⊕",
+      "latex": "\\bigoplus_{i \\in I} M_i",
+      "unicode": "⊕",
+      "name": "direct sum",
+      "name_zh": "直和",
+      "field": "algebra",
+      "description": "The subgroup of the product of modules whose components vanish outside a finite set.",
+      "description_zh": "模的直积中只有有限多个分量非零的元素构成的子模。",
+      "tags": [
+        "algebra",
+        "module-theory"
+      ],
+      "lean": "DirectSum"
+    },
+    {
+      "id": "tensor-product",
+      "symbol": "⊗",
+      "latex": "M \\otimes_R N",
+      "unicode": "⊗",
+      "name": "tensor product",
+      "name_zh": "张量积",
+      "field": "algebra",
+      "description": "The universal R-bilinear map's target; linearises bilinear algebra.",
+      "description_zh": "万能 R-双线性映射的靶对象；把双线性代数线性化。",
+      "tags": [
+        "algebra",
+        "module-theory"
+      ],
+      "lean": "TensorProduct"
+    },
+    {
+      "id": "semidirect-product",
+      "symbol": "⋊",
+      "latex": "N \\rtimes H",
+      "unicode": "⋊",
+      "name": "semidirect product",
+      "name_zh": "半直积",
+      "field": "algebra",
+      "description": "A group built from N and H with H acting on N by automorphisms.",
+      "description_zh": "由 N 与 H 构造、H 通过自同构作用于 N 的群。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ]
+    },
+    {
+      "id": "cyclic-group",
+      "symbol": "Cₙ",
+      "latex": "C_n",
+      "unicode": "Cₙ",
+      "name": "cyclic group",
+      "name_zh": "循环群",
+      "field": "algebra",
+      "description": "A group generated by one element; isomorphic to ℤ or ℤ/nℤ.",
+      "description_zh": "由一个元素生成的群；同构于 ℤ 或 ℤ/nℤ。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "ZMod",
+      "sympy": "Z/n"
+    },
+    {
+      "id": "symmetric-group",
+      "symbol": "Sₙ",
+      "latex": "S_n",
+      "unicode": "Sₙ",
+      "name": "symmetric group",
+      "name_zh": "对称群",
+      "field": "algebra",
+      "description": "The group of all permutations of an n-element set, of order n!.",
+      "description_zh": "n 元集合上所有置换构成的群，阶为 n!。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "Equiv.Perm"
+    },
+    {
+      "id": "alternating-group",
+      "symbol": "Aₙ",
+      "latex": "A_n",
+      "unicode": "Aₙ",
+      "name": "alternating group",
+      "name_zh": "交错群",
+      "field": "algebra",
+      "description": "The kernel of the sign homomorphism: even permutations, of order n!/2 for n ≥ 2.",
+      "description_zh": "符号同态的核：偶置换组成的群，n ≥ 2 时阶为 n!/2。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ]
+    },
+    {
+      "id": "dihedral-group",
+      "symbol": "Dₙ",
+      "latex": "D_n",
+      "unicode": "Dₙ",
+      "name": "dihedral group",
+      "name_zh": "二面体群",
+      "field": "algebra",
+      "description": "The symmetry group of a regular n-gon, of order 2n.",
+      "description_zh": "正 n 边形的对称群，阶为 2n。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ]
+    },
+    {
+      "id": "order-of-element",
+      "symbol": "ord(g)",
+      "latex": "\\operatorname{ord}(g)",
+      "unicode": "ord(g)",
+      "name": "order of an element",
+      "name_zh": "元素的阶",
+      "field": "algebra",
+      "description": "The least positive k with g^k = e; divides the group order by Lagrange.",
+      "description_zh": "使 g^k = e 的最小正整数 k；由拉格朗日定理整除群的阶。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "orderOf"
+    },
+    {
+      "id": "group-center",
+      "symbol": "Z(G)",
+      "latex": "Z(G)",
+      "unicode": "Z(G)",
+      "name": "center of a group",
+      "name_zh": "群中心",
+      "field": "algebra",
+      "description": "The subgroup of elements commuting with every element of G.",
+      "description_zh": "与 G 中每个元素都交换的元素构成的子群。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ]
+    },
+    {
+      "id": "commutator",
+      "symbol": "[g,h]",
+      "latex": "[g,h]",
+      "unicode": "[g,h]",
+      "name": "commutator",
+      "name_zh": "换位子",
+      "field": "algebra",
+      "description": "The element g h g⁻¹ h⁻¹; trivial iff g and h commute.",
+      "description_zh": "元素 g h g⁻¹ h⁻¹；为 e 当且仅当 g 与 h 交换。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ]
+    },
+    {
+      "id": "ideal",
+      "symbol": "I⊴R",
+      "latex": "I \\trianglelefteq R",
+      "unicode": "I⊴R",
+      "name": "ideal",
+      "name_zh": "理想",
+      "field": "algebra",
+      "description": "An additive subgroup of a ring closed under multiplication by ring elements.",
+      "description_zh": "对环元素乘法封闭的加法子群。",
+      "tags": [
+        "algebra",
+        "ring-theory"
+      ],
+      "lean": "Ideal"
+    },
+    {
+      "id": "polynomial-ring",
+      "symbol": "R[x]",
+      "latex": "R[x]",
+      "unicode": "R[x]",
+      "name": "polynomial ring",
+      "name_zh": "多项式环",
+      "field": "algebra",
+      "description": "Polynomials in one indeterminate over R, with formal addition and multiplication.",
+      "description_zh": "环 R 上一元多项式的集合，带形式加法与乘法。",
+      "tags": [
+        "algebra",
+        "ring-theory"
+      ],
+      "lean": "Polynomial"
+    },
+    {
+      "id": "finite-field-gf",
+      "symbol": "𝔽_q",
+      "latex": "\\mathbb{F}_q",
+      "unicode": "𝔽_q",
+      "name": "finite field",
+      "name_zh": "有限域",
+      "field": "algebra",
+      "description": "A field with q = p^n elements; unique up to isomorphism for each prime power q.",
+      "description_zh": "含 q = p^n 个元素的域；对每个素数幂 q 在同构意义下唯一。",
+      "tags": [
+        "algebra",
+        "field-theory"
+      ],
+      "lean": "GaloisField"
+    },
+    {
+      "id": "permutation-cycles",
+      "symbol": "(1 2 3)",
+      "latex": "(1\\ 2\\ 3)",
+      "unicode": "(1 2 3)",
+      "name": "cycle notation",
+      "name_zh": "轮换记号",
+      "field": "algebra",
+      "description": "A permutation written as a product of disjoint cycles, composed right to left.",
+      "description_zh": "用互不相交轮换的乘积表示置换，按从右到左复合。",
+      "tags": [
+        "algebra",
+        "group-theory"
+      ],
+      "lean": "Equiv.Perm",
+      "note": "one-line notation"
+    },
+    {
+      "id": "extension-degree",
+      "symbol": "[K:F]",
+      "latex": "[K:F]",
+      "unicode": "[K:F]",
+      "name": "field extension degree",
+      "name_zh": "扩域次数",
+      "field": "algebra",
+      "description": "The dimension of K as a vector space over the subfield F.",
+      "description_zh": "K 作为子域 F 上向量空间的维数。",
+      "tags": [
+        "algebra",
+        "field-theory"
+      ],
+      "lean": "Module.finrank"
+    },
+    {
+      "id": "ring-homomorphism",
+      "symbol": "f:R→S",
+      "latex": "f\\colon R \\to S",
+      "unicode": "f:R→S",
+      "name": "ring homomorphism",
+      "name_zh": "环同态",
+      "field": "algebra",
+      "description": "A map preserving addition, multiplication and the multiplicative unit.",
+      "description_zh": "保持加法、乘法与乘法单位元的映射。",
+      "tags": [
+        "algebra",
+        "ring-theory"
+      ],
+      "lean": "RingHom"
+    },
+    {
+      "id": "galois-group",
+      "symbol": "Gal(K/F)",
+      "latex": "\\operatorname{Gal}(K/F)",
+      "unicode": "Gal(K/F)",
+      "name": "Galois group",
+      "name_zh": "伽罗瓦群",
+      "field": "algebra",
+      "description": "The group of F-fixing field automorphisms of a Galois extension K/F.",
+      "description_zh": "伽罗瓦扩张 K/F 的保持 F 不动的域自同构群。",
+      "tags": [
+        "algebra",
+        "field-theory"
+      ],
+      "lean": "IsGalois"
+    },
+    {
+      "id": "matrix",
+      "symbol": "A=[aᵢⱼ]",
+      "latex": "A = (a_{ij})",
+      "unicode": "A=[aᵢⱼ]",
+      "name": "matrix",
+      "name_zh": "矩阵",
+      "field": "linear-algebra",
+      "description": "A rectangular array of scalars, with entrywise addition and matrix multiplication.",
+      "description_zh": "标量的矩形阵列，带逐元素加法与矩阵乘法。",
+      "tags": [
+        "linear-algebra",
+        "matrices"
+      ],
+      "lean": "Matrix"
+    },
+    {
+      "id": "determinant",
+      "symbol": "det",
+      "latex": "\\det A",
+      "unicode": "det",
+      "name": "determinant",
+      "name_zh": "行列式",
+      "field": "linear-algebra",
+      "description": "The signed volume scaling of the linear map A; zero iff A is singular.",
+      "description_zh": "线性映射 A 的有向体积伸缩因子；A 奇异当且仅当它为零。",
+      "tags": [
+        "linear-algebra",
+        "matrices"
+      ],
+      "lean": "Matrix.det",
+      "sympy": "det(A)"
+    },
+    {
+      "id": "inverse-matrix",
+      "symbol": "A⁻¹",
+      "latex": "A^{-1}",
+      "unicode": "A⁻¹",
+      "name": "inverse matrix",
+      "name_zh": "逆矩阵",
+      "field": "linear-algebra",
+      "description": "The matrix B with AB = BA = I, existing iff det A ≠ 0.",
+      "description_zh": "满足 AB = BA = I 的矩阵 B，存在当且仅当 det A ≠ 0。",
+      "tags": [
+        "linear-algebra",
+        "matrices"
+      ]
+    },
+    {
+      "id": "transpose",
+      "symbol": "Aᵀ",
+      "latex": "A^{\\mathsf{T}}",
+      "unicode": "Aᵀ",
+      "name": "transpose",
+      "name_zh": "转置",
+      "field": "linear-algebra",
+      "description": "Reflection across the main diagonal: (Aᵀ)_{ij} = A_{ji}.",
+      "description_zh": "沿主对角线反射：(Aᵀ)_{ij} = A_{ji}。",
+      "tags": [
+        "linear-algebra",
+        "matrices"
+      ],
+      "lean": "Matrix.transpose",
+      "sympy": "A^T"
+    },
+    {
+      "id": "trace",
+      "symbol": "tr(A)",
+      "latex": "\\operatorname{tr}(A)",
+      "unicode": "tr(A)",
+      "name": "trace",
+      "name_zh": "迹",
+      "field": "linear-algebra",
+      "description": "The sum of the diagonal entries; equals the sum of eigenvalues.",
+      "description_zh": "主对角线元素之和；等于特征值之和。",
+      "tags": [
+        "linear-algebra",
+        "matrices"
+      ],
+      "lean": "Matrix.trace"
+    },
+    {
+      "id": "rank",
+      "symbol": "rank(A)",
+      "latex": "\\operatorname{rank}(A)",
+      "unicode": "rank(A)",
+      "name": "rank",
+      "name_zh": "秩",
+      "field": "linear-algebra",
+      "description": "The dimension of the column space; the number of nonzero singular values.",
+      "description_zh": "列空间的维数；非零奇异值的个数。",
+      "tags": [
+        "linear-algebra",
+        "matrices"
+      ],
+      "lean": "Matrix.rank"
+    },
+    {
+      "id": "nullspace",
+      "symbol": "ker A",
+      "latex": "\\ker A",
+      "unicode": "ker A",
+      "name": "nullspace (kernel)",
+      "name_zh": "零空间（核）",
+      "field": "linear-algebra",
+      "description": "The subspace of vectors x with Ax = 0; dimension n − rank A.",
+      "description_zh": "满足 Ax = 0 的向量构成的子空间；维数为 n − rank A。",
+      "tags": [
+        "linear-algebra",
+        "matrices"
+      ],
+      "lean": "LinearMap.ker"
+    },
+    {
+      "id": "eigenvalue",
+      "symbol": "λ",
+      "latex": "\\lambda",
+      "unicode": "λ",
+      "name": "eigenvalue",
+      "name_zh": "特征值",
+      "field": "linear-algebra",
+      "description": "A scalar λ for which Av = λv has a nonzero solution v.",
+      "description_zh": "使 Av = λv 有非零解 v 的标量 λ。",
+      "tags": [
+        "linear-algebra",
+        "eigenvalues"
+      ],
+      "lean": "Module.End.HasEigenvalue"
+    },
+    {
+      "id": "eigenvector",
+      "symbol": "v",
+      "latex": "v",
+      "unicode": "v",
+      "name": "eigenvector",
+      "name_zh": "特征向量",
+      "field": "linear-algebra",
+      "description": "A nonzero vector v that the matrix only rescales: Av = λv.",
+      "description_zh": "矩阵只对其作伸缩的非零向量 v：Av = λv。",
+      "tags": [
+        "linear-algebra",
+        "eigenvalues"
+      ],
+      "lean": "Module.End.HasEigenvector"
+    },
+    {
+      "id": "characteristic-polynomial",
+      "symbol": "χₐ",
+      "latex": "\\chi_A(\\lambda)",
+      "unicode": "χₐ",
+      "name": "characteristic polynomial",
+      "name_zh": "特征多项式",
+      "field": "linear-algebra",
+      "description": "det(λI − A); its roots are the eigenvalues with algebraic multiplicities.",
+      "description_zh": "det(λI − A)；其根为各代数重数下的特征值。",
+      "tags": [
+        "linear-algebra",
+        "eigenvalues"
+      ],
+      "lean": "Matrix.charpoly"
+    },
+    {
+      "id": "inner-product",
+      "symbol": "⟨u,v⟩",
+      "latex": "\\langle u, v \\rangle",
+      "unicode": "⟨u,v⟩",
+      "name": "inner product",
+      "name_zh": "内积",
+      "field": "linear-algebra",
+      "description": "A positive-definite symmetric bilinear form; measures length and angle.",
+      "description_zh": "正定对称双线性型；用于定义长度与夹角。",
+      "tags": [
+        "linear-algebra",
+        "inner-product"
+      ],
+      "lean": "inner"
+    },
+    {
+      "id": "orthogonality",
+      "symbol": "⊥",
+      "latex": "u \\perp v",
+      "unicode": "⊥",
+      "name": "orthogonality",
+      "name_zh": "正交",
+      "field": "linear-algebra",
+      "description": "Two vectors are orthogonal when their inner product is zero.",
+      "description_zh": "内积为零的两向量互相正交。",
+      "tags": [
+        "linear-algebra",
+        "inner-product"
+      ]
+    },
+    {
+      "id": "orthogonal-complement",
+      "symbol": "A^⊥",
+      "latex": "A^{\\perp}",
+      "unicode": "A^⊥",
+      "name": "orthogonal complement",
+      "name_zh": "正交补",
+      "field": "linear-algebra",
+      "description": "The subspace of vectors orthogonal to every vector of A.",
+      "description_zh": "与 A 中每个向量都正交的向量构成的子空间。",
+      "tags": [
+        "linear-algebra",
+        "inner-product"
+      ]
+    },
+    {
+      "id": "projection",
+      "symbol": "P",
+      "latex": "P^2 = P",
+      "unicode": "P",
+      "name": "projection (idempotent)",
+      "name_zh": "投影（幂等）",
+      "field": "linear-algebra",
+      "description": "A linear map with P² = P; orthogonal projections are self-adjoint.",
+      "description_zh": "满足 P² = P 的线性映射；正交投影还是自伴的。",
+      "tags": [
+        "linear-algebra",
+        "operators"
+      ]
+    },
+    {
+      "id": "identity-matrix",
+      "symbol": "Iₙ",
+      "latex": "I_n",
+      "unicode": "Iₙ",
+      "name": "identity matrix",
+      "name_zh": "单位矩阵",
+      "field": "linear-algebra",
+      "description": "The diagonal matrix with 1s on the diagonal; neutral for multiplication.",
+      "description_zh": "主对角线全为 1 的矩阵；是矩阵乘法的单位元。",
+      "tags": [
+        "linear-algebra",
+        "matrices"
+      ]
+    },
+    {
+      "id": "linear-system",
+      "symbol": "Ax=b",
+      "latex": "A\\mathbf{x} = \\mathbf{b}",
+      "unicode": "Ax=b",
+      "name": "linear system",
+      "name_zh": "线性方程组",
+      "field": "linear-algebra",
+      "description": "The system of linear equations encoded by matrix A and right-hand side b.",
+      "description_zh": "由矩阵 A 与右端 b 编码的线性方程组。",
+      "tags": [
+        "linear-algebra",
+        "matrices"
+      ]
+    },
+    {
+      "id": "linear-map",
+      "symbol": "T:V→W",
+      "latex": "T\\colon V \\to W",
+      "unicode": "T:V→W",
+      "name": "linear map",
+      "name_zh": "线性映射",
+      "field": "linear-algebra",
+      "description": "A map preserving vector addition and scalar multiplication.",
+      "description_zh": "保持向量加法与数乘的映射。",
+      "tags": [
+        "linear-algebra",
+        "operators"
+      ],
+      "lean": "LinearMap"
+    },
+    {
+      "id": "basis",
+      "symbol": "{eᵢ}",
+      "latex": "\\{e_i\\}_{i \\in I}",
+      "unicode": "{eᵢ}",
+      "name": "basis",
+      "name_zh": "基",
+      "field": "linear-algebra",
+      "description": "A linearly independent spanning set; every vector is a unique finite combination.",
+      "description_zh": "线性无关的生成集；每个向量都有唯一的有限线性组合表示。",
+      "tags": [
+        "linear-algebra",
+        "matrices"
+      ],
+      "lean": "Basis"
+    },
+    {
+      "id": "dimension",
+      "symbol": "dim V",
+      "latex": "\\dim V",
+      "unicode": "dim V",
+      "name": "dimension",
+      "name_zh": "维数",
+      "field": "linear-algebra",
+      "description": "The cardinality of any basis of V.",
+      "description_zh": "V 的任意一组基的基数。",
+      "tags": [
+        "linear-algebra",
+        "matrices"
+      ],
+      "lean": "Module.finrank"
+    },
+    {
+      "id": "dual-space",
+      "symbol": "V*",
+      "latex": "V^{*}",
+      "unicode": "V*",
+      "name": "dual space",
+      "name_zh": "对偶空间",
+      "field": "linear-algebra",
+      "description": "The space of all linear functionals V → 𝕜.",
+      "description_zh": "全部线性泛函 V → 𝕜 构成的空间。",
+      "tags": [
+        "linear-algebra",
+        "duality"
+      ],
+      "lean": "Module.Dual"
+    },
+    {
+      "id": "singular-value-decomposition",
+      "symbol": "UΣVᵀ",
+      "latex": "U\\Sigma V^{\\mathsf{T}}",
+      "unicode": "UΣVᵀ",
+      "name": "singular value decomposition",
+      "name_zh": "奇异值分解",
+      "field": "linear-algebra",
+      "description": "Factorisation of any matrix into orthogonal U, diagonal Σ ≥ 0 and orthogonal Vᵀ.",
+      "description_zh": "任意矩阵分解为正交 U、非负对角 Σ 与正交 Vᵀ 的乘积。",
+      "tags": [
+        "linear-algebra",
+        "matrices"
+      ]
+    },
+    {
+      "id": "spectral-radius",
+      "symbol": "ρ(A)",
+      "latex": "\\rho(A)",
+      "unicode": "ρ(A)",
+      "name": "spectral radius",
+      "name_zh": "谱半径",
+      "field": "linear-algebra",
+      "description": "The maximum modulus of the eigenvalues of A; governs asymptotic growth of Aⁿ.",
+      "description_zh": "A 的特征值的最大模；决定 Aⁿ 的渐近增长。",
+      "tags": [
+        "linear-algebra",
+        "eigenvalues"
+      ]
+    },
+    {
+      "id": "topology",
+      "symbol": "τ",
+      "latex": "\\tau",
+      "unicode": "τ",
+      "name": "topology",
+      "name_zh": "拓扑",
+      "field": "topology",
+      "description": "A collection of open sets closed under arbitrary unions and finite intersections.",
+      "description_zh": "对任意并与有限交封闭的开集族。",
+      "tags": [
+        "topology",
+        "basic"
+      ],
+      "lean": "TopologicalSpace"
+    },
+    {
+      "id": "open-set",
+      "symbol": "U∈τ",
+      "latex": "U \\in \\tau",
+      "unicode": "U∈τ",
+      "name": "open set",
+      "name_zh": "开集",
+      "field": "topology",
+      "description": "A member of the topology τ of a space X.",
+      "description_zh": "空间 X 的拓扑 τ 中的元素。",
+      "tags": [
+        "topology",
+        "basic"
+      ],
+      "lean": "IsOpen"
+    },
+    {
+      "id": "closed-set",
+      "symbol": "F",
+      "latex": "F",
+      "unicode": "F",
+      "name": "closed set",
+      "name_zh": "闭集",
+      "field": "topology",
+      "description": "The complement of an open set; closed under finite unions and arbitrary intersections.",
+      "description_zh": "开集的补集；对有限并与任意交封闭。",
+      "tags": [
+        "topology",
+        "basic"
+      ],
+      "lean": "IsClosed"
+    },
+    {
+      "id": "interior",
+      "symbol": "int(A)",
+      "latex": "\\operatorname{int}(A)",
+      "unicode": "int(A)",
+      "name": "interior",
+      "name_zh": "内部",
+      "field": "topology",
+      "description": "The union of all open sets contained in A.",
+      "description_zh": "包含于 A 的所有开集之并。",
+      "tags": [
+        "topology",
+        "basic"
+      ],
+      "lean": "interior"
+    },
+    {
+      "id": "closure",
+      "symbol": "cl(A)",
+      "latex": "\\operatorname{cl}(A)",
+      "unicode": "cl(A)",
+      "name": "closure",
+      "name_zh": "闭包",
+      "field": "topology",
+      "description": "The intersection of all closed sets containing A; adds all limit points.",
+      "description_zh": "包含 A 的所有闭集之交；加入全部极限点。",
+      "tags": [
+        "topology",
+        "basic"
+      ],
+      "lean": "closure"
+    },
+    {
+      "id": "set-boundary",
+      "symbol": "∂A",
+      "latex": "\\partial A",
+      "unicode": "∂A",
+      "name": "boundary of a set",
+      "name_zh": "集合的边界",
+      "field": "topology",
+      "description": "cl(A) ∩ cl(X∖A); the points near both A and its complement.",
+      "description_zh": "cl(A) ∩ cl(X∖A)；同时接近 A 与其补集的点。",
+      "tags": [
+        "topology",
+        "basic"
+      ],
+      "lean": "frontier"
+    },
+    {
+      "id": "dense-subset",
+      "symbol": "cl(A)=X",
+      "latex": "\\overline{A} = X",
+      "unicode": "cl(A)=X",
+      "name": "dense subset",
+      "name_zh": "稠密子集",
+      "field": "topology",
+      "description": "A is dense when its closure is the whole space.",
+      "description_zh": "A 的闭包等于全空间时称为稠密。",
+      "tags": [
+        "topology",
+        "basic"
+      ],
+      "lean": "Dense"
+    },
+    {
+      "id": "connected-space",
+      "symbol": "X connected",
+      "latex": "X \\text{ connected}",
+      "unicode": "X connected",
+      "name": "connected space",
+      "name_zh": "连通空间",
+      "field": "topology",
+      "description": "A space that is not the union of two nonempty disjoint open sets.",
+      "description_zh": "不能表示为两个非空不交开集之并的空间。",
+      "tags": [
+        "topology",
+        "basic"
+      ],
+      "lean": "ConnectedSpace"
+    },
+    {
+      "id": "relatively-compact",
+      "symbol": "K⋐U",
+      "latex": "K \\Subset U",
+      "unicode": "K⋐U",
+      "name": "relatively compact subset",
+      "name_zh": "相对紧子集",
+      "field": "topology",
+      "description": "K is relatively compact in U when its closure is compact and contained in U.",
+      "description_zh": "K 的闭包紧且包含于 U 时称 K 在 U 中相对紧。",
+      "tags": [
+        "topology",
+        "basic"
+      ],
+      "lean": "IsCompact"
+    },
+    {
+      "id": "fundamental-group",
+      "symbol": "π₁",
+      "latex": "\\pi_1(X,x_0)",
+      "unicode": "π₁",
+      "name": "fundamental group",
+      "name_zh": "基本群",
+      "field": "topology",
+      "description": "Homotopy classes of loops based at x₀, under concatenation.",
+      "description_zh": "以 x₀ 为基点的环路在同伦下的等价类，以衔接为运算。",
+      "tags": [
+        "topology",
+        "homotopy"
+      ],
+      "lean": "FundamentalGroup"
+    },
+    {
+      "id": "homology",
+      "symbol": "Hₙ",
+      "latex": "H_n(X)",
+      "unicode": "Hₙ",
+      "name": "singular homology",
+      "name_zh": "奇异同调",
+      "field": "topology",
+      "description": "The homology of the singular chain complex; counts n-dimensional holes.",
+      "description_zh": "奇异链复形的同调；计数 n 维“洞”。",
+      "tags": [
+        "topology",
+        "homology"
+      ],
+      "lean": "HomologicalComplex"
+    },
+    {
+      "id": "cohomology",
+      "symbol": "Hⁿ",
+      "latex": "H^n(X;G)",
+      "unicode": "Hⁿ",
+      "name": "cohomology",
+      "name_zh": "上同调",
+      "field": "topology",
+      "description": "The dual theory to homology, obtained from the cochain complex.",
+      "description_zh": "由上链复形得到的、同调的对偶理论。",
+      "tags": [
+        "topology",
+        "homology"
+      ]
+    },
+    {
+      "id": "boundary-operator",
+      "symbol": "∂ₙ",
+      "latex": "\\partial_n",
+      "unicode": "∂ₙ",
+      "name": "boundary operator",
+      "name_zh": "边缘算子",
+      "field": "topology",
+      "description": "The map C_n → C_{n−1} with ∂² = 0; defines chains, cycles and boundaries.",
+      "description_zh": "满足 ∂² = 0 的映射 C_n → C_{n−1}；定义链、闭链与边缘。",
+      "tags": [
+        "topology",
+        "homology"
+      ]
+    },
+    {
+      "id": "chain-complex",
+      "symbol": "C•",
+      "latex": "C_\\bullet",
+      "unicode": "C•",
+      "name": "chain complex",
+      "name_zh": "链复形",
+      "field": "topology",
+      "description": "A sequence of modules with boundary maps whose composition is zero.",
+      "description_zh": "带复合为零的边缘映射的模序列。",
+      "tags": [
+        "topology",
+        "homology"
+      ]
+    },
+    {
+      "id": "cup-product",
+      "symbol": "⌣",
+      "latex": "\\smile",
+      "unicode": "⌣",
+      "name": "cup product",
+      "name_zh": "上积",
+      "field": "topology",
+      "description": "The ring product H^p × H^q → H^{p+q} making cohomology a graded ring.",
+      "description_zh": "使上同调成为分次环的乘积 H^p × H^q → H^{p+q}。",
+      "tags": [
+        "topology",
+        "homology"
+      ]
+    },
+    {
+      "id": "cap-product",
+      "symbol": "⌢",
+      "latex": "\\frown",
+      "unicode": "⌢",
+      "name": "cap product",
+      "name_zh": "上积作用",
+      "field": "topology",
+      "description": "The action of cohomology on homology, H^p × H_n → H_{n−p}.",
+      "description_zh": "上同调对同调的作用 H^p × H_n → H_{n−p}。",
+      "tags": [
+        "topology",
+        "homology"
+      ]
+    },
+    {
+      "id": "wedge-sum",
+      "symbol": "∨",
+      "latex": "X \\vee Y",
+      "unicode": "∨",
+      "name": "wedge sum",
+      "name_zh": "楔和",
+      "field": "topology",
+      "description": "The quotient of the disjoint union of pointed spaces identifying the base points.",
+      "description_zh": "把带基点空间的不交并中的基点粘合所得的商空间。",
+      "tags": [
+        "topology",
+        "homotopy"
+      ]
+    },
+    {
+      "id": "smash-product",
+      "symbol": "∧",
+      "latex": "X \\wedge Y",
+      "unicode": "∧",
+      "name": "smash product",
+      "name_zh": "smash 积",
+      "field": "topology",
+      "description": "X × Y modulo the subspace (X × {y₀}) ∪ ({x₀} × Y).",
+      "description_zh": "X × Y 模去子空间 (X × {y₀}) ∪ ({x₀} × Y)。",
+      "tags": [
+        "topology",
+        "homotopy"
+      ]
+    },
+    {
+      "id": "continuous-map",
+      "symbol": "f:X→Y",
+      "latex": "f\\colon X \\to Y",
+      "unicode": "f:X→Y",
+      "name": "continuous map",
+      "name_zh": "连续映射",
+      "field": "topology",
+      "description": "A map for which preimages of open sets are open.",
+      "description_zh": "开集的原像仍为开集的映射。",
+      "tags": [
+        "topology",
+        "basic"
+      ],
+      "lean": "Continuous"
+    },
+    {
+      "id": "homeomorphism",
+      "symbol": "≅",
+      "latex": "X \\cong Y",
+      "unicode": "≅",
+      "name": "homeomorphism",
+      "name_zh": "同胚",
+      "field": "topology",
+      "description": "A continuous bijection with continuous inverse; the same topological shape.",
+      "description_zh": "具有连续逆的连续双射；拓扑形状相同。",
+      "tags": [
+        "topology",
+        "basic"
+      ],
+      "lean": "Homeomorph"
+    },
+    {
+      "id": "homotopy-equivalence",
+      "symbol": "≃",
+      "latex": "X \\simeq Y",
+      "unicode": "≃",
+      "name": "homotopy equivalence",
+      "name_zh": "同伦等价",
+      "field": "topology",
+      "description": "A map with a homotopy inverse; the spaces have the same homotopy type.",
+      "description_zh": "具有同伦逆的映射；两空间同伦型相同。",
+      "tags": [
+        "topology",
+        "homotopy"
+      ]
+    },
+    {
+      "id": "point",
+      "symbol": "P",
+      "latex": "P",
+      "unicode": "P",
+      "name": "point",
+      "name_zh": "点",
+      "field": "geometry",
+      "description": "A primitive object of incidence geometry, located but without extent.",
+      "description_zh": "射影/关联几何中的基本对象，有位置而无大小。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ]
+    },
+    {
+      "id": "line",
+      "symbol": "ℓ",
+      "latex": "\\ell",
+      "unicode": "ℓ",
+      "name": "line",
+      "name_zh": "直线",
+      "field": "geometry",
+      "description": "A straight one-dimensional figure determined by two distinct points.",
+      "description_zh": "由两个不同点确定的直线。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ]
+    },
+    {
+      "id": "line-segment",
+      "symbol": "AB",
+      "latex": "\\overline{AB}",
+      "unicode": "AB",
+      "name": "line segment",
+      "name_zh": "线段",
+      "field": "geometry",
+      "description": "The part of the line between points A and B, of length equal to the distance AB.",
+      "description_zh": "直线上 A、B 之间的部分，其长度等于两点之间的距离。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ]
+    },
+    {
+      "id": "angle",
+      "symbol": "∠ABC",
+      "latex": "\\angle ABC",
+      "unicode": "∠ABC",
+      "name": "angle",
+      "name_zh": "角",
+      "field": "geometry",
+      "description": "The figure formed by rays BA and BC sharing vertex B.",
+      "description_zh": "以 B 为顶点、由射线 BA 与 BC 形成的图形。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ]
+    },
+    {
+      "id": "triangle",
+      "symbol": "△ABC",
+      "latex": "\\triangle ABC",
+      "unicode": "△ABC",
+      "name": "triangle",
+      "name_zh": "三角形",
+      "field": "geometry",
+      "description": "Three non-collinear points with their three connecting segments.",
+      "description_zh": "三个不共线的点及其三条连线构成的图形。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ]
+    },
+    {
+      "id": "parallel",
+      "symbol": "∥",
+      "latex": "a \\parallel b",
+      "unicode": "∥",
+      "name": "parallel",
+      "name_zh": "平行",
+      "field": "geometry",
+      "description": "Two coplanar lines that never meet; equal slopes.",
+      "description_zh": "同一平面内永不相交的两条直线；斜率相等。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ]
+    },
+    {
+      "id": "perpendicular",
+      "symbol": "⊥",
+      "latex": "a \\perp b",
+      "unicode": "⊥",
+      "name": "perpendicular",
+      "name_zh": "垂直",
+      "field": "geometry",
+      "description": "Two lines meeting at a right angle (90°).",
+      "description_zh": "成直角（90°）相交的两条直线。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ]
+    },
+    {
+      "id": "congruent",
+      "symbol": "≅",
+      "latex": "\\cong",
+      "unicode": "≅",
+      "name": "congruent",
+      "name_zh": "全等",
+      "field": "geometry",
+      "description": "Figures related by an isometry; equal side lengths and angles.",
+      "description_zh": "存在等距变换使之一致的图形；边长与角分别相等。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ]
+    },
+    {
+      "id": "similar",
+      "symbol": "∼",
+      "latex": "\\sim",
+      "unicode": "∼",
+      "name": "similar",
+      "name_zh": "相似",
+      "field": "geometry",
+      "description": "Figures with equal angles and proportional side lengths.",
+      "description_zh": "对应角相等、对应边成比例的图形。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ],
+      "aka": [
+        "homothety"
+      ]
+    },
+    {
+      "id": "circle",
+      "symbol": "⊙",
+      "latex": "\\odot O",
+      "unicode": "⊙",
+      "name": "circle",
+      "name_zh": "圆",
+      "field": "geometry",
+      "description": "The locus of points at a fixed distance (radius) from a centre O.",
+      "description_zh": "到圆心 O 距离为定值（半径）的点的轨迹。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ]
+    },
+    {
+      "id": "arc",
+      "symbol": "⌒",
+      "latex": "\\overset{\\frown}{AB}",
+      "unicode": "⌒",
+      "name": "arc",
+      "name_zh": "弧",
+      "field": "geometry",
+      "description": "A connected portion of a circle; measured by its central angle.",
+      "description_zh": "圆上的一段连通弧；用其所对圆心角度量。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ]
+    },
+    {
+      "id": "vector",
+      "symbol": "v⃗",
+      "latex": "\\vec{v}",
+      "unicode": "v⃗",
+      "name": "geometric vector",
+      "name_zh": "几何向量",
+      "field": "geometry",
+      "description": "A directed displacement with magnitude and direction.",
+      "description_zh": "带大小与方向的位移量。",
+      "tags": [
+        "geometry",
+        "analytic"
+      ]
+    },
+    {
+      "id": "dot-product",
+      "symbol": "u·v",
+      "latex": "u \\cdot v",
+      "unicode": "u·v",
+      "name": "dot product",
+      "name_zh": "点积",
+      "field": "geometry",
+      "description": "u·v = ‖u‖‖v‖cos θ; measures projection and orthogonality.",
+      "description_zh": "u·v = ‖u‖‖v‖cos θ；用于投影与正交判定。",
+      "tags": [
+        "geometry",
+        "analytic"
+      ]
+    },
+    {
+      "id": "cross-product",
+      "symbol": "u×v",
+      "latex": "u \\times v",
+      "unicode": "u×v",
+      "name": "cross product",
+      "name_zh": "叉积",
+      "field": "geometry",
+      "description": "The vector of length ‖u‖‖v‖sin θ normal to u and v, oriented by the right-hand rule.",
+      "description_zh": "长度 ‖u‖‖v‖sin θ、垂直于 u 与 v 的右手系向量。",
+      "tags": [
+        "geometry",
+        "analytic"
+      ]
+    },
+    {
+      "id": "curvature",
+      "symbol": "κ",
+      "latex": "\\kappa",
+      "unicode": "κ",
+      "name": "curvature (plane curve)",
+      "name_zh": "曲率（平面曲线）",
+      "field": "geometry",
+      "description": "κ = 1/R for a circle; measures how fast the tangent direction turns.",
+      "description_zh": "圆的曲率 κ = 1/R；度量切线方向转动的快慢。",
+      "tags": [
+        "geometry",
+        "differential"
+      ]
+    },
+    {
+      "id": "spherical-coordinates",
+      "symbol": "(r,θ,φ)",
+      "latex": "(r,\\theta,\\varphi)",
+      "unicode": "(r,θ,φ)",
+      "name": "spherical coordinates",
+      "name_zh": "球坐标",
+      "field": "geometry",
+      "description": "Radius r, polar angle θ from the z-axis, azimuth φ in the xy-plane.",
+      "description_zh": "半径 r、与 z 轴的极角 θ、xy 平面内的方位角 φ。",
+      "tags": [
+        "geometry",
+        "analytic"
+      ]
+    },
+    {
+      "id": "angle-measure",
+      "symbol": "m∠ABC",
+      "latex": "m\\angle ABC",
+      "unicode": "m∠ABC",
+      "name": "angle measure",
+      "name_zh": "角的度数",
+      "field": "geometry",
+      "description": "The size of an angle in degrees or radians.",
+      "description_zh": "以度或弧度表示的角的大小。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ]
+    },
+    {
+      "id": "degree",
+      "symbol": "°",
+      "latex": "90^{\\circ}",
+      "unicode": "°",
+      "name": "degree (angle unit)",
+      "name_zh": "度（角度单位）",
+      "field": "geometry",
+      "description": "1/360 of a full turn; right angle = 90°, straight angle = 180°.",
+      "description_zh": "整个圆周的 1/360；直角为 90°，平角为 180°。",
+      "tags": [
+        "geometry",
+        "euclidean"
+      ]
+    },
+    {
+      "id": "category",
+      "symbol": "𝒞",
+      "latex": "\\mathcal{C}",
+      "unicode": "𝒞",
+      "name": "category",
+      "name_zh": "范畴",
+      "field": "category",
+      "description": "A class of objects with morphisms and associative composition, plus identities.",
+      "description_zh": "对象类、态射类、结合复合与单位态射构成的结构。",
+      "tags": [
+        "category",
+        "basic"
+      ],
+      "lean": "CategoryTheory.Category"
+    },
+    {
+      "id": "object-of-category",
+      "symbol": "Ob(𝒞)",
+      "latex": "\\mathrm{Ob}(\\mathcal{C})",
+      "unicode": "Ob(𝒞)",
+      "name": "objects of a category",
+      "name_zh": "范畴的对象",
+      "field": "category",
+      "description": "The collection of objects of a category 𝒞.",
+      "description_zh": "范畴 𝒞 的对象全体。",
+      "tags": [
+        "category",
+        "basic"
+      ]
+    },
+    {
+      "id": "morphism",
+      "symbol": "f:A→B",
+      "latex": "f\\colon A \\to B",
+      "unicode": "f:A→B",
+      "name": "morphism",
+      "name_zh": "态射",
+      "field": "category",
+      "description": "A map/arrow from object A to object B in a category.",
+      "description_zh": "范畴中从对象 A 到对象 B 的箭头。",
+      "tags": [
+        "category",
+        "basic"
+      ]
+    },
+    {
+      "id": "hom-set",
+      "symbol": "Hom(A,B)",
+      "latex": "\\operatorname{Hom}(A,B)",
+      "unicode": "Hom(A,B)",
+      "name": "hom-set",
+      "name_zh": "态射集",
+      "field": "category",
+      "description": "The set (or class) of all morphisms A → B in a category.",
+      "description_zh": "范畴中 A → B 的全部态射构成的集合或类。",
+      "tags": [
+        "category",
+        "basic"
+      ]
+    },
+    {
+      "id": "composition",
+      "symbol": "∘",
+      "latex": "g \\circ f",
+      "unicode": "∘",
+      "name": "composition of morphisms",
+      "name_zh": "态射复合",
+      "field": "category",
+      "description": "The composite A → C obtained from f : A → B and g : B → C; associative.",
+      "description_zh": "由 f : A → B 与 g : B → C 得到的复合 A → C；满足结合律。",
+      "tags": [
+        "category",
+        "basic"
+      ],
+      "lean": "CategoryTheory.CategoryStruct.comp"
+    },
+    {
+      "id": "identity-morphism",
+      "symbol": "id",
+      "latex": "\\operatorname{id}_A",
+      "unicode": "id",
+      "name": "identity morphism",
+      "name_zh": "恒等态射",
+      "field": "category",
+      "description": "The morphism A → A that is neutral for composition.",
+      "description_zh": "复合运算的单位态射 A → A。",
+      "tags": [
+        "category",
+        "basic"
+      ],
+      "lean": "CategoryTheory.CategoryStruct.id"
+    },
+    {
+      "id": "functor",
+      "symbol": "F:𝒞→𝒟",
+      "latex": "F\\colon \\mathcal{C} \\to \\mathcal{D}",
+      "unicode": "F:𝒞→𝒟",
+      "name": "functor",
+      "name_zh": "函子",
+      "field": "category",
+      "description": "A map on objects and morphisms preserving identities and composition.",
+      "description_zh": "保持恒等态射与复合的对象、态射映射。",
+      "tags": [
+        "category",
+        "functor"
+      ],
+      "lean": "CategoryTheory.Functor"
+    },
+    {
+      "id": "natural-transformation",
+      "symbol": "⇒",
+      "latex": "\\eta\\colon F \\Rightarrow G",
+      "unicode": "⇒",
+      "name": "natural transformation",
+      "name_zh": "自然变换",
+      "field": "category",
+      "description": "A family of morphisms η_A : F(A) → G(A) making every naturality square commute.",
+      "description_zh": "满足所有自然性方块交换的态射族 η_A : F(A) → G(A)。",
+      "tags": [
+        "category",
+        "functor"
+      ],
+      "lean": "CategoryTheory.NatTrans",
+      "sympy": "eta"
+    },
+    {
+      "id": "functor-category",
+      "symbol": "Fun(𝒞,𝒟)",
+      "latex": "\\mathrm{Fun}(\\mathcal{C},\\mathcal{D})",
+      "unicode": "Fun(𝒞,𝒟)",
+      "name": "functor category",
+      "name_zh": "函子范畴",
+      "field": "category",
+      "description": "The category of functors 𝒞 → 𝒟 with natural transformations as morphisms.",
+      "description_zh": "以 𝒞 → 𝒟 的函子为对象、自然变换为态射的范畴。",
+      "tags": [
+        "category",
+        "functor"
+      ],
+      "lean": "CategoryTheory.Functor.category"
+    },
+    {
+      "id": "nat-set",
+      "symbol": "Nat(F,G)",
+      "latex": "\\mathrm{Nat}(F,G)",
+      "unicode": "Nat(F,G)",
+      "name": "set of natural transformations",
+      "name_zh": "自然变换集",
+      "field": "category",
+      "description": "The hom-set from F to G in the functor category.",
+      "description_zh": "函子范畴中从 F 到 G 的态射集。",
+      "tags": [
+        "category",
+        "functor"
+      ],
+      "lean": "CategoryTheory.NatTrans"
+    },
+    {
+      "id": "adjunction",
+      "symbol": "⊣",
+      "latex": "F \\dashv G",
+      "unicode": "⊣",
+      "name": "adjunction",
+      "name_zh": "伴随",
+      "field": "category",
+      "description": "F is left adjoint to G when Hom(F(A), B) ≅ Hom(A, G(B)) naturally.",
+      "description_zh": "当 Hom(F(A), B) ≅ Hom(A, G(B)) 自然同构时，F 左伴随于 G。",
+      "tags": [
+        "category",
+        "adjunction"
+      ],
+      "lean": "CategoryTheory.Adjunction"
+    },
+    {
+      "id": "categorical-limit",
+      "symbol": "lim ←",
+      "latex": "\\varprojlim_{j} X_j",
+      "unicode": "lim ←",
+      "name": "limit (projective limit)",
+      "name_zh": "极限（投射极限）",
+      "field": "category",
+      "description": "A universal cone over a diagram; generalises products, pullbacks and inverse limits.",
+      "description_zh": "图上的万能锥；推广乘积、拉回与逆向极限。",
+      "tags": [
+        "category",
+        "limits"
+      ],
+      "lean": "CategoryTheory.Limits.limit"
+    },
+    {
+      "id": "colimit",
+      "symbol": "colim →",
+      "latex": "\\varinjlim_{j} X_j",
+      "unicode": "colim →",
+      "name": "colimit (inductive limit)",
+      "name_zh": "余极限（归纳极限）",
+      "field": "category",
+      "description": "A universal cocone under a diagram; generalises coproducts and pushouts.",
+      "description_zh": "图下的万能余锥；推广余积与推出。",
+      "tags": [
+        "category",
+        "limits"
+      ],
+      "lean": "CategoryTheory.Limits.colimit"
+    },
+    {
+      "id": "pullback",
+      "symbol": "×_𝒞",
+      "latex": "\\times_{\\mathcal{C}}",
+      "unicode": "×_𝒞",
+      "name": "pullback (fibre product)",
+      "name_zh": "拉回（纤维积）",
+      "field": "category",
+      "description": "The universal object completing a commutative square over a common codomain.",
+      "description_zh": "在共同靶对象上方补全交换方块的万能对象。",
+      "tags": [
+        "category",
+        "limits"
+      ],
+      "lean": "CategoryTheory.Limits.pullback"
+    },
+    {
+      "id": "coproduct",
+      "symbol": "⨿",
+      "latex": "\\coprod_{i \\in I} X_i",
+      "unicode": "⨿",
+      "name": "coproduct",
+      "name_zh": "余积",
+      "field": "category",
+      "description": "The universal object receiving maps from every component; disjoint union in Set.",
+      "description_zh": "接收各分量映射的万能对象；在集合范畴中即不交并。",
+      "tags": [
+        "category",
+        "limits"
+      ],
+      "lean": "CategoryTheory.Limits.coproduct"
+    },
+    {
+      "id": "terminal-object",
+      "symbol": "1",
+      "latex": "\\mathbf{1}",
+      "unicode": "1",
+      "name": "terminal object",
+      "name_zh": "终对象",
+      "field": "category",
+      "description": "An object with exactly one morphism from every object.",
+      "description_zh": "从任意对象恰有一个态射指向它的对象。",
+      "tags": [
+        "category",
+        "limits"
+      ],
+      "lean": "CategoryTheory.Limits.HasTerminal"
+    },
+    {
+      "id": "initial-object",
+      "symbol": "0",
+      "latex": "\\mathbf{0}",
+      "unicode": "0",
+      "name": "initial object",
+      "name_zh": "始对象",
+      "field": "category",
+      "description": "An object with exactly one morphism to every object.",
+      "description_zh": "指向任意对象恰有一个态射的对象。",
+      "tags": [
+        "category",
+        "limits"
+      ],
+      "lean": "CategoryTheory.Limits.HasInitial"
+    },
+    {
+      "id": "monomorphism",
+      "symbol": "↪",
+      "latex": "m \\hookrightarrow",
+      "unicode": "↪",
+      "name": "monomorphism",
+      "name_zh": "单态射",
+      "field": "category",
+      "description": "A morphism cancellable on the left; generalises injective maps.",
+      "description_zh": "左可消去的态射；推广单射。",
+      "tags": [
+        "category",
+        "basic"
+      ],
+      "lean": "CategoryTheory.Mono"
+    },
+    {
+      "id": "epimorphism",
+      "symbol": "↠",
+      "latex": "e \\twoheadrightarrow",
+      "unicode": "↠",
+      "name": "epimorphism",
+      "name_zh": "满态射",
+      "field": "category",
+      "description": "A morphism cancellable on the right; generalises surjective maps.",
+      "description_zh": "右可消去的态射；推广满射。",
+      "tags": [
+        "category",
+        "basic"
+      ],
+      "lean": "CategoryTheory.Epi"
+    },
+    {
+      "id": "categorical-isomorphism",
+      "symbol": "≅",
+      "latex": "A \\cong B",
+      "unicode": "≅",
+      "name": "categorical isomorphism",
+      "name_zh": "范畴同构",
+      "field": "category",
+      "description": "A morphism with a two-sided inverse; an isomorphism in the arrow category sense.",
+      "description_zh": "具有双侧逆的态射。",
+      "tags": [
+        "category",
+        "basic"
+      ],
+      "lean": "CategoryTheory.Iso"
+    },
+    {
+      "id": "equivalence-of-categories",
+      "symbol": "≃",
+      "latex": "\\mathcal{C} \\simeq \\mathcal{D}",
+      "unicode": "≃",
+      "name": "equivalence of categories",
+      "name_zh": "范畴等价",
+      "field": "category",
+      "description": "A functor that is full, faithful and essentially surjective.",
+      "description_zh": "全、忠实且本质满的函子。",
+      "tags": [
+        "category",
+        "functor"
+      ],
+      "lean": "CategoryTheory.Equivalence"
+    },
+    {
+      "id": "hom-functor",
+      "symbol": "Hom(−,X)",
+      "latex": "\\operatorname{Hom}(-,X)",
+      "unicode": "Hom(−,X)",
+      "name": "hom-functor",
+      "name_zh": "Hom 函子",
+      "field": "category",
+      "description": "The functor 𝒞ᵒᵖ → Set sending A to Hom(A, X).",
+      "description_zh": "把 A 映到 Hom(A, X) 的函子 𝒞ᵒᵖ → Set。",
+      "tags": [
+        "category",
+        "yoneda"
+      ],
+      "lean": "CategoryTheory.yoneda"
+    },
+    {
+      "id": "yoneda-embedding",
+      "symbol": "よ",
+      "latex": "\\mathsf{y}",
+      "unicode": "よ",
+      "name": "Yoneda embedding",
+      "name_zh": "米田嵌入",
+      "field": "category",
+      "description": "The fully faithful functor 𝒞 → Fun(𝒞ᵒᵖ, Set), A ↦ Hom(−, A).",
+      "description_zh": "全忠实函子 𝒞 → Fun(𝒞ᵒᵖ, Set)，A ↦ Hom(−, A)。",
+      "tags": [
+        "category",
+        "yoneda"
+      ]
+    },
+    {
+      "id": "opposite-category",
+      "symbol": "𝒞ᵒᵖ",
+      "latex": "\\mathcal{C}^{\\mathrm{op}}",
+      "unicode": "𝒞ᵒᵖ",
+      "name": "opposite category",
+      "name_zh": "对偶范畴",
+      "field": "category",
+      "description": "The category with all arrows of 𝒞 reversed.",
+      "description_zh": "所有箭头方向反转所得的范畴。",
+      "tags": [
+        "category",
+        "basic"
+      ],
+      "lean": "CategoryTheory.Opposite"
+    },
+    {
+      "id": "groupoid",
+      "symbol": "Gpd",
+      "latex": "\\mathbf{Gpd}",
+      "unicode": "Gpd",
+      "name": "groupoid",
+      "name_zh": "群胚",
+      "field": "category",
+      "description": "A category in which every morphism is invertible.",
+      "description_zh": "每个态射都可逆的范畴。",
+      "tags": [
+        "category",
+        "basic"
+      ],
+      "lean": "CategoryTheory.Groupoid"
+    },
+    {
+      "id": "comma-category",
+      "symbol": "↓",
+      "latex": "(F \\downarrow G)",
+      "unicode": "↓",
+      "name": "comma category",
+      "name_zh": "逗号范畴",
+      "field": "category",
+      "description": "Objects are triples (A, f, B) with f : F(A) → G(B); morphisms are compatible pairs.",
+      "description_zh": "对象为三元组 (A, f, B)（f : F(A) → G(B)），态射为相容对。",
+      "tags": [
+        "category",
+        "basic"
+      ],
+      "lean": "CategoryTheory.Comma",
+      "sympy": "slice"
+    },
+    {
+      "id": "monoidal-category",
+      "symbol": "⊗",
+      "latex": "(\\mathcal{C},\\otimes,I)",
+      "unicode": "⊗",
+      "name": "monoidal category",
+      "name_zh": "幺半范畴",
+      "field": "category",
+      "description": "A category with a tensor product, unit object and coherent associativity/unit constraints.",
+      "description_zh": "带张量积、单位对象以及相干结合、单位约束的范畴。",
+      "tags": [
+        "category",
+        "higher"
+      ],
+      "lean": "CategoryTheory.MonoidalCategory"
+    },
+    {
+      "id": "category-product",
+      "symbol": "×",
+      "latex": "A \\times B",
+      "unicode": "×",
+      "name": "product in a category",
+      "name_zh": "范畴中的积",
+      "field": "category",
+      "description": "The limit of a two-object discrete diagram; generalises cartesian product.",
+      "description_zh": "二元离散图的极限；推广笛卡尔积。",
+      "tags": [
+        "category",
+        "limits"
+      ],
+      "lean": "CategoryTheory.Limits.prod"
+    },
+    {
+      "id": "mor-c",
+      "symbol": "Mor(𝒞)",
+      "latex": "\\mathrm{Mor}(\\mathcal{C})",
+      "unicode": "Mor(𝒞)",
+      "name": "morphisms of a category",
+      "name_zh": "范畴的态射",
+      "field": "category",
+      "description": "The collection of all morphisms of a category 𝒞, usually including every identity morphism.",
+      "description_zh": "范畴 𝒞 的全部态射构成的类，通常包含所有恒等态射。",
+      "tags": [
+        "category",
+        "basic"
+      ],
+      "aka": [
+        "arrow class"
+      ]
+    },
+    {
+      "id": "probability-measure",
+      "symbol": "P(A)",
+      "latex": "\\mathbb{P}(A)",
+      "unicode": "P(A)",
+      "name": "probability",
+      "name_zh": "概率",
+      "field": "probability",
+      "description": "A number in [0,1] assigning likelihood to an event A, with P(Ω) = 1 and countable additivity.",
+      "description_zh": "把事件 A 的可能性赋为 [0,1] 中数值，满足 P(Ω)=1 与可列可加性。",
+      "tags": [
+        "probability",
+        "foundations"
+      ],
+      "lean": "MeasureTheory.ProbabilityMeasure"
+    },
+    {
+      "id": "conditional-probability",
+      "symbol": "P(A∣B)",
+      "latex": "\\mathbb{P}(A \\mid B)",
+      "unicode": "P(A∣B)",
+      "name": "conditional probability",
+      "name_zh": "条件概率",
+      "field": "probability",
+      "description": "P(A∣B) = P(A ∩ B) / P(B), the probability of A given B (P(B) > 0).",
+      "description_zh": "P(A∣B) = P(A ∩ B) / P(B)，表示在 B 发生条件下 A 的概率。",
+      "tags": [
+        "probability",
+        "foundations"
+      ]
+    },
+    {
+      "id": "expectation",
+      "symbol": "E[X]",
+      "latex": "\\mathbb{E}[X]",
+      "unicode": "E[X]",
+      "name": "expectation",
+      "name_zh": "数学期望",
+      "field": "probability",
+      "description": "The Lebesgue integral of X with respect to the probability measure: E[X] = ∫ X dP.",
+      "description_zh": "随机变量 X 关于概率测度的勒贝格积分：E[X] = ∫ X dP。",
+      "tags": [
+        "probability",
+        "moments"
+      ],
+      "lean": "MeasureTheory.integral"
+    },
+    {
+      "id": "variance",
+      "symbol": "Var(X)",
+      "latex": "\\operatorname{Var}(X)",
+      "unicode": "Var(X)",
+      "name": "variance",
+      "name_zh": "方差",
+      "field": "probability",
+      "description": "E[(X − E[X])²] = E[X²] − (E[X])²; measures spread.",
+      "description_zh": "E[(X − E[X])²] = E[X²] − (E[X])²；度量离散程度。",
+      "tags": [
+        "probability",
+        "moments"
+      ]
+    },
+    {
+      "id": "covariance",
+      "symbol": "Cov(X,Y)",
+      "latex": "\\operatorname{Cov}(X,Y)",
+      "unicode": "Cov(X,Y)",
+      "name": "covariance",
+      "name_zh": "协方差",
+      "field": "probability",
+      "description": "E[(X − E X)(Y − E Y)]; zero for independent variables.",
+      "description_zh": "E[(X − E X)(Y − E Y)]；独立随机变量的协方差为零。",
+      "tags": [
+        "probability",
+        "moments"
+      ]
+    },
+    {
+      "id": "sigma-algebra",
+      "symbol": "σ(𝒜)",
+      "latex": "\\sigma(\\mathcal{A})",
+      "unicode": "σ(𝒜)",
+      "name": "sigma-algebra",
+      "name_zh": "σ 代数",
+      "field": "probability",
+      "description": "A family of subsets closed under complement and countable unions; the measurable events.",
+      "description_zh": "对补集与可列并封闭的子集族；即可测事件全体。",
+      "tags": [
+        "probability",
+        "foundations"
+      ],
+      "lean": "MeasurableSpace"
+    },
+    {
+      "id": "random-variable",
+      "symbol": "X:Ω→ℝ",
+      "latex": "X\\colon \\Omega \\to \\mathbb{R}",
+      "unicode": "X:Ω→ℝ",
+      "name": "random variable",
+      "name_zh": "随机变量",
+      "field": "probability",
+      "description": "A measurable function from a probability space to the reals.",
+      "description_zh": "从概率空间到实数的可测函数。",
+      "tags": [
+        "probability",
+        "foundations"
+      ],
+      "lean": "AEMeasurable"
+    },
+    {
+      "id": "normal-distribution",
+      "symbol": "𝒩(μ,σ²)",
+      "latex": "\\mathcal{N}(\\mu,\\sigma^2)",
+      "unicode": "𝒩(μ,σ²)",
+      "name": "normal distribution",
+      "name_zh": "正态分布",
+      "field": "probability",
+      "description": "The Gaussian law with mean μ and variance σ², density (2πσ²)^{-1/2} e^{-(x−μ)²/(2σ²)}.",
+      "description_zh": "均值为 μ、方差为 σ² 的高斯分布，密度为 (2πσ²)^{-1/2} e^{-(x−μ)²/(2σ²)}。",
+      "tags": [
+        "probability",
+        "distributions"
+      ]
+    },
+    {
+      "id": "bernoulli-distribution",
+      "symbol": "Ber(p)",
+      "latex": "\\operatorname{Ber}(p)",
+      "unicode": "Ber(p)",
+      "name": "Bernoulli distribution",
+      "name_zh": "伯努利分布",
+      "field": "probability",
+      "description": "The law of a single success/failure trial with success probability p.",
+      "description_zh": "成功概率为 p 的单次成败试验的分布。",
+      "tags": [
+        "probability",
+        "distributions"
+      ]
+    },
+    {
+      "id": "binomial-distribution",
+      "symbol": "Bin(n,p)",
+      "latex": "\\operatorname{Bin}(n,p)",
+      "unicode": "Bin(n,p)",
+      "name": "binomial distribution",
+      "name_zh": "二项分布",
+      "field": "probability",
+      "description": "The law of the number of successes in n independent trials with success probability p.",
+      "description_zh": "n 次独立、成功率 p 的试验中成功次数的分布。",
+      "tags": [
+        "probability",
+        "distributions"
+      ]
+    },
+    {
+      "id": "poisson-distribution",
+      "symbol": "Poi(λ)",
+      "latex": "\\operatorname{Poi}(\\lambda)",
+      "unicode": "Poi(λ)",
+      "name": "Poisson distribution",
+      "name_zh": "泊松分布",
+      "field": "probability",
+      "description": "The law of counts with P(X=k) = e^{−λ}λᵏ/k!, mean and variance both λ.",
+      "description_zh": "计数分布，P(X=k) = e^{−λ}λᵏ/k!，均值与方差均为 λ。",
+      "tags": [
+        "probability",
+        "distributions"
+      ]
+    },
+    {
+      "id": "exponential-distribution",
+      "symbol": "Exp(λ)",
+      "latex": "\\operatorname{Exp}(\\lambda)",
+      "unicode": "Exp(λ)",
+      "name": "exponential distribution",
+      "name_zh": "指数分布",
+      "field": "probability",
+      "description": "The law with density λe^{−λx} on x ≥ 0; models waiting times.",
+      "description_zh": "在 x ≥ 0 上密度为 λe^{−λx} 的分布；用于等待时间建模。",
+      "tags": [
+        "probability",
+        "distributions"
+      ]
+    },
+    {
+      "id": "indicator-function",
+      "symbol": "1_A",
+      "latex": "\\mathbf{1}_A",
+      "unicode": "1_A",
+      "name": "indicator function",
+      "name_zh": "指示函数",
+      "field": "probability",
+      "description": "The function equal to 1 on A and 0 elsewhere; E[1_A] = P(A).",
+      "description_zh": "在 A 上取 1、其余取 0 的函数；E[1_A] = P(A)。",
+      "tags": [
+        "probability",
+        "foundations"
+      ],
+      "lean": "Set.indicator"
+    },
+    {
+      "id": "independence",
+      "symbol": "⫫",
+      "latex": "X \\perp\\!\\!\\!\\perp Y",
+      "unicode": "⫫",
+      "name": "independence",
+      "name_zh": "独立",
+      "field": "probability",
+      "description": "X and Y are independent when P(X∈A, Y∈B) = P(X∈A)P(Y∈B) for all measurable A, B.",
+      "description_zh": "对所有可测 A、B 有 P(X∈A, Y∈B) = P(X∈A)P(Y∈B)。",
+      "tags": [
+        "probability",
+        "foundations"
+      ],
+      "lean": "ProbabilityTheory.IndepFun"
+    },
+    {
+      "id": "conditional-independence",
+      "symbol": "A⫫B∣C",
+      "latex": "A \\perp\\!\\!\\!\\perp B \\mid C",
+      "unicode": "A⫫B∣C",
+      "name": "conditional independence",
+      "name_zh": "条件独立",
+      "field": "probability",
+      "description": "A and B are conditionally independent given C when P(A∩B∣C) = P(A∣C)P(B∣C).",
+      "description_zh": "当 P(A∩B∣C) = P(A∣C)P(B∣C) 时 A、B 在给定 C 下条件独立。",
+      "tags": [
+        "probability",
+        "foundations"
+      ]
+    },
+    {
+      "id": "distributed-as",
+      "symbol": "∼",
+      "latex": "X \\sim \\mathcal{N}(0,1)",
+      "unicode": "∼",
+      "name": "distributed as",
+      "name_zh": "服从分布",
+      "field": "probability",
+      "description": "X ∼ D means X has distribution D; here standard normal.",
+      "description_zh": "X ∼ D 表示 X 服从分布 D；此处为标准正态分布。",
+      "tags": [
+        "probability",
+        "distributions"
+      ]
+    },
+    {
+      "id": "almost-sure",
+      "symbol": "a.s.",
+      "latex": "\\text{a.s.}",
+      "unicode": "a.s.",
+      "name": "almost surely",
+      "name_zh": "几乎必然",
+      "field": "probability",
+      "description": "A property holds with probability 1.",
+      "description_zh": "性质以概率 1 成立。",
+      "tags": [
+        "probability",
+        "foundations"
+      ]
+    },
+    {
+      "id": "probability-density",
+      "symbol": "f_X",
+      "latex": "f_X(x)",
+      "unicode": "f_X",
+      "name": "probability density function",
+      "name_zh": "概率密度函数",
+      "field": "probability",
+      "description": "The Radon–Nikodym derivative of a continuous law with respect to Lebesgue measure.",
+      "description_zh": "连续分布关于勒贝格测度的拉东–尼科迪姆导数。",
+      "tags": [
+        "probability",
+        "distributions"
+      ]
+    },
+    {
+      "id": "smooth-manifold",
+      "symbol": "M",
+      "latex": "M",
+      "unicode": "M",
+      "name": "smooth manifold",
+      "name_zh": "光滑流形",
+      "field": "differential",
+      "description": "A topological space locally homeomorphic to ℝⁿ with smoothly compatible charts.",
+      "description_zh": "局部同胚于 ℝⁿ 且坐标卡光滑相容的拓扑空间。",
+      "tags": [
+        "differential",
+        "manifolds"
+      ],
+      "lean": "IsManifold"
+    },
+    {
+      "id": "chart",
+      "symbol": "(U,φ)",
+      "latex": "(U,\\varphi)",
+      "unicode": "(U,φ)",
+      "name": "coordinate chart",
+      "name_zh": "坐标卡",
+      "field": "differential",
+      "description": "A homeomorphism φ from an open set U of M onto an open set of ℝⁿ.",
+      "description_zh": "从 M 的开集 U 到 ℝⁿ 开集的同胚 φ。",
+      "tags": [
+        "differential",
+        "manifolds"
+      ],
+      "lean": "ChartedSpace"
+    },
+    {
+      "id": "tangent-space",
+      "symbol": "TₚM",
+      "latex": "T_p M",
+      "unicode": "TₚM",
+      "name": "tangent space",
+      "name_zh": "切空间",
+      "field": "differential",
+      "description": "The vector space of tangent directions to M at the point p.",
+      "description_zh": "流形 M 在点 p 处切方向的向量空间。",
+      "tags": [
+        "differential",
+        "manifolds"
+      ]
+    },
+    {
+      "id": "cotangent-space",
+      "symbol": "Tₚ*M",
+      "latex": "T_p^{*}M",
+      "unicode": "Tₚ*M",
+      "name": "cotangent space",
+      "name_zh": "余切空间",
+      "field": "differential",
+      "description": "The dual space of the tangent space; covectors act on tangent vectors.",
+      "description_zh": "切空间的对偶空间；余切向量作用于切向量。",
+      "tags": [
+        "differential",
+        "manifolds"
+      ]
+    },
+    {
+      "id": "differential-form",
+      "symbol": "Ωᵏ(M)",
+      "latex": "\\Omega^k(M)",
+      "unicode": "Ωᵏ(M)",
+      "name": "space of k-forms",
+      "name_zh": "k 形式空间",
+      "field": "differential",
+      "description": "Smooth sections of ΛᵏT*M; k-forms can be integrated over k-dimensional domains.",
+      "description_zh": "ΛᵏT*M 的光滑截面；k 形式可在 k 维区域上积分。",
+      "tags": [
+        "differential",
+        "forms"
+      ]
+    },
+    {
+      "id": "exterior-derivative",
+      "symbol": "d",
+      "latex": "d",
+      "unicode": "d",
+      "name": "exterior derivative",
+      "name_zh": "外微分",
+      "field": "differential",
+      "description": "The unique degree +1 derivation with d² = 0 extending the differential of functions.",
+      "description_zh": "满足 d² = 0、把函数微分推广到形式阶数加一阶的唯一导子。",
+      "tags": [
+        "differential",
+        "forms"
+      ]
+    },
+    {
+      "id": "exterior-derivative-forms",
+      "symbol": "d",
+      "latex": "d\\omega",
+      "unicode": "d",
+      "name": "exterior derivative on forms",
+      "name_zh": "形式上的外微分",
+      "field": "differential",
+      "description": "Maps a k-form to a (k+1)-form; d(ω ∧ η) = dω ∧ η + (−1)ᵏω ∧ dη.",
+      "description_zh": "把 k 形式映为 k+1 形式；满足分次莱布尼茨律。",
+      "tags": [
+        "differential",
+        "forms"
+      ]
+    },
+    {
+      "id": "wedge-product",
+      "symbol": "∧",
+      "latex": "\\omega \\wedge \\eta",
+      "unicode": "∧",
+      "name": "wedge product",
+      "name_zh": "楔积",
+      "field": "differential",
+      "description": "The graded-commutative product of differential forms: ω∧η = (−1)^{pq}η∧ω.",
+      "description_zh": "微分形式的分次交换乘积：ω∧η = (−1)^{pq}η∧ω。",
+      "tags": [
+        "differential",
+        "forms"
+      ]
+    },
+    {
+      "id": "lie-bracket",
+      "symbol": "[X,Y]",
+      "latex": "[X,Y]",
+      "unicode": "[X,Y]",
+      "name": "Lie bracket",
+      "name_zh": "李括号",
+      "field": "differential",
+      "description": "The commutator of vector fields: [X,Y]f = X(Yf) − Y(Xf).",
+      "description_zh": "向量场的换位子：[X,Y]f = X(Yf) − Y(Xf)。",
+      "tags": [
+        "differential",
+        "vector-fields"
+      ],
+      "lean": "LieAlgebra"
+    },
+    {
+      "id": "metric-tensor",
+      "symbol": "g",
+      "latex": "g_{\\mu\\nu}",
+      "unicode": "g",
+      "name": "metric tensor",
+      "name_zh": "度量张量",
+      "field": "differential",
+      "description": "A smooth symmetric positive-definite 2-tensor defining lengths and angles on a manifold.",
+      "description_zh": "流形上的光滑对称正定二阶张量，定义长度与夹角。",
+      "tags": [
+        "differential",
+        "riemannian"
+      ]
+    },
+    {
+      "id": "christoffel-symbol",
+      "symbol": "Γ",
+      "latex": "\\Gamma^{k}_{ij}",
+      "unicode": "Γ",
+      "name": "Christoffel symbols",
+      "name_zh": "克里斯托费尔符号",
+      "field": "differential",
+      "description": "Connection coefficients Γᵏᵢⱼ = ½ g^{kl}(∂ᵢg_{jl} + ∂ⱼg_{il} − ∂ₗg_{ij}).",
+      "description_zh": "联络系数 Γᵏᵢⱼ = ½ g^{kl}(∂ᵢg_{jl} + ∂ⱼg_{il} − ∂ₗg_{ij})。",
+      "tags": [
+        "differential",
+        "riemannian"
+      ]
+    },
+    {
+      "id": "covariant-derivative",
+      "symbol": "∇",
+      "latex": "\\nabla_X Y",
+      "unicode": "∇",
+      "name": "covariant derivative",
+      "name_zh": "协变导数",
+      "field": "differential",
+      "description": "Differentiates a vector field along another, using a connection.",
+      "description_zh": "沿另一向量场、借助联络对向量场求导。",
+      "tags": [
+        "differential",
+        "connections"
+      ]
+    },
+    {
+      "id": "riemann-curvature",
+      "symbol": "R",
+      "latex": "R^{\\rho}{}_{\\sigma\\mu\\nu}",
+      "unicode": "R",
+      "name": "Riemann curvature tensor",
+      "name_zh": "黎曼曲率张量",
+      "field": "differential",
+      "description": "The curvature of the Levi-Civita connection; measures non-commutativity of covariant derivatives.",
+      "description_zh": "列维-奇维塔联络的曲率；度量协变导数的不交换性。",
+      "tags": [
+        "differential",
+        "riemannian"
+      ]
+    },
+    {
+      "id": "ricci-tensor",
+      "symbol": "Ric",
+      "latex": "\\operatorname{Ric}_{\\mu\\nu}",
+      "unicode": "Ric",
+      "name": "Ricci curvature",
+      "name_zh": "里奇曲率",
+      "field": "differential",
+      "description": "The trace of the Riemann tensor over the first and third indices.",
+      "description_zh": "黎曼张量对第一、第三指标求迹所得的张量。",
+      "tags": [
+        "differential",
+        "riemannian"
+      ]
+    },
+    {
+      "id": "scalar-curvature",
+      "symbol": "R",
+      "latex": "R",
+      "unicode": "R",
+      "name": "scalar curvature",
+      "name_zh": "标量曲率",
+      "field": "differential",
+      "description": "The full trace of the Ricci tensor; the simplest curvature invariant.",
+      "description_zh": "里奇张量的完全迹；最简单的曲率不变量。",
+      "tags": [
+        "differential",
+        "riemannian"
+      ]
+    },
+    {
+      "id": "pushforward",
+      "symbol": "f∗",
+      "latex": "f_{*}",
+      "unicode": "f∗",
+      "name": "pushforward",
+      "name_zh": "前推",
+      "field": "differential",
+      "description": "The derivative map sending tangent vectors of M to tangent vectors of N.",
+      "description_zh": "把 M 的切向量映到 N 的切向量的导数映射。",
+      "tags": [
+        "differential",
+        "manifolds"
+      ]
+    },
+    {
+      "id": "pullback-form",
+      "symbol": "f*",
+      "latex": "f^{*}",
+      "unicode": "f*",
+      "name": "pullback of forms",
+      "name_zh": "拉回",
+      "field": "differential",
+      "description": "The dual map on forms, (f*ω)(v) = ω(f*v).",
+      "description_zh": "形式上的对偶映射，(f*ω)(v) = ω(f*v)。",
+      "tags": [
+        "differential",
+        "manifolds"
+      ]
+    },
+    {
+      "id": "volume-form",
+      "symbol": "dV",
+      "latex": "dV",
+      "unicode": "dV",
+      "name": "volume form",
+      "name_zh": "体积形式",
+      "field": "differential",
+      "description": "A nowhere-vanishing top-degree form; orients the manifold and defines integration.",
+      "description_zh": "处处非零的最高次形式；给出流形定向并定义积分。",
+      "tags": [
+        "differential",
+        "forms"
+      ]
+    },
+    {
+      "id": "hodge-star",
+      "symbol": "⋆",
+      "latex": "\\star",
+      "unicode": "⋆",
+      "name": "Hodge star",
+      "name_zh": "霍奇星算子",
+      "field": "differential",
+      "description": "Maps k-forms to (n−k)-forms using the metric and orientation; ⋆⋆ = ±1.",
+      "description_zh": "借助度量与定向把 k 形式映为 n−k 形式的算子；⋆⋆ = ±1。",
+      "tags": [
+        "differential",
+        "riemannian"
+      ]
+    },
+    {
+      "id": "geodesic",
+      "symbol": "γ",
+      "latex": "\\gamma",
+      "unicode": "γ",
+      "name": "geodesic",
+      "name_zh": "测地线",
+      "field": "differential",
+      "description": "A curve whose acceleration is zero: ∇_{γ̇}γ̇ = 0; locally length-minimising.",
+      "description_zh": "加速度为零的曲线 ∇_{γ̇}γ̇ = 0；局部最短。",
+      "tags": [
+        "differential",
+        "riemannian"
+      ]
+    },
+    {
+      "id": "factorial",
+      "symbol": "n!",
+      "latex": "n!",
+      "unicode": "n!",
+      "name": "factorial",
+      "name_zh": "阶乘",
+      "field": "combinatorics",
+      "description": "The product 1·2···n, counting orderings of n distinct objects; 0! = 1.",
+      "description_zh": "乘积 1·2···n，计数 n 个不同对象的全排列；约定 0! = 1。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ],
+      "lean": "Nat.factorial"
+    },
+    {
+      "id": "binomial-coefficient",
+      "symbol": "C(n,k)",
+      "latex": "\\binom{n}{k}",
+      "unicode": "C(n,k)",
+      "name": "binomial coefficient",
+      "name_zh": "二项式系数",
+      "field": "combinatorics",
+      "description": "The number of k-element subsets of an n-set; equals n!/(k!(n−k)!).",
+      "description_zh": "n 元集合的 k 元子集个数；等于 n!/(k!(n−k)!)。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ],
+      "lean": "Nat.choose"
+    },
+    {
+      "id": "multinomial-coefficient",
+      "symbol": "C(n;k₁,…,kₘ)",
+      "latex": "\\binom{n}{k_1,\\dots,k_m}",
+      "unicode": "C(n;k₁,…,kₘ)",
+      "name": "multinomial coefficient",
+      "name_zh": "多项式系数",
+      "field": "combinatorics",
+      "description": "The number of ordered partitions into parts of sizes k_i; n!/(k_1!⋯k_m!).",
+      "description_zh": "把 n 个对象分成大小 k_i 的有序组的数目；n!/(k_1!⋯k_m!)。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ]
+    },
+    {
+      "id": "falling-factorial",
+      "symbol": "(x)ₙ",
+      "latex": "x^{\\underline{n}}",
+      "unicode": "(x)ₙ",
+      "name": "falling factorial",
+      "name_zh": "下降阶乘",
+      "field": "combinatorics",
+      "description": "The product x(x−1)⋯(x−n+1), counting injections from an n-set.",
+      "description_zh": "乘积 x(x−1)⋯(x−n+1)，计数 n 元集合的单射数。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ],
+      "lean": "Nat.descFactorial"
+    },
+    {
+      "id": "rising-factorial",
+      "symbol": "x⁽ⁿ⁾",
+      "latex": "x^{\\overline{n}}",
+      "unicode": "x⁽ⁿ⁾",
+      "name": "rising factorial",
+      "name_zh": "上升阶乘",
+      "field": "combinatorics",
+      "description": "The product x(x+1)⋯(x+n−1), i.e. the Pochhammer symbol.",
+      "description_zh": "乘积 x(x+1)⋯(x+n−1)，即 Pochhammer 符号。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ]
+    },
+    {
+      "id": "permutation-count",
+      "symbol": "P(n,k)",
+      "latex": "P(n,k) = \\frac{n!}{(n-k)!}",
+      "unicode": "P(n,k)",
+      "name": "number of k-permutations",
+      "name_zh": "排列数",
+      "field": "combinatorics",
+      "description": "The number of injective maps from a k-set into an n-set.",
+      "description_zh": "从 k 元集到 n 元集的单射个数。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ]
+    },
+    {
+      "id": "derangement",
+      "symbol": "!n",
+      "latex": "!n",
+      "unicode": "!n",
+      "name": "derangement number",
+      "name_zh": "错排数",
+      "field": "combinatorics",
+      "description": "The number of permutations of n objects with no fixed point.",
+      "description_zh": "n 个对象无不动点的置换个数。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ]
+    },
+    {
+      "id": "catalan-number",
+      "symbol": "Cₙ",
+      "latex": "C_n = \\frac{1}{n+1}\\binom{2n}{n}",
+      "unicode": "Cₙ",
+      "name": "Catalan number",
+      "name_zh": "卡特兰数",
+      "field": "combinatorics",
+      "description": "Counts Dyck paths, binary trees and balanced parentheses; C₀ = 1.",
+      "description_zh": "计数 Dyck 路径、二叉树与合法括号串；C₀ = 1。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ]
+    },
+    {
+      "id": "stirling-first",
+      "symbol": "[n k]",
+      "latex": "\\left[{n \\atop k}\\right]",
+      "unicode": "[n k]",
+      "name": "Stirling number of the first kind",
+      "name_zh": "第一类斯特林数",
+      "field": "combinatorics",
+      "description": "The number of permutations of n elements with exactly k cycles.",
+      "description_zh": "n 元置换中恰含 k 个轮换的个数。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ]
+    },
+    {
+      "id": "stirling-second",
+      "symbol": "{n k}",
+      "latex": "\\left\\{{n \\atop k}\\right\\}",
+      "unicode": "{n k}",
+      "name": "Stirling number of the second kind",
+      "name_zh": "第二类斯特林数",
+      "field": "combinatorics",
+      "description": "The number of ways to partition an n-set into exactly k nonempty blocks.",
+      "description_zh": "把 n 元集合划分为 k 个非空块的方案数。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ]
+    },
+    {
+      "id": "integer-partition",
+      "symbol": "p(n)",
+      "latex": "p(n)",
+      "unicode": "p(n)",
+      "name": "partition function",
+      "name_zh": "整数分拆函数",
+      "field": "combinatorics",
+      "description": "The number of ways to write n as a sum of nonincreasing positive integers.",
+      "description_zh": "把 n 写成单调递减正整数之和的方案数。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ]
+    },
+    {
+      "id": "bell-number",
+      "symbol": "Bₙ",
+      "latex": "B_n",
+      "unicode": "Bₙ",
+      "name": "Bell number",
+      "name_zh": "贝尔数",
+      "field": "combinatorics",
+      "description": "The number of set partitions of an n-element set; B_n = Σ_k S(n,k).",
+      "description_zh": "n 元集合的划分总数；B_n = Σ_k S(n,k)。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ]
+    },
+    {
+      "id": "generating-function",
+      "symbol": "G(x)",
+      "latex": "G(x) = \\sum_{n \\ge 0} a_n x^n",
+      "unicode": "G(x)",
+      "name": "generating function",
+      "name_zh": "生成函数",
+      "field": "combinatorics",
+      "description": "A formal power series encoding a sequence; algebraic operations mirror combinatorial ones.",
+      "description_zh": "编码序列的形式幂级数；代数运算对应组合运算。",
+      "tags": [
+        "combinatorics",
+        "generating-functions"
+      ],
+      "lean": "PowerSeries"
+    },
+    {
+      "id": "inclusion-exclusion",
+      "symbol": "⋃ᵢAᵢ",
+      "latex": "\\lvert \\bigcup_{i=1}^{n} A_i \\rvert = \\sum_i \\lvert A_i \\rvert - \\sum_{i<j} \\lvert A_i \\cap A_j \\rvert + \\cdots",
+      "unicode": "⋃ᵢAᵢ",
+      "name": "inclusion–exclusion principle",
+      "name_zh": "容斥原理",
+      "field": "combinatorics",
+      "description": "Computes the size of a union by alternating sums of intersection sizes.",
+      "description_zh": "用交集大小的交错和计算并集大小。",
+      "tags": [
+        "combinatorics",
+        "counting"
+      ]
+    },
+    {
+      "id": "lean-goal-turnstile",
+      "symbol": "⊢",
+      "latex": "\\vdash",
+      "unicode": "⊢",
+      "name": "Lean goal marker",
+      "name_zh": "Lean 目标记号",
+      "field": "lean",
+      "description": "In Lean's tactic state, `⊢ P` displays the current goal to be proved.",
+      "description_zh": "Lean 策略状态中，`⊢ P` 显示当前待证目标 P。",
+      "tags": [
+        "lean",
+        "tactic-state"
+      ]
+    },
+    {
+      "id": "lean-fun",
+      "symbol": "fun",
+      "latex": "\\texttt{fun}",
+      "unicode": "fun",
+      "name": "anonymous function keyword",
+      "name_zh": "匿名函数关键字",
+      "field": "lean",
+      "description": "`fun x => e` defines the function mapping x to e; `fun x y => e` curries.",
+      "description_zh": "`fun x => e` 定义把 x 映到 e 的函数；`fun x y => e` 表示柯里化。",
+      "tags": [
+        "lean",
+        "syntax"
+      ]
+    },
+    {
+      "id": "lean-forall",
+      "symbol": "∀",
+      "latex": "\\forall",
+      "unicode": "∀",
+      "name": "universal binder in Lean",
+      "name_zh": "Lean 全称绑定",
+      "field": "lean",
+      "description": "`∀ x, P x` and `∀ x : α, P x` are dependent function types for propositions.",
+      "description_zh": "`∀ x, P x` 与 `∀ x : α, P x` 是命题意义下的依赖函数类型。",
+      "tags": [
+        "lean",
+        "syntax"
+      ]
+    },
+    {
+      "id": "lean-exists",
+      "symbol": "∃",
+      "latex": "\\exists",
+      "unicode": "∃",
+      "name": "existential binder in Lean",
+      "name_zh": "Lean 存在绑定",
+      "field": "lean",
+      "description": "`∃ x, P x` is `Exists (fun x => P x)`; proofs use `⟨witness, proof⟩`.",
+      "description_zh": "`∃ x, P x` 即 `Exists (fun x => P x)`；证明形如 `⟨证据, 证明⟩`。",
+      "tags": [
+        "lean",
+        "syntax"
+      ]
+    },
+    {
+      "id": "lean-function-arrow",
+      "symbol": "→",
+      "latex": "\\to",
+      "unicode": "→",
+      "name": "function type arrow",
+      "name_zh": "函数类型箭头",
+      "field": "lean",
+      "description": "`A → B` is the type of functions from A to B; implications are functions on Prop.",
+      "description_zh": "`A → B` 是从 A 到 B 的函数类型；命题蕴涵即 Prop 上的函数。",
+      "tags": [
+        "lean",
+        "syntax"
+      ]
+    },
+    {
+      "id": "lean-theorem",
+      "symbol": "theorem",
+      "latex": "\\texttt{theorem}",
+      "unicode": "theorem",
+      "name": "theorem declaration",
+      "name_zh": "定理声明",
+      "field": "lean",
+      "description": "`theorem name : statement := proof` declares a proof-checked theorem.",
+      "description_zh": "`theorem name : statement := proof` 声明经内核检验的定理。",
+      "tags": [
+        "lean",
+        "declarations"
+      ]
+    },
+    {
+      "id": "lean-by",
+      "symbol": "by",
+      "latex": "\\texttt{by}",
+      "unicode": "by",
+      "name": "tactic block",
+      "name_zh": "策略块",
+      "field": "lean",
+      "description": "`by` switches from term mode to tactic mode; tactics are commands separated by newlines.",
+      "description_zh": "`by` 从项模式切换到策略模式；策略以换行分隔。",
+      "tags": [
+        "lean",
+        "tactics"
+      ]
+    },
+    {
+      "id": "lean-have",
+      "symbol": "have",
+      "latex": "\\texttt{have}",
+      "unicode": "have",
+      "name": "local assertion",
+      "name_zh": "局部断言",
+      "field": "lean",
+      "description": "`have h : P := proof` introduces an intermediate fact usable later.",
+      "description_zh": "`have h : P := proof` 引入可后续使用的中间事实。",
+      "tags": [
+        "lean",
+        "tactics"
+      ]
+    },
+    {
+      "id": "lean-rw",
+      "symbol": "rw",
+      "latex": "\\texttt{rw}",
+      "unicode": "rw",
+      "name": "rewrite tactic",
+      "name_zh": "重写策略",
+      "field": "lean",
+      "description": "`rw [h]` rewrites the goal with the equation h, left to right.",
+      "description_zh": "`rw [h]` 用等式 h 从左到右重写目标。",
+      "tags": [
+        "lean",
+        "tactics"
+      ]
+    },
+    {
+      "id": "lean-simp",
+      "symbol": "simp",
+      "latex": "\\texttt{simp}",
+      "unicode": "simp",
+      "name": "simplifier tactic",
+      "name_zh": "化简策略",
+      "field": "lean",
+      "description": "`simp` normalises the goal using the simp lemma set.",
+      "description_zh": "`simp` 用 simp 引理集规范化目标。",
+      "tags": [
+        "lean",
+        "tactics"
+      ]
+    },
+    {
+      "id": "lean-exact",
+      "symbol": "exact",
+      "latex": "\\texttt{exact}",
+      "unicode": "exact",
+      "name": "exact tactic",
+      "name_zh": "精确策略",
+      "field": "lean",
+      "description": "`exact h` closes the goal with a term h whose type matches.",
+      "description_zh": "`exact h` 用类型相符的项 h 直接关闭目标。",
+      "tags": [
+        "lean",
+        "tactics"
+      ]
+    },
+    {
+      "id": "lean-inductive",
+      "symbol": "inductive",
+      "latex": "\\texttt{inductive}",
+      "unicode": "inductive",
+      "name": "inductive type declaration",
+      "name_zh": "归纳类型声明",
+      "field": "lean",
+      "description": "`inductive T where ∣ c : ...` declares constructors of an inductive type.",
+      "description_zh": "`inductive T where ∣ c : ...` 声明归纳类型的构造子。",
+      "tags": [
+        "lean",
+        "declarations"
+      ]
+    },
+    {
+      "id": "lean-structure",
+      "symbol": "structure",
+      "latex": "\\texttt{structure}",
+      "unicode": "structure",
+      "name": "structure declaration",
+      "name_zh": "结构体声明",
+      "field": "lean",
+      "description": "`structure S where field : Type` bundles named fields, generating projections.",
+      "description_zh": "`structure S where field : Type` 打包带名域并生成投影函数。",
+      "tags": [
+        "lean",
+        "declarations"
+      ]
+    },
+    {
+      "id": "lean-class",
+      "symbol": "class",
+      "latex": "\\texttt{class}",
+      "unicode": "class",
+      "name": "typeclass declaration",
+      "name_zh": "类型类声明",
+      "field": "lean",
+      "description": "`class C (α : Type) where op : ...` declares a typeclass; instances provide implementations.",
+      "description_zh": "`class C (α : Type) where op : ...` 声明类型类；实例给出具体实现。",
+      "tags": [
+        "lean",
+        "declarations"
+      ]
+    },
+    {
+      "id": "lean-instance",
+      "symbol": "instance",
+      "latex": "\\texttt{instance}",
+      "unicode": "instance",
+      "name": "typeclass instance",
+      "name_zh": "类型类实例",
+      "field": "lean",
+      "description": "`instance : C α := ...` registers an implementation for typeclass resolution.",
+      "description_zh": "`instance : C α := ...` 注册供类型类解析使用的实现。",
+      "tags": [
+        "lean",
+        "declarations"
+      ]
+    },
+    {
+      "id": "lean-calc",
+      "symbol": "calc",
+      "latex": "\\texttt{calc}",
+      "unicode": "calc",
+      "name": "calculation block",
+      "name_zh": "计算链",
+      "field": "lean",
+      "description": "`calc a = b := h₁ _ = c := h₂` chains equalities with justifications.",
+      "description_zh": "`calc a = b := h₁ _ = c := h₂` 以理由逐行连接等式。",
+      "tags": [
+        "lean",
+        "syntax"
+      ]
+    },
+    {
+      "id": "lean-match",
+      "symbol": "match",
+      "latex": "\\texttt{match}",
+      "unicode": "match",
+      "name": "pattern matching",
+      "name_zh": "模式匹配",
+      "field": "lean",
+      "description": "`match x with ∣ pat => e` performs structural case analysis on x.",
+      "description_zh": "`match x with ∣ pat => e` 对 x 做结构性情形的分析。",
+      "tags": [
+        "lean",
+        "syntax"
+      ]
+    },
+    {
+      "id": "lean-do",
+      "symbol": "do",
+      "latex": "\\texttt{do}",
+      "unicode": "do",
+      "name": "do-notation",
+      "name_zh": "do 记号",
+      "field": "lean",
+      "description": "`do` blocks sequence monadic actions, e.g. `do let x ← m; pure (f x)`.",
+      "description_zh": "`do` 块按单子顺序串接动作，例如 `do let x ← m; pure (f x)`。",
+      "tags": [
+        "lean",
+        "syntax"
+      ]
+    },
+    {
+      "id": "greek-lowercase",
+      "symbol": "α β γ … ω",
+      "latex": "\\alpha\\ \\beta\\ \\gamma\\ \\dots\\ \\omega",
+      "unicode": "α β γ … ω",
+      "name": "lowercase Greek letters",
+      "name_zh": "小写希腊字母",
+      "field": "lean",
+      "description": "Conventional names for types, coefficients, angles and ordinal variables in mathematics and Lean.",
+      "description_zh": "数学与 Lean 中表示类型、系数、角度与序数变量的惯用字母。",
+      "tags": [
+        "lean",
+        "notation"
+      ],
+      "sympy": "alpha beta gamma omega"
+    },
+    {
+      "id": "greek-uppercase",
+      "symbol": "Γ Δ Θ Λ Ξ Π Σ Φ Ψ Ω",
+      "latex": "\\Gamma\\ \\Delta\\ \\Theta\\ \\Lambda\\ \\Xi\\ \\Pi\\ \\Sigma\\ \\Phi\\ \\Psi\\ \\Omega",
+      "unicode": "Γ Δ Θ Λ Ξ Π Σ Φ Ψ Ω",
+      "name": "uppercase Greek letters",
+      "name_zh": "大写希腊字母",
+      "field": "lean",
+      "description": "Conventional names for contexts, sums, products, groups and operators in mathematics and Lean.",
+      "description_zh": "数学与 Lean 中表示语境、和、积、群与算子的惯用字母。",
+      "tags": [
+        "lean",
+        "notation"
+      ],
+      "sympy": "Gamma Delta Sigma Pi Omega"
+    }
+  ]
+}
