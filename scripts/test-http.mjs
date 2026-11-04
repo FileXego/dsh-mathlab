@@ -1,109 +1,165 @@
 /**
- * MathLab HTTP smoke test.
- * Usage: node scripts/test-http.mjs [baseUrl]
- * Exits non-zero when a required probe fails; prints a compact report.
+ * MathLab HTTP surface test.
+ *
+ * The real HTTP routes ride DSH's authenticated connection.fetch channel, so a
+ * CLI cannot call them without the browser's session. This script therefore:
+ *  1. registers the handlers against a fake connection channel and exercises
+ *     the API/SSE/asset handlers directly (paths, status codes, streaming);
+ *  2. proves default deny: a host without connection.fetch registers nothing;
+ *  3. if a base URL is passed, proves unauthenticated access is rejected
+ *     (legacy /mathlab/api, authenticated /api/mathlab/*, and assets).
+ *
+ * Usage: node scripts/test-http.mjs [http://127.0.0.1:PORT]
  */
-const base = (process.argv[2] ?? 'http://127.0.0.1:62937').replace(/\/$/, '');
-let failures = 0;
+import { registerHttpApi } from '../lib/http-api.js';
 
-/** @param {string} label @param {boolean} ok @param {string} detail */
+let failures = 0;
 function check(label, ok, detail = '') {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${label}${detail ? `  — ${detail}` : ''}`);
   if (!ok) failures++;
 }
 
-/**
- * POST one op.
- * @param {string} op @param {object} args
- */
-async function call(op, args = {}) {
-  const res = await fetch(`${base}/mathlab/api`, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ op, args }),
-  });
-  const payload = await res.json().catch(() => ({ ok: false, error: { code: 'bad-json', message: 'non-JSON response' } }));
-  return { status: res.status, ...payload };
-}
-
-function textOf(result) {
-  if (result === null || result === undefined) return '';
-  if (typeof result === 'string') return result;
-  if (typeof result.pretty === 'string') return result.pretty;
-  if (typeof result.latex === 'string') return result.latex;
-  if (typeof result.text === 'string') return result.text;
-  return JSON.stringify(result).slice(0, 200);
-}
-
-const probes = [
-  ['meta.info', {}, (r) => r?.engine?.available === true, (r) => `engine=${r?.engine?.available} python=${r?.engine?.python ?? '?'}`],
-  ['symbols.list', {}, (r) => Array.isArray(r?.symbols) && r.symbols.length > 100, (r) => `${r?.symbols?.length ?? 0} symbols`],
-  ['examples.list', {}, (r) => Array.isArray(r?.examples) && r.examples.length > 20, (r) => `${r?.examples?.length ?? 0} examples`],
-  ['calc.simplify', { expr: 'sin(x)**2+cos(x)**2' }, (r) => /^1$/.test(String(r?.result)), (r) => textOf(r)],
-  ['calc.diff', { expr: 'x**3', var: 'x' }, (r) => String(r?.result).includes('3'), (r) => textOf(r)],
-  ['calc.integrate', { expr: 'exp(-x**2)', var: 'x', lower: '-oo', upper: 'oo' }, (r) => String(r?.result).includes('sqrt(pi)'), (r) => textOf(r)],
-  ['calc.solve', { equations: ['x**2-1=0'], vars: ['x'] }, (r) => Array.isArray(r?.solutions), (r) => JSON.stringify(r?.solutions)?.slice(0, 120)],
-  ['calc.matrix', { op: 'det', matrix: [['1', '2'], ['3', '4']] }, (r) => /-2/.test(JSON.stringify(r?.value ?? r?.result)), (r) => textOf(r?.value)],
-  ['algebra.perm', { op: 'order', cycles: [[1, 2, 3]] }, (r) => Number(r?.order) === 3, (r) => `order=${r?.order}`],
-  ['algebra.group', { op: 'subgroups', generators: [[[1, 2, 3]], [[1, 2]]] }, (r) => Array.isArray(r?.subgroups) && r.subgroups.length === 6, (r) => `${r?.subgroups?.length} subgroups`],
-  ['algebra.finitefield', { p: 2, n: 2, op: 'table' }, (r) => Array.isArray(r?.mul) || Array.isArray(r?.table), (r) => 'GF(4) table'],
-  ['category.validate', {
-    category: {
-      objects: [{ id: 'A' }, { id: 'B' }],
-      morphisms: [{ id: 'idA', dom: 'A', cod: 'A' }, { id: 'idB', dom: 'B', cod: 'B' }, { id: 'f', dom: 'A', cod: 'B' }],
-      identities: [{ object: 'A', morphism: 'idA' }, { object: 'B', morphism: 'idB' }],
-      compositions: [
-        { first: 'idA', second: 'f', result: 'f' }, { first: 'f', second: 'idB', result: 'f' },
-        { first: 'idA', second: 'idA', result: 'idA' }, { first: 'idB', second: 'idB', result: 'idB' },
-      ],
+function fakeHost(registerSink) {
+  const routes = new Map();
+  const ctx = {
+    logger: { warn() {}, info() {} },
+    get(name) {
+      if (name !== 'connection') return undefined;
+      return {
+        fetch: {
+          register(route) {
+            routes.set(route.path, route);
+            if (registerSink) registerSink(route);
+            return () => routes.delete(route.path);
+          },
+        },
+      };
     },
-  }, (r) => r?.valid === true, (r) => `valid=${r?.valid} violations=${r?.violations?.length ?? 0}`],
-  ['logic.truthtable', { formula: 'A | ~A' }, (r) => r?.tautology === true, (r) => `tautology=${r?.tautology}`],
-  ['logic.prove', { premises: ['A -> B', 'A'], goal: 'B' }, (r) => r?.valid === true, (r) => `valid=${r?.valid} steps=${r?.fitch?.length ?? 0}`],
-  ['topology.homology', { simplices: { '0': [['a'], ['b'], ['c']], '1': [['a', 'b'], ['b', 'c'], ['c', 'a']] } }, (r) => r?.betti?.[0] === 1 && r?.betti?.[1] === 1, (r) => `betti=${JSON.stringify(r?.betti)}`],
-  ['graph.analyze', { edges: [['a', 'b'], ['b', 'c']], op: 'components' }, (r) => Array.isArray(r?.components) && r.components.length === 1, (r) => JSON.stringify(r?.components)?.slice(0, 80)],
-  ['plot.sample', { expr: 'sin(x)', var: 'x', range: [-3, 3], samples: 50 }, (r) => Array.isArray(r?.curves) && JSON.stringify(r).length > 100, (r) => 'curves sampled'],
-  ['prob.dist', { dist: 'normal', params: { mu: 0, sigma: 1 }, op: 'mean' }, (r) => Number(r?.value) === 0 || String(r?.value) === '0', (r) => `mean=${r?.value}`],
-  ['lean.info', {}, (r) => typeof r?.available === 'boolean', (r) => `available=${r?.available}`],
-  ['help', {}, (r) => typeof r?.text === 'string' && r.text.length > 20, (r) => `${r?.text?.length ?? 0} chars`],
-];
+  };
+  return { ctx, routes };
+}
 
-for (const [op, args, predicate, detail] of probes) {
-  try {
-    const payload = await call(op, args);
-    if (!payload.ok) {
-      check(op, false, `error ${payload.error?.code}: ${payload.error?.message}`);
-      continue;
-    }
-    let ok = false;
-    let detailText = '';
+function fakeService() {
+  const listeners = new Set();
+  return {
+    calls: [],
+    async call(op, args) {
+      this.calls.push({ op, args });
+      return { echo: op, args: args ?? {} };
+    },
+    stage: {
+      get() {
+        return { revision: 7 };
+      },
+      subscribe(listener) {
+        listeners.add(listener);
+        return () => listeners.delete(listener);
+      },
+      emit(event) {
+        for (const listener of listeners) listener(event);
+      },
+    },
+  };
+}
+
+/* 1. Registration and handler contract on an authenticated channel. */
+const host = fakeHost();
+const service = fakeService();
+const dispose = registerHttpApi(host.ctx, service);
+check('authenticated channel registers API route', host.routes.has('/api/mathlab/api'));
+check('authenticated channel registers SSE route', host.routes.has('/api/mathlab/events'));
+check('authenticated channel registers KaTeX JS asset', host.routes.has('/api/mathlab/assets/katex/katex.min.js'));
+check('authenticated channel registers KaTeX font asset', host.routes.has('/api/mathlab/assets/katex/fonts/KaTeX_Main-Regular.woff2'));
+
+try {
+  const response = await host.routes.get('/api/mathlab/api').fetch(
+    new Request('http://localhost/api/mathlab/api', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ op: 'calc.simplify', args: { expr: '1+1' } }),
+    }),
+  );
+  const payload = await response.json();
+  check('API handler calls service and returns JSON', response.status === 200 && payload.ok === true && payload.result.echo === 'calc.simplify');
+} catch (error) {
+  check('API handler calls service and returns JSON', false, error.message);
+}
+
+try {
+  const response = await host.routes.get('/api/mathlab/assets/katex/katex.min.js').fetch(
+    new Request('http://localhost/api/mathlab/assets/katex/katex.min.js', { method: 'GET' }),
+  );
+  const text = await response.text();
+  check('asset handler serves allowlisted file', response.status === 200 && text.length > 100 && text.includes('katex'));
+} catch (error) {
+  check('asset handler serves allowlisted file', false, error.message);
+}
+
+try {
+  const response = await host.routes.get('/api/mathlab/assets/katex/katex.min.js').fetch(
+    new Request('http://localhost/api/mathlab/assets/katex/katex.min.js', { method: 'HEAD' }),
+  );
+  check('asset handler supports HEAD', response.status === 200 && response.body === null);
+} catch (error) {
+  check('asset handler supports HEAD', false, error.message);
+}
+
+try {
+  const events = host.routes.get('/api/mathlab/events');
+  const controller = new AbortController();
+  const response = await events.fetch(
+    new Request('http://localhost/api/mathlab/events?sessionId=s1', { method: 'GET', signal: controller.signal }),
+  );
+  const reader = response.body.getReader();
+  const first = await reader.read();
+  const second = await reader.read();
+  const chunk = new TextDecoder().decode(first.value) + new TextDecoder().decode(second.value);
+  await reader.cancel();
+  controller.abort();
+  check('SSE handler streams retry + initial revision', response.status === 200 && chunk.includes('retry:') && chunk.includes('event: stage'));
+} catch (error) {
+  check('SSE handler streams retry + initial revision', false, error.message);
+}
+
+/* 2. Default deny: no connection service means no registration and a warning. */
+let deniedWarnings = 0;
+const denyCtx = {
+  logger: {
+    warn() {
+      deniedWarnings++;
+    },
+    info() {},
+  },
+  get() {
+    return undefined;
+  },
+};
+const disposeDenied = registerHttpApi(denyCtx, fakeService());
+check('default deny: no connection.fetch registers no routes', deniedWarnings === 1);
+disposeDenied();
+
+/* 3. Live unauthenticated probes when a GUI base URL is supplied. */
+const liveBase = (process.argv[2] ?? process.env.MATHLAB_BASE ?? '').replace(/\/$/, '');
+if (liveBase) {
+  const probes = [
+    ['legacy /mathlab/api is gone', '/mathlab/api', { method: 'POST', body: '{}' }],
+    ['authenticated /api/mathlab/api rejects unauthenticated calls', '/api/mathlab/api', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }],
+    ['unauthenticated lean.info is rejected', '/api/mathlab/api', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ op: 'lean.info', args: {} }) }],
+    ['authenticated /api/mathlab/assets rejects unauthenticated calls', '/api/mathlab/assets/katex/katex.min.js', { method: 'GET' }],
+    ['authenticated /api/mathlab/events rejects unauthenticated calls', '/api/mathlab/events', { method: 'GET' }],
+  ];
+  for (const [label, path, init] of probes) {
     try {
-      ok = Boolean(predicate(payload.result));
-      detailText = detail ? String(detail(payload.result)) : '';
+      const response = await fetch(liveBase + path, init);
+      check(label, response.status !== 200, `status=${response.status}`);
     } catch (error) {
-      ok = false;
-      detailText = `predicate threw: ${error.message}`;
+      check(label, true, 'connection refused/closed (denied)');
     }
-    check(op, ok, detailText);
-  } catch (error) {
-    check(op, false, `request failed: ${error.message}`);
   }
+} else {
+  console.log('INFO  no base URL supplied; skipped live unauthenticated probes');
 }
 
-// Static assets
-for (const [path, expectType] of [
-  ['/mathlab/assets/katex/katex.min.js', 'javascript'],
-  ['/mathlab/assets/katex/katex.min.css', 'css'],
-  ['/mathlab/assets/katex/LICENSE', 'text'],
-]) {
-  try {
-    const res = await fetch(base + path);
-    const type = res.headers.get('content-type') ?? '';
-    check(`GET ${path}`, res.status === 200 && type.includes(expectType), `${res.status} ${type}`);
-  } catch (error) {
-    check(`GET ${path}`, false, error.message);
-  }
-}
-
+dispose();
 console.log(failures === 0 ? '\nALL PROBES PASSED' : `\n${failures} PROBE(S) FAILED`);
 process.exitCode = failures === 0 ? 0 : 1;

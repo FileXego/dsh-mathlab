@@ -46,7 +46,7 @@ undefined — fall back to `ML.makeT`).
 ## Host API
 
 ```js
-const res = await fetch('/mathlab/api', {
+const res = await fetch('/api/mathlab/api', {
   method: 'POST',
   headers: { 'content-type': 'application/json' },
   body: JSON.stringify({ op: 'calc.simplify', args: { expr: 'sin(x)**2+cos(x)**2' } }),
@@ -60,8 +60,8 @@ engine may be briefly unavailable while Python starts: show *引擎启动中…*
 All ops are listed in `docs/API.md`; the same operations are exposed to the agent as tools.
 
 Static assets served by the Host (load lazily, cache in a module promise):
-- `/mathlab/assets/katex/katex.min.js`, `/mathlab/assets/katex/katex.min.css`,
-  fonts under `/mathlab/assets/katex/fonts/`. Use `ML.renderMath(container, latex)` helper:
+- `/api/mathlab/assets/katex/katex.min.js`, `/api/mathlab/assets/katex/katex.min.css`,
+  fonts under `/api/mathlab/assets/katex/fonts/`. Use `ML.renderMath(container, latex)` helper:
   KaTeX if available, otherwise `container.textContent = latex` (never throw).
 - `ML.ensureKatex()` returns a shared Promise<boolean>.
 
@@ -206,3 +206,4 @@ Local iteration: after editing, run the build; the Host serves `client.js` from 
 linked plugin directory, and a page reload (or plugin toggle by the Lead) picks it up.
 Do not attempt to install/uninstall the plugin or edit `index.js`, `lib/`, `engine/`,
 `data/`, or `package.json` — the Lead owns those.
+

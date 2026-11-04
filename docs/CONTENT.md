@@ -136,3 +136,4 @@ The Lead appends the final bundled-version list; you provide the canonical list 
 - JSON must parse: `python -c "import json;json.load(open('data/symbols.json',encoding='utf-8'))"`
   for all three files (run from `D:\dsh-work\mathlab`).
 - No trailing whitespace, UTF-8, and stable ids (they are referenced by examples/tests).
+

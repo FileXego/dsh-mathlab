@@ -2,7 +2,8 @@
  * MathLab — a graduate-level mathematics workbench for DeepSeek Harness.
  *
  * Host half: one MathLabService (Python SymPy engine + local content catalog),
- * exposed twice — as a fenced HTTP JSON API for the Web panel and as agent tools.
+ * exposed twice — as an authenticated HTTP JSON API for the Web panel and as
+ * agent tools.
  * The Web client half lives in client.js; display metadata in locale/icon.
  *
  * No harness package imports on purpose: a linked workspace bundle resolves only
@@ -15,10 +16,15 @@ import { registerTools } from './lib/tools.js';
 
 export const name = 'mathlab';
 
-/** Services this plugin requires to mount. */
-export const inject = ['tools', 'webServer'];
+/**
+ * Only the tool registry is a hard dependency. The HTTP surface rides the
+ * host's authenticated `connection.fetch` channel and is registered lazily;
+ * if that channel is unavailable the routes are absent (default deny) while
+ * the agent tools and the global panel still work.
+ */
+export const inject = ['tools'];
 
-const VERSION = '0.2.0';
+const VERSION = '0.2.1';
 
 const STAGE_GUIDE = `MathLab is mounted (tools mathlab, mathlab_plot, mathlab_lean, mathlab_reference, mathlab_status, mathlab_stage; panel tab 数学研究台).
 
@@ -44,14 +50,16 @@ export function apply(ctx) {
   });
 
   ctx.effect(() => {
-    const disposeHttp = registerHttpApi(ctx, service);
     const disposeTools = registerTools(ctx, service);
     return () => {
       disposeTools();
-      disposeHttp();
       service.stop();
     };
   }, 'mathlab: service');
+
+  ctx.inject(['connection'], (sctx) => {
+    sctx.effect(() => registerHttpApi(sctx, service), 'mathlab: authenticated HTTP');
+  });
 
   ctx.inject(['systemPrompt'], (sctx) => {
     sctx.systemPrompt.section({
@@ -61,5 +69,5 @@ export function apply(ctx) {
     });
   });
 
-  ctx.logger?.info?.('mathlab: mounted (engine lazy, tools + /mathlab/api + live stage registered)');
+  ctx.logger?.info?.('mathlab: mounted (engine lazy, tools + authenticated /api/mathlab + live stage)');
 }

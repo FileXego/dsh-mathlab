@@ -662,7 +662,7 @@ window.__ModuleLoader__.load({
 (function () {
   'use strict';
 
-  const API_URL = '/mathlab/api';
+  const API_URL = '/api/mathlab/api';
 
   function MathLabError(code, message, cause) {
     const error = new Error(message || code || 'MathLab request failed');
@@ -889,7 +889,7 @@ window.__ModuleLoader__.load({
 (function () {
   'use strict';
 
-  const KATEX_BASE = '/mathlab/assets/katex/';
+  const KATEX_BASE = '/api/mathlab/assets/katex/';
   let katexPromise = null;
   let katexCssRequested = false;
   let lastFailureAt = 0;
@@ -14326,7 +14326,7 @@ window.__ModuleLoader__.load({
         let source = null;
         let last = null;
         try {
-          source = new EventSource('/mathlab/events?sessionId=' + encodeURIComponent(sessionId));
+          source = new EventSource('/api/mathlab/events?sessionId=' + encodeURIComponent(sessionId));
         } catch (streamError) {
           return undefined;
         }

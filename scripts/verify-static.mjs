@@ -163,3 +163,4 @@ check('package.json files list entries exist', missingFiles.length === 0, missin
 
 console.log(`\n${results.filter((r) => r.ok).length}/${results.length} static checks passed`);
 if (results.some((r) => !r.ok)) process.exitCode = 1;
+

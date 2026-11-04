@@ -3,27 +3,45 @@
 MathLab has one operation layer with two callers:
 
 ```
-browser panel  ──POST /mathlab/api──▶  Host service  ──line-delimited JSON──▶  Python engine
+browser panel  ──POST /api/mathlab/api──▶  Host service  ──line-delimited JSON──▶  Python engine
 agent tools    ──ctx.tools──────────▶  Host service  ──(same dispatch)───────▶  Python engine
 ```
 
 Everything below is frozen for v1. The Host implements the dispatch + Python bridge;
 the Python engine implements every `op` listed under **Engine ops**.
 
+## 0. Authentication (mandatory)
+
+The browser routes are registered **only** on DSH's authenticated `connection.fetch`
+channel (`ctx.connection.fetch.register`). That channel authenticates the browser
+session and applies the host's Host/Origin checks before a handler runs. There is
+**no `webServer` fallback**: when `connection.fetch` is unavailable, no MathLab HTTP
+route is registered at all (default deny), and only the agent tools/global panel work.
+
+Consequences:
+
+- an unauthenticated request to `/api/mathlab/api`, `/api/mathlab/events` or
+  `/api/mathlab/assets/...` is answered by the host's gateway with `401` and never
+  reaches MathLab code;
+- the old unauthenticated `/mathlab/*` routes are gone (GET is `404`; other methods are not a MathLab API surface);
+- the panel calls the same-origin paths with the browser session, so no extra token
+  or CSRF header is needed; the authenticated channel is the trust boundary.
+
+Never re-introduce a `ctx.webServer` route for this plugin. `scripts/test-http.mjs`
+contains a default-deny test and, when given the GUI base URL, live unauthenticated
+probes.
+
 ## 1. Browser → Host
 
-`POST /mathlab/api`, `content-type: application/json`, body `{ "op": "<group.action>", "args": {...} }`.
+`POST /api/mathlab/api`, `content-type: application/json`, body `{ "op": "<group.action>", "args": {...} }`.
 
 Success: `200 { "ok": true, "result": <any JSON> }`
 Failure: `200 { "ok": false, "error": { "code": "<code>", "message": "<human text>" } }`
 
 Error codes: `parse-error`, `domain-error`, `unsupported`, `timeout`, `engine-down`, `bad-request`, `unknown-op`, `limit`, `forbidden`.
 
-The Host answers these itself (no Python needed): `symbols.list`, `symbols.search`,
-`examples.list`, `examples.get`, `lean.snippets`, `meta.info` (merges engine capabilities).
-
-Same-origin `fetch('/mathlab/api', { method:'POST', body: JSON.stringify(...) })` is enough —
-the route is fenced by Host/Origin checks, there is no CSRF token.
+Host-side protections: authenticated channel + JSON content-type, 1 MiB body limit,
+per-process concurrency cap (8) and stage-SSE client cap (16).
 
 ## 2. Host → Python engine
 
@@ -223,7 +241,7 @@ Coordinates are plain numbers; all ranges are two-element `[min,max]` number arr
   - `stage.annotate {blockId?, note, sessionId?}` → `{annotation, stage}`; `stage.question {blockId?, text, quote?, sessionId?}` → `{question, stage}` (a panel/dock text selection supplies `quote` along with the question); `stage.cursor {index, blockId?, sessionId?}` → `{stage, revision}`.
   - `stage.clear {sessionId?}` → `{stage, revision}`; `stage.export {sessionId?}` → `{markdown, filename}`.
   Blocks are validated server-side (kinds: heading, prose, math, judgment, strategy, proof, diagram, plot, compute, symbols, lean, takeaway, note; ≤120 blocks, ≤256 KiB serialized stage). Unknown block kinds are preserved and rendered as JSON by the panel rather than failing.
-- `GET /mathlab/events?sessionId=…` → Server-Sent-Events stream (`text/event-stream`; `retry: 3000`; `event: stage` frames with `{sessionId, revision}`; 15 s heartbeat). The initial frame carries the current revision. Used by the conversation dock and the panel for push updates, with polling as fallback.
+- `GET /api/mathlab/events?sessionId=…` → Server-Sent-Events stream (`text/event-stream`; `retry: 3000`; `event: stage` frames with `{sessionId, revision}`; 15 s heartbeat). The initial frame carries the current revision. Used by the conversation dock and the panel for push updates, with polling as fallback. Registered on the authenticated channel; unauthenticated access is `401`.
 
 ## 6. Data formats (shared with `data/`)
 `data/symbols.json`:
@@ -252,3 +270,4 @@ Coordinates are plain numbers; all ranges are two-element `[min,max]` number arr
 - For unsupported-but-valid requests use `unsupported`; never crash the worker—wrap op
   dispatch in try/except and answer `domain-error`/`internal`.
 - The worker must flush every response line (`print(..., flush=True)`).
+

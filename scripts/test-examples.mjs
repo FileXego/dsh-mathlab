@@ -1,15 +1,21 @@
 /**
- * Execute every example action in data/examples.json through the live MathLab API.
- * Usage: node scripts/test-examples.mjs [baseUrl]
- * Exits non-zero when an example fails; prints a compact table.
+ * Execute every example action in data/examples.json directly through the
+ * MathLabService (no HTTP/auth required; the HTTP surface is browser-session
+ * authenticated and covered by scripts/test-http.mjs).
+ * Usage: node scripts/test-examples.mjs
  */
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+import { MathLabService } from '../lib/math-service.js';
 
-const base = (process.argv[2] ?? 'http://127.0.0.1:62937').replace(/\/$/, '');
 const root = fileURLToPath(new URL('..', import.meta.url));
 const data = JSON.parse(await readFile(`${root}/data/examples.json`, 'utf8'));
 const examples = Array.isArray(data.examples) ? data.examples : [];
+const service = new MathLabService({
+  version: 'test',
+  engineTimeoutMs: 30_000,
+  logger: { info() {}, warn() {}, error() {} },
+});
 
 let failures = 0;
 const rows = [];
@@ -23,23 +29,14 @@ for (const example of examples) {
     continue;
   }
   try {
-    const res = await fetch(`${base}/mathlab/api`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ op, args }),
-    });
-    const payload = await res.json();
-    if (payload.ok === true) {
-      rows.push([label, true, '']);
-    } else {
-      rows.push([label, false, `${payload.error?.code}: ${payload.error?.message}`]);
-      failures++;
-    }
+    await service.call(op, args);
+    rows.push([label, true, '']);
   } catch (error) {
-    rows.push([label, false, `request failed: ${error.message}`]);
+    rows.push([label, false, `${error?.code ?? 'error'}: ${error?.message ?? error}`]);
     failures++;
   }
 }
+service.stop();
 
 for (const [label, ok, detail] of rows) {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${label}${detail ? `  — ${detail}` : ''}`);

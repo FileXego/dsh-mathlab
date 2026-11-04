@@ -2489,7 +2489,7 @@
         let source = null;
         let last = null;
         try {
-          source = new EventSource('/mathlab/events?sessionId=' + encodeURIComponent(sessionId));
+          source = new EventSource('/api/mathlab/events?sessionId=' + encodeURIComponent(sessionId));
         } catch (streamError) {
           return undefined;
         }

@@ -131,15 +131,14 @@ Lean 安装（任选其一）：安装 [elan](https://github.com/leanprover/elan
 
 ```
 dsh-mathlab (bundle)
-├─ index.js              Host 插件：注入 tools/webServer，挂载 MathLabService
+├─ index.js              Host 插件：注入 tools，可选注入 connection；挂载 MathLabService
 ├─ lib/
 │  ├─ math-service.js    统一操作层（Host 自有数据 + Python 转发 + 讲解舞台）
 │  ├─ stage-store.js     讲解舞台状态、块校验、过程轨迹与 Markdown 导出
 │  ├─ python-bridge.js   常驻 Python worker 的 JSON 行协议、自动重启与超时
 │  ├─ catalog.js         符号 / 例题 / Lean 片段数据
-│  ├─ http-api.js        POST /mathlab/api 与 /mathlab/assets 静态资源
+│  ├─ http-api.js        认证通道上的 API / SSE / KaTeX 资产（无 route 回退即拒绝）
 │  ├─ tools.js           6 个智能体工具（与面板同源操作）
-│  ├─ fence.js           Host/Origin 浏览器信任栅栏（DNS rebinding 防护）
 │  └─ define-tool.js     不依赖 DSH 包的 tool 定义构造器
 ├─ engine/mathlab_engine.py   全部数学运算（SymPy/SciPy/NetworkX）
 ├─ client-src/*.js      Web 面板源码（纯 JS + React.createElement）
@@ -149,6 +148,12 @@ dsh-mathlab (bundle)
 ```
 
 运算层只有一份：面板通过同源 HTTP JSON API 调用它，智能体通过工具调用同一批方法，因此 UI 与工具行为一致，错误信息同源。
+
+**网络与执行边界**：面板 HTTP 路由只注册在 DSH 的认证连接通道
+（`ctx.connection.fetch`）上；该通道不可用时**不注册任何路由**（默认拒绝），不会退回
+Host/Origin 检查。未认证请求对 `/api/mathlab/api`（包括 Lean 操作）、SSE 与 KaTeX 资产
+都返回 `401`；旧的未认证 `/mathlab/*` 路由已删除。Lean 是本地子进程，只有已认证的浏览器
+会话或智能体工具能触发；插件不联网、不读取密钥、无安装脚本。
 
 ## 开源参考与致谢
 
@@ -178,3 +183,4 @@ dsh-mathlab (bundle)
 ## 许可
 
 插件代码由本项目的原始实现构成。第三方组件许可见 `NOTICE.md`。
+

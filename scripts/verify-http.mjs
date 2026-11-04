@@ -4,7 +4,7 @@
 // expectations, cross-checked with a separately spawned local SymPy process.
 import { execFileSync } from 'node:child_process';
 
-const API = process.env.MATHLAB_API || 'http://127.0.0.1:62937/mathlab/api';
+const API = process.env.MATHLAB_API || 'http://127.0.0.1:62937/api/mathlab/api';
 const records = [];
 const defects = [];
 
@@ -491,17 +491,17 @@ record('calc.simplify still correct after errors', ping.payload?.ok === true && 
 // =====================================================================
 {
   const base = new URL(API);
-  const getRes = await fetch(`${base.origin}/mathlab/api`);
-  record('GET /mathlab/api -> 405', getRes.status === 405, `status=${getRes.status}`);
+  const getRes = await fetch(`${base.origin}/api/mathlab/api`);
+  record('GET /api/mathlab/api -> 405', getRes.status === 405, `status=${getRes.status}`);
   const badJson = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{not json' });
   record('malformed JSON body -> 400 bad-request', badJson.status === 400, `status=${badJson.status} body=${(await badJson.text()).slice(0, 140)}`);
   const evil = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json', origin: 'http://evil.example' }, body: JSON.stringify({ op: 'meta.info', args: {} }) });
   record('cross-origin POST rejected (403 forbidden)', evil.status === 403, `status=${evil.status} body=${(await evil.text()).slice(0, 140)}`);
-  const miss = await fetch(`${base.origin}/mathlab/assets/nope.js`);
+  const miss = await fetch(`${base.origin}/api/mathlab/assets/nope.js`);
   record('unknown asset path -> 404', miss.status === 404, `status=${miss.status}`);
-  const katex = await fetch(`${base.origin}/mathlab/assets/katex/katex.min.js`);
-  const katexCss = await fetch(`${base.origin}/mathlab/assets/katex/katex.min.css`);
-  const font = await fetch(`${base.origin}/mathlab/assets/katex/fonts/KaTeX_Main-Regular.woff2`);
+  const katex = await fetch(`${base.origin}/api/mathlab/assets/katex/katex.min.js`);
+  const katexCss = await fetch(`${base.origin}/api/mathlab/assets/katex/katex.min.css`);
+  const font = await fetch(`${base.origin}/api/mathlab/assets/katex/fonts/KaTeX_Main-Regular.woff2`);
   record('KaTeX assets served with correct content types', katex.status === 200 && /javascript/.test(katex.headers.get('content-type') || '') && katexCss.status === 200 && /text\/css/.test(katexCss.headers.get('content-type') || '') && font.status === 200 && /font\/woff2/.test(font.headers.get('content-type') || ''), `js=${katex.status}/${katex.headers.get('content-type')} css=${katexCss.status} font=${font.status}/${font.headers.get('content-type')}`);
 }
 
@@ -517,3 +517,4 @@ if (fails.length) {
   for (const f of fails) console.log(`- ${f.name}: ${f.detail}`);
   process.exitCode = 1;
 }
+

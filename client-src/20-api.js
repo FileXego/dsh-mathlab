@@ -1,8 +1,8 @@
-/* 20-api — Host bridge (`POST /mathlab/api`), shared engine store, request hook. */
+/* 20-api — Host bridge (`POST /api/mathlab/api`, authenticated DSH channel), shared engine store, request hook. */
 (function () {
   'use strict';
 
-  const API_URL = '/mathlab/api';
+  const API_URL = '/api/mathlab/api';
 
   /** Error carrying the API error code (`engine-down`, `parse-error`, ...). */
   function MathLabError(code, message, cause) {

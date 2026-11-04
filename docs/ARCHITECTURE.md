@@ -16,7 +16,7 @@ user
  ├─ Host plugin (index.js, lib/)
  │    ├─ lib/tools.js                 agent tools (mathlab, mathlab_stage, …)
  │    ├─ lib/math-service.js          operation dispatcher + stage store
- │    ├─ lib/http-api.js              /mathlab/api + /mathlab/events (SSE)
+ │    ├─ lib/http-api.js              /api/mathlab/* on the authenticated connection channel (default deny)
  │    └─ engine/                      Python/SymPy engine (subprocess)
  │
  └─ docs/                            protocol and UI documentation
@@ -41,7 +41,7 @@ disposed when the right-sidebar preference is turned off; re-enabling installs i
 
 The stage protocol, block renderer, HTTP API, SSE stream, engine bridge, symbol atlas,
 algebra/category/logic/plot modules know nothing about DSH tabs or sessions. They communicate
-through plain data (`stage` JSON, `/mathlab/api` ops) in `lib/` and the client modules below
+through plain data (`stage` JSON, `/api/mathlab/api` ops) in `lib/` and the client modules below
 `60-stage`. The host tools are defined with local plain-JSON tool definitions
 (`lib/define-tool.js`) rather than importing private DSH tool packages, which keeps the host
 half installable on a stock DSH context.
@@ -60,3 +60,4 @@ adapter and the stylesheet rather than spread through the math engine.
   has a visible fallback; a missing service never disables the math tools.
 - Keep the shipped client under the build budget (`build-client.mjs` refuses oversized
   bundles); documentation comments are stripped from the artifact only.
+

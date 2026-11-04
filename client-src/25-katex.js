@@ -1,10 +1,11 @@
 /* 25-katex — lazy KaTeX loader + safe math rendering component.
- * Assets are served by the Host at /mathlab/assets/katex/. If anything fails the
- * renderer degrades to literal LaTeX text and never throws. */
+ * Assets are served by the Host on the authenticated channel at
+ * /api/mathlab/assets/katex/. If anything fails the renderer degrades to
+ * literal LaTeX text and never throws. */
 (function () {
   'use strict';
 
-  const KATEX_BASE = '/mathlab/assets/katex/';
+  const KATEX_BASE = '/api/mathlab/assets/katex/';
   let katexPromise = null;
   let katexCssRequested = false;
   let lastFailureAt = 0;

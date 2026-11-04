@@ -17,7 +17,7 @@ const katex = (() => {
   return sandbox.module.exports.katex || sandbox.module.exports || sandbox.exports.katex || sandbox.katex;
 })();
 if (!katex || typeof katex.renderToString !== 'function') { console.log('FAIL :: cannot load KaTeX from assets'); process.exit(1); }
-const API = 'http://127.0.0.1:62937/mathlab/api';
+const API = 'http://127.0.0.1:62937/api/mathlab/api';
 const results = [];
 function record(name, ok, detail) { results.push({ name, ok, detail }); console.log(`${ok ? 'PASS' : 'FAIL'} :: ${name}${detail ? ' :: ' + detail : ''}`); }
 async function call(op, args) {
@@ -115,3 +115,4 @@ record('explanation-cited Mathlib names appear in snippet code', suspicious.leng
 const pass = results.filter((r) => r.ok).length;
 console.log(`\n${pass}/${results.length} content checks passed`);
 if (results.some((r) => !r.ok)) process.exitCode = 1;
+

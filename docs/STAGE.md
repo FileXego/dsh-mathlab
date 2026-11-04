@@ -11,7 +11,7 @@ turns and is readable back by the agent.
   shows its own Session's stage, the main panel (no session) shows the most recently
   updated one. Revision counters drive an **SSE push** stream plus a ~900 ms poll fallback.
 - The agent-facing tool is `mathlab_stage`; the same operations are available over
-  `POST /mathlab/api` (used by the panel and by tests):
+  `POST /api/mathlab/api` (used by the panel and by tests):
   `stage.get`, `stage.set`, `stage.append`, `stage.update`, `stage.annotate`,
   `stage.question`, `stage.cursor`, `stage.export`, `stage.clear`.
 
@@ -111,7 +111,7 @@ view).
 
 - Every stage op accepts an optional `sessionId`; annotations, questions, cursor and
   export are scoped to that Session too.
-- Push: `GET /mathlab/events?sessionId=…` is a Server-Sent-Events stream
+- Push: `GET /api/mathlab/events?sessionId=…` is a Server-Sent-Events stream
   (`text/event-stream`, `Cache-Control: no-transform`). It sends the current revision on
   connect, then `event: stage` frames `{sessionId, revision}` on every mutation, plus a
   heartbeat every 15 s. The conversation dock and the main panel subscribe; both keep a low
@@ -178,3 +178,4 @@ the controls stay at 100%; plot blocks keep their own pan/zoom interaction.
   step numbers. The `symbols` block adds a `符号 → 步骤` connection list **and a bipartite
   symbol–step graph**; symbols and step labels are both clickable. This makes the logical
   notation and its usage auditable rather than decorative.
+

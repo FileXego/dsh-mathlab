@@ -10,31 +10,32 @@
   Lead toggles `include:mathlab` off/on to activate a fresh module generation. The Web page picks up a
   changed `client.js` through the client HMR receiver when the bundle graph changes; a page reload also works.
 
-## HTTP API (works from any local shell; no auth header needed)
+## HTTP API (authenticated DSH channel only)
 
-The route is fenced by Host/Origin only:
+The routes are registered on `ctx.connection.fetch` (DSH's authenticated browser channel).
+There is **no unauthenticated webServer route and no fallback**. A CLI without the browser's
+session must receive `401` for `/api/mathlab/*` and must not get a `200` from the removed legacy `/mathlab/*` surface (`GET` is `404`; the DSH server may answer other methods with `405`). That is the expected default-deny behaviour.
 
 ```bat
 node scripts/test-http.mjs
-:: or
-node scripts/test-http.mjs http://127.0.0.1:62937
+:: with the GUI URL to also run live unauthenticated probes:
+node scripts/test-http.mjs http://127.0.0.1:53640
 ```
 
-Manual probe:
+Manual probe from a local shell (expected: `401`, never `200`):
 
 ```powershell
-$body = '{"op":"meta.info","args":{}}'
-Invoke-WebRequest -Method POST -Uri http://127.0.0.1:62937/mathlab/api -ContentType application/json -Body $body
+Invoke-WebRequest -Method POST -Uri http://127.0.0.1:53640/api/mathlab/api -ContentType application/json -Body '{"op":"lean.info","args":{}}' -SkipHttpErrorCheck
 ```
 
-Envelope: `{ok:true,result}` or `{ok:false,error:{code,message}}`. `meta.info` should report
-`engine.available:true` with Python/SymPy versions once the engine file exists; `content.symbols > 0`
-once `data/symbols.json` is present; `lean.available` reflects the real toolchain (expected `false`
-on this machine until Lean is installed).
+Authenticated checks are performed through the running Web panel (engine status, KaTeX
+rendering, stage list/SSE). The envelope is `{ok:true,result}` or
+`{ok:false,error:{code,message}}`. `meta.info` should report `engine.available:true` with
+Python/SymPy versions; `content.symbols > 0`; `lean.available` reflects the real toolchain
+(expected `false` here until Lean is installed).
 
-Static assets: `GET /mathlab/assets/katex/katex.min.js` (200 `text/javascript`),
-`/mathlab/assets/katex/katex.min.css`, `/mathlab/assets/katex/fonts/<font>.woff2`,
-`/mathlab/assets/katex/LICENSE`. Anything else under the prefix must 404.
+Static assets are served only through the same authenticated channel at
+`/api/mathlab/assets/katex/...`; unauthenticated requests are `401`, unknown names are `404`.
 
 ## Agent tools (registered on the harness tool registry)
 
@@ -66,7 +67,8 @@ refreshed it; note that limitation instead of editing the app.
 - [ ] `node --check client.js`, `node --check index.js`, all `lib/*.js` parse.
 - [ ] `python -m unittest discover -s engine/tests -v` green.
 - [ ] `python -m json.tool data/symbols.json` etc. parse; counts meet `docs/CONTENT.md`.
-- [ ] `/mathlab/api` meta.info: engine available, content counts > 0.
+- [ ] `/api/mathlab/api` meta.info through the authenticated panel: engine available, content counts > 0.
+- [ ] Security: `node scripts/test-http.mjs` passes; unauthenticated POST to `/api/mathlab/api` (including `lean.info`) is `401`; legacy `/mathlab/api` is not `200` (GET `404`, POST `405`); unauthenticated asset/SSE requests are not `200`; missing `connection.fetch` registers no route.
 - [ ] At least 15 varied ops return mathematically correct results (integral, group lattice, truth
       table, ND proof, category validation, set pullback, circle homology, curvature, plot sample,
       prob/opt/graph, Lean info/check diagnostic).
@@ -76,3 +78,4 @@ refreshed it; note that limitation instead of editing the app.
 - [ ] Sidebar 数学研究台 opens the panel; tabs render; no console/slot crash; KaTeX or fallback visible.
 - [ ] `mathlab_status` honestly reports Lean missing.
 - [ ] `NOTICE.md`/`README.md` present and accurate.
+
