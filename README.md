@@ -45,13 +45,18 @@ npm run setup:python
 
 ### 2. 安装插件
 
-- 从 GitHub 源码安装（推荐，固定提交见发布页）：
+- 从 npm 安装（已发布 `dsh-mathlab@0.2.2`）：
+
+```bash
+dsh plugin --profile desktop add dsh-mathlab
+```
+
+- 或从 GitHub 源码安装（固定提交见发布页）：
 
 ```bash
 dsh plugin --profile desktop add github:FileXego/dsh-mathlab
 ```
 
-- npm 包名为 `dsh-mathlab`（发布后可用 `dsh plugin --profile desktop add dsh-mathlab`）。
 - 安装后重启/重载 DSH；侧边栏出现 **数学研究台**。
 
 ## 使用方式
