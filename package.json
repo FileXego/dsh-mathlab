@@ -38,6 +38,7 @@
   },
   "scripts": {
     "build": "node build-client.mjs",
+    "setup:python": "node scripts/install-python-deps.mjs",
     "test:stage": "node --test scripts/test-stage.mjs",
     "test:engine": "python -m unittest discover -s engine/tests -v",
     "test": "node --test scripts/test-stage.mjs scripts/test-bridge.mjs && node scripts/test-http.mjs && node scripts/test-examples.mjs",

@@ -35,6 +35,14 @@ py -3.13 -m pip install -r engine/requirements.txt
 
 依赖固定为 `sympy==1.14.0`、`numpy==2.4.4`、`scipy==1.17.1`、`networkx==3.6.1`（见 [engine/requirements.txt](engine/requirements.txt)）。插件会自动探测解释器；缺包时会直接给出“请运行 pip install -r ...requirements.txt”的可执行提示，而不是含糊的 spawn 错误。需要指定解释器时设置 `MATHLAB_PYTHON`。
 
+在源码目录里也可以直接执行封装好的安装入口：
+
+```bash
+npm run setup:python
+```
+
+如果插件是通过 `dsh plugin add` 安装的，依赖文件位于 DSH 的插件目录；首次打开 MathLab 时如果缺依赖，错误/`mathlab_status` 会打印该解释器和 `engine/requirements.txt` 的**绝对路径**，复制那条 `pip install` 命令执行即可。
+
 ### 2. 安装插件
 
 - 从 GitHub 源码安装（推荐，固定提交见发布页）：
