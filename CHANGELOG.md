@@ -4,6 +4,13 @@ All notable changes to MathLab are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions use
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.4] — 2026-11-12
+
+### Fixed
+
+- README screenshots and documentation links now use absolute GitHub URLs, so
+  images render on the npm package page after `docs/` was removed from the tarball.
+
 ## [0.2.3] — 2026-11-12
 
 ### Added

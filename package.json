@@ -1,6 +1,6 @@
 {
   "name": "dsh-mathlab",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": false,
   "type": "module",
   "description": "MathLab — a graduate-level mathematics research workbench for DeepSeek Harness: symbolic computation, abstract algebra, category theory, mathematical logic, Lean 4, plotting and a searchable symbol atlas.",

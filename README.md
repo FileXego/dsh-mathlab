@@ -46,7 +46,7 @@ npm run setup:python
 
 ### 2. 安装插件
 
-- 从 npm 安装（已发布 `dsh-mathlab@0.2.3`）：
+- 从 npm 安装（已发布 `dsh-mathlab@0.2.4`）：
 
 ```bash
 dsh plugin --profile desktop add dsh-mathlab
@@ -108,29 +108,29 @@ dsh plugin --profile desktop add github:FileXego/dsh-mathlab
 - "把这个积分过程做成讲解，包含换元思路树和函数图像，导出分享"
 - "P vs NP 的等价表述能弱化到多少层？用极限语言分析，放到右侧讲解台"
 
-平台协议见 [docs/STAGE.md](docs/STAGE.md)。实际界面：
+平台协议见 [docs/STAGE.md](https://github.com/FileXego/dsh-mathlab/blob/main/docs/STAGE.md)。实际界面：
 
-![右侧原生分栏：固定顶栏（步进/步骤条/缩放）+ 独立滚动的正文](docs/screenshot-stage-native.png)
+![右侧原生分栏：固定顶栏（步进/步骤条/缩放）+ 独立滚动的正文](https://raw.githubusercontent.com/FileXego/dsh-mathlab/main/docs/screenshot-stage-native.png)
 
-![右侧 Sidebar「开始」页里的独立讲解按钮](docs/screenshot-stage-guide.png)
+![右侧 Sidebar「开始」页里的独立讲解按钮](https://raw.githubusercontent.com/FileXego/dsh-mathlab/main/docs/screenshot-stage-guide.png)
 
-![插件选项：下侧栏与右侧栏可独立开关](docs/screenshot-stage-prefs.png)
+![插件选项：下侧栏与右侧栏可独立开关](https://raw.githubusercontent.com/FileXego/dsh-mathlab/main/docs/screenshot-stage-prefs.png)
 
-![内嵌模式：只在对话内就地展开](docs/screenshot-stage-inline.png)
+![内嵌模式：只在对话内就地展开](https://raw.githubusercontent.com/FileXego/dsh-mathlab/main/docs/screenshot-stage-inline.png)
 
-![关闭模式：只留一行讲解条，把屏幕让给代码](docs/screenshot-stage-off.png)
+![关闭模式：只留一行讲解条，把屏幕让给代码](https://raw.githubusercontent.com/FileXego/dsh-mathlab/main/docs/screenshot-stage-off.png)
 
-![划词提问：选中段落即可针对它提问，并发送到对话](docs/screenshot-stage-selectask.png)
+![划词提问：选中段落即可针对它提问，并发送到对话](https://raw.githubusercontent.com/FileXego/dsh-mathlab/main/docs/screenshot-stage-selectask.png)
 
-![符号—步骤连接图：点击符号高亮相关判断](docs/screenshot-stage-symbolgraph.png)
+![符号—步骤连接图：点击符号高亮相关判断](https://raw.githubusercontent.com/FileXego/dsh-mathlab/main/docs/screenshot-stage-symbolgraph.png)
 
-![判断卡与逻辑符号](docs/screenshot-stage-judgment.png)
+![判断卡与逻辑符号](https://raw.githubusercontent.com/FileXego/dsh-mathlab/main/docs/screenshot-stage-judgment.png)
 
-![Fitch 形式证明逐步展开](docs/screenshot-stage-proof.png)
+![Fitch 形式证明逐步展开](https://raw.githubusercontent.com/FileXego/dsh-mathlab/main/docs/screenshot-stage-proof.png)
 
-![可交互图像：y=x² 与 y=2](docs/screenshot-stage-plot.png)
+![可交互图像：y=x² 与 y=2](https://raw.githubusercontent.com/FileXego/dsh-mathlab/main/docs/screenshot-stage-plot.png)
 
-![可迁移结论卡与导出](docs/screenshot-stage-takeaway.png)
+![可迁移结论卡与导出](https://raw.githubusercontent.com/FileXego/dsh-mathlab/main/docs/screenshot-stage-takeaway.png)
 
 ### 作为智能体工具
 
@@ -183,7 +183,7 @@ CI 配置见 [.github/workflows/ci.yml](.github/workflows/ci.yml)：Python 3.13 
 
 ## 架构
 
-分层、宿主边界与“高内聚低耦合”说明见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。
+分层、宿主边界与“高内聚低耦合”说明见 [docs/ARCHITECTURE.md](https://github.com/FileXego/dsh-mathlab/blob/main/docs/ARCHITECTURE.md)。
 
 ```
 dsh-mathlab (bundle)
