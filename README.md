@@ -1,6 +1,7 @@
 # MathLab · 数学研究台
 
 [![CI](https://github.com/FileXego/dsh-mathlab/actions/workflows/ci.yml/badge.svg)](https://github.com/FileXego/dsh-mathlab/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/dsh-mathlab?logo=npm)](https://www.npmjs.com/package/dsh-mathlab)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **MathLab** 是 DeepSeek Harness（DSH）的高等数学研究工具插件，不是数学知识介绍页，而是一台可以真正"算"的工具台：
