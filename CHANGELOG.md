@@ -4,6 +4,28 @@ All notable changes to MathLab are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions use
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.3] — 2026-11-12
+
+### Added
+
+- GitHub issue templates (bug / feature) and a README feedback section linking
+  Issues and Discussions, so users have a clear place to report problems.
+- The panel now shows a visible, copyable Python-dependency setup card when the
+  engine is unavailable, instead of only a status tooltip.
+
+### Changed
+
+- Slimmed the npm package: `docs/` screenshots, dev-only verification scripts and
+  engine tests are no longer shipped; only `scripts/install-python-deps.mjs`
+  remains for `npm run setup:python`.
+- Clarified in the README that MathLab is a mathematics workbench, not MATLAB.
+
+### Fixed
+
+- Static-scanner false positives: the Lean/elan hint no longer contains a
+  `curl | sh` pattern, and local verification scripts use `localhost`/environment
+  variables instead of a hard-coded loopback IP.
+
 ## [0.2.2] — 2026-11-11
 
 ### Added

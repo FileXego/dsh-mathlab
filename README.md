@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/dsh-mathlab?logo=npm)](https://www.npmjs.com/package/dsh-mathlab)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**MathLab** 是 DeepSeek Harness（DSH）的高等数学研究工具插件，不是数学知识介绍页，而是一台可以真正"算"的工具台：
+**MathLab**（数学工作台，不是 MATLAB；本插件不调用 MATLAB）是 DeepSeek Harness（DSH）的高等数学研究工具插件，不是数学知识介绍页，而是一台可以真正"算"的工具台：
 
 - **符号计算**：SymPy 驱动的化简、展开、因式分解、求导、积分、极限、级数、求和、解方程、解微分方程、矩阵分解等；
 - **抽象代数**：置换群运算、群的 Cayley 表 / 中心 / 共轭类 / 子群格（Hasse 图）/ 正规子群 / 商群 / Sylow / 同态检验，有限域 GF(pⁿ) 运算与乘法表，ℤ/nℤ 单位群与零因子；
@@ -46,7 +46,7 @@ npm run setup:python
 
 ### 2. 安装插件
 
-- 从 npm 安装（已发布 `dsh-mathlab@0.2.2`）：
+- 从 npm 安装（已发布 `dsh-mathlab@0.2.3`）：
 
 ```bash
 dsh plugin --profile desktop add dsh-mathlab
@@ -158,9 +158,17 @@ mathlab_plot({ action: "svg", args: { kind: "explicit", expr: "exp(-x**2)", var:
 | Lean 4（可选） | Lean 代码检查与 Mathlib | 未安装；`mathlab_status` / Lean 页会明确报告并给出安装指引 |
 | KaTeX（随插件分发） | 公式排版 | 已内置（MIT，见 `NOTICE.md`） |
 
-Python 不可用时，面板会显示"引擎启动中 / 引擎不可用"，`mathlab_status` 返回具体原因；不会静默失败。缺依赖时错误信息会直接给出 `pip install -r engine/requirements.txt` 命令和探测到的解释器路径。
+Python 不可用时，面板会显示"引擎启动中 / 引擎不可用"，`mathlab_status` 返回具体原因；不会静默失败。缺依赖时错误信息会直接给出 `pip install -r engine/requirements.txt` 命令和探测到的解释器路径；面板顶部同时会出现一张可一键复制的安装提示卡。
 自定义解释器路径：设置环境变量 `MATHLAB_PYTHON` 指向带有 SymPy 的 Python 可执行文件，然后重启 DSH。
 Lean 安装（任选其一）：安装 [elan](https://github.com/leanprover/elan) 后执行 `elan toolchain install stable`，或把 `lean`/`lake` 加入 PATH；插件会自动探测。
+
+## 反馈与参与
+
+- Bug / 安装问题：[GitHub Issues](https://github.com/FileXego/dsh-mathlab/issues/new/choose)
+- 使用交流、功能建议：[GitHub Discussions](https://github.com/FileXego/dsh-mathlab/discussions)
+- 插件市场条目：[Open Plugin Market](https://dshopen.org/plugins/dsh-mathlab/)
+
+首次使用请先完成上面的 Python 依赖步骤；如果面板显示“引擎不可用”，顶部的安装提示卡里有可复制的 `pip install` 命令。
 
 ## 开发与测试
 

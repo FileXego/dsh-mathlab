@@ -36,6 +36,8 @@ window.__ModuleLoader__.load({
       'engine.checking': '正在连接数学引擎…',
       'engine.downHint': '无法连接本地数学引擎。Python 进程可能仍在启动，或插件宿主尚未加载。',
       'engine.downRetry': '重新连接',
+      'engine.setupTitle': 'Python 依赖未就绪',
+      'engine.setupHint': '复制下面的 pip 命令到终端运行，然后重新连接。',
       'footer.version': '版本',
       'footer.attribution': '开源组件：SymPy、NetworkX、SciPy、NumPy、Lean 4 / Mathlib4、KaTeX',
       'footer.note': '面板与引擎通过本地同源 API 通信，计算在您的机器上完成。',
@@ -106,6 +108,8 @@ window.__ModuleLoader__.load({
       'engine.checking': 'Connecting to the mathematics engine…',
       'engine.downHint': 'Cannot reach the local engine. Python may still be starting, or the plugin host is not loaded yet.',
       'engine.downRetry': 'Reconnect',
+      'engine.setupTitle': 'Python deps missing',
+      'engine.setupHint': 'Copy the pip command below into a terminal, then reconnect.',
       'footer.version': 'version',
       'footer.attribution': 'Open source: SymPy, NetworkX, SciPy, NumPy, Lean 4 / Mathlib4, KaTeX',
       'footer.note': 'The panel talks to the local engine over a same-origin API; computation happens on your machine.',
@@ -15968,6 +15972,19 @@ window.__ModuleLoader__.load({
     );
   };
 
+  ML.SetupBanner = function (props) {
+    const t = props.t || ML.useT(), engine = props.engine;
+    const msg = engine.error ? ML.errInfo(engine.error).message : t('engine.downHint');
+    return h(
+      'div',
+      { className: 'ml-banner ml-banner-warn', style: { marginTop: '14px' } },
+      h('strong', null, t('engine.setupTitle')),
+      h('p', { className: 'ml-hint' }, t('engine.setupHint')),
+      h('pre', { className: 'ml-pre' }, msg),
+      h(ML.CopyBtn, { text: msg, label: t('common.copyText'), variant: 'subtle' }),
+    );
+  };
+
   ML.AboutFooter = function AboutFooter(props) {
     const t = ML.useT();
     const engine = props.engine;
@@ -16096,6 +16113,7 @@ window.__ModuleLoader__.load({
               h(ML.EngineStatus, { engine: engine }),
             ),
           ),
+          engine.status === 'down' ? h(ML.SetupBanner, { engine: engine, t: t }) : null,
           h(ML.Tabs, {
             items: tabItems,
             value: active,

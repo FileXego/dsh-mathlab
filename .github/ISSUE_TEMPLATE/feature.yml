@@ -1,0 +1,34 @@
+name: Feature request / 功能建议
+description: Suggest a new capability, operation, or workflow for MathLab.
+title: "[feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the problem before the solution. Concrete examples (an operation name,
+        a formula, or a workflow) are much easier to act on.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: The mathematical task or workflow that is currently awkward or missing.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What should MathLab do? Include example input and expected output if possible.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Existing workarounds or other tools you tried.
+    validations:
+      required: false

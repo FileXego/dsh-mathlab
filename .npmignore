@@ -1,3 +1,7 @@
 **/__pycache__/
 **/*.pyc
 .tmp-venv*/
+engine/tests/
+engine/README.md
+docs/
+build-client.mjs

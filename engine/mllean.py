@@ -81,10 +81,10 @@ def lean_info(args=None) -> dict:
             "lake": bool(lake_path),
             "lakePath": lake_path,
             "note": (
-                "Lean toolchain not found. Install Lean 4 (for example via elan: "
-                "`curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh`), "
-                "or point MATHLAB_LEAN at the `lean` executable. The algebra/analysis "
-                "panels work without Lean; only lean.* operations need it."
+                "Lean toolchain not found. Install Lean 4 (for example via elan: download "
+                "https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh, review it, "
+                "then run it with `sh`), or point MATHLAB_LEAN at the `lean` executable. "
+                "The algebra/analysis panels work without Lean; only lean.* operations need it."
             ),
         }
     result = {

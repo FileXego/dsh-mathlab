@@ -4,7 +4,7 @@
 // expectations, cross-checked with a separately spawned local SymPy process.
 import { execFileSync } from 'node:child_process';
 
-const API = process.env.MATHLAB_API || 'http://127.0.0.1:62937/api/mathlab/api';
+const API = process.env.MATHLAB_API || 'http://localhost:62937/api/mathlab/api';
 const records = [];
 const defects = [];
 

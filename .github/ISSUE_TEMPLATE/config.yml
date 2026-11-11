@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Usage questions / 使用交流
+    url: https://github.com/FileXego/dsh-mathlab/discussions
+    about: Ask installation or usage questions and share workflows with other MathLab users.
+  - name: Open Plugin Market listing
+    url: https://dshopen.org/plugins/dsh-mathlab/
+    about: The marketplace entry, likes, and install source for MathLab.

@@ -84,6 +84,20 @@
     );
   };
 
+  /** Visible first-run hint when the engine is down (usually missing Python deps). */
+  ML.SetupBanner = function (props) {
+    const t = props.t || ML.useT(), engine = props.engine;
+    const msg = engine.error ? ML.errInfo(engine.error).message : t('engine.downHint');
+    return h(
+      'div',
+      { className: 'ml-banner ml-banner-warn', style: { marginTop: '14px' } },
+      h('strong', null, t('engine.setupTitle')),
+      h('p', { className: 'ml-hint' }, t('engine.setupHint')),
+      h('pre', { className: 'ml-pre' }, msg),
+      h(ML.CopyBtn, { text: msg, label: t('common.copyText'), variant: 'subtle' }),
+    );
+  };
+
   ML.AboutFooter = function AboutFooter(props) {
     const t = ML.useT();
     const engine = props.engine;
@@ -213,6 +227,7 @@
               h(ML.EngineStatus, { engine: engine }),
             ),
           ),
+          engine.status === 'down' ? h(ML.SetupBanner, { engine: engine, t: t }) : null,
           h(ML.Tabs, {
             items: tabItems,
             value: active,

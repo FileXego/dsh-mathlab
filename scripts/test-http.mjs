@@ -9,7 +9,7 @@
  *  3. if a base URL is passed, proves unauthenticated access is rejected
  *     (legacy /mathlab/api, authenticated /api/mathlab/*, and assets).
  *
- * Usage: node scripts/test-http.mjs [http://127.0.0.1:PORT]
+ * Usage: node scripts/test-http.mjs [http://localhost:PORT]
  */
 import { registerHttpApi } from '../lib/http-api.js';
 

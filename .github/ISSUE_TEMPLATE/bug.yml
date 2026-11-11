@@ -1,0 +1,65 @@
+name: Bug report / 问题反馈
+description: Report a crash, a wrong mathematical result, or an install problem in MathLab.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please do not paste API keys, tokens, or private file paths.
+        For usage questions, use Discussions instead: https://github.com/FileXego/dsh-mathlab/discussions
+
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: MathLab version (panel footer), DSH version, and Python version.
+      placeholder: "MathLab 0.2.3 · DSH 0.2.1-rc.5 · Python 3.13.9"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Install / Python engine
+        - Compute / symbolic math
+        - Algebra / category theory / logic
+        - Lean 4
+        - Plot / diagram
+        - Live Stage
+        - Agent tools
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what did you get instead?
+      placeholder: Expected ... but MathLab returned/shows ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: The exact operation, expression, or UI path.
+      placeholder: |
+        1. Open MathLab -> Compute
+        2. Enter ...
+        3. Click Run
+    validations:
+      required: true
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: Paste the `mathlab_status` output or the panel error message. Redact usernames if needed.
+      render: text
+    validations:
+      required: false
