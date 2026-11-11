@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -26,10 +27,12 @@ jobs:
         run: |
           node -e "
             const pkg = require('./package.json');
-            const tag = (process.env.GITHUB_REF_NAME || '').replace(/^v/, '');
-            if (!tag || tag !== pkg.version) {
-              console.error('tag ' + tag + ' does not match package.json ' + pkg.version);
-              process.exit(1);
+            if (process.env.GITHUB_REF_TYPE === 'tag') {
+              const tag = (process.env.GITHUB_REF_NAME || '').replace(/^v/, '');
+              if (!tag || tag !== pkg.version) {
+                console.error('tag ' + tag + ' does not match package.json ' + pkg.version);
+                process.exit(1);
+              }
             }
             if (pkg.private === true) {
               console.error('package.json is private; refusing to publish');
