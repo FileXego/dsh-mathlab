@@ -1,0 +1,54 @@
+name: Publish npm package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Verify tag and package version
+        run: |
+          node -e "
+            const pkg = require('./package.json');
+            const tag = (process.env.GITHUB_REF_NAME || '').replace(/^v/, '');
+            if (!tag || tag !== pkg.version) {
+              console.error('tag ' + tag + ' does not match package.json ' + pkg.version);
+              process.exit(1);
+            }
+            if (pkg.private === true) {
+              console.error('package.json is private; refusing to publish');
+              process.exit(1);
+            }
+          "
+
+      - name: Build browser bundle
+        run: node build-client.mjs
+
+      - name: Verify package contents
+        run: npm pack --dry-run
+
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "NPM_TOKEN secret is not configured; add it in the repository Actions settings." >&2
+            exit 1
+          fi
+          npm publish --access public

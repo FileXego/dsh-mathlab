@@ -1,5 +1,8 @@
 # MathLab · 数学研究台
 
+[![CI](https://github.com/FileXego/dsh-mathlab/actions/workflows/ci.yml/badge.svg)](https://github.com/FileXego/dsh-mathlab/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 **MathLab** 是 DeepSeek Harness（DSH）的高等数学研究工具插件，不是数学知识介绍页，而是一台可以真正"算"的工具台：
 
 - **符号计算**：SymPy 驱动的化简、展开、因式分解、求导、积分、极限、级数、求和、解方程、解微分方程、矩阵分解等；
@@ -13,6 +16,26 @@
 - **例子库**：可直接载入执行的研究生级例题（分析、代数、范畴、逻辑、拓扑、绘图等）。
 
 ## 安装
+
+### 1. Python 依赖（必须）
+
+MathLab 的数学运算在本地 Python 引擎里运行。安装 Python 3.13 后，用**插件将使用的那个解释器**安装固定版本依赖：
+
+```bash
+python -m pip install -r engine/requirements.txt
+```
+
+Windows 如果 `python` 指向 Microsoft Store 占位符或不是目标解释器，请用具体路径，例如：
+
+```powershell
+py -3.13 -m pip install -r engine/requirements.txt
+# 或
+& "C:\Users\<you>\AppData\Local\Programs\Python\Python313\python.exe" -m pip install -r engine/requirements.txt
+```
+
+依赖固定为 `sympy==1.14.0`、`numpy==2.4.4`、`scipy==1.17.1`、`networkx==3.6.1`（见 [engine/requirements.txt](engine/requirements.txt)）。插件会自动探测解释器；缺包时会直接给出“请运行 pip install -r ...requirements.txt”的可执行提示，而不是含糊的 spawn 错误。需要指定解释器时设置 `MATHLAB_PYTHON`。
+
+### 2. 安装插件
 
 - 从 GitHub 源码安装（推荐，固定提交见发布页）：
 
@@ -121,9 +144,20 @@ mathlab_plot({ action: "svg", args: { kind: "explicit", expr: "exp(-x**2)", var:
 | Lean 4（可选） | Lean 代码检查与 Mathlib | 未安装；`mathlab_status` / Lean 页会明确报告并给出安装指引 |
 | KaTeX（随插件分发） | 公式排版 | 已内置（MIT，见 `NOTICE.md`） |
 
-Python 不可用时，面板会显示"引擎启动中 / 引擎不可用"，`mathlab_status` 返回具体原因；不会静默失败。
+Python 不可用时，面板会显示"引擎启动中 / 引擎不可用"，`mathlab_status` 返回具体原因；不会静默失败。缺依赖时错误信息会直接给出 `pip install -r engine/requirements.txt` 命令和探测到的解释器路径。
 自定义解释器路径：设置环境变量 `MATHLAB_PYTHON` 指向带有 SymPy 的 Python 可执行文件，然后重启 DSH。
 Lean 安装（任选其一）：安装 [elan](https://github.com/leanprover/elan) 后执行 `elan toolchain install stable`，或把 `lean`/`lake` 加入 PATH；插件会自动探测。
+
+## 开发与测试
+
+```bash
+npm test        # Stage store/bridge 单测 + HTTP auth/default-deny + 57 个例题
+npm run ci      # 构建预算门 + 上述测试
+python -m unittest discover -s engine/tests -v
+python engine/smoke.py
+```
+
+CI 配置见 [.github/workflows/ci.yml](.github/workflows/ci.yml)：Python 3.13 安装固定依赖 → 引擎单测/协议 smoke → Node 构建（620 KiB 预算门）→ Stage 单测 → HTTP 认证契约 → 例题。发布流程见 [.github/workflows/publish.yml](.github/workflows/publish.yml)（推送 `v*` tag，需要仓库 secret `NPM_TOKEN`）；版本记录见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 架构
 
@@ -141,7 +175,14 @@ dsh-mathlab (bundle)
 │  ├─ tools.js           6 个智能体工具（与面板同源操作）
 │  └─ define-tool.js     不依赖 DSH 包的 tool 定义构造器
 ├─ engine/mathlab_engine.py   全部数学运算（SymPy/SciPy/NetworkX）
+├─ engine/requirements.txt    固定版本 Python 依赖（CI 与用户安装共用）
 ├─ client-src/*.js      Web 面板源码（纯 JS + React.createElement）
+│  ├─ 60-stage-store.js  舞台纯数据层（payload / block / Fitch / Markdown）
+│  ├─ 61-stage-render.js block 渲染器与共享展示组件
+│  ├─ 62-stage-transport.js SSE + 轮询
+│  ├─ 63-stage-extras.js 符号—步骤图等可选展示
+│  ├─ 64-stage-tab.js    StageTab（阅读区、标注、导出、交互）
+│  └─ 65-stage-dock.js   内嵌讲解条 / 插件选项 / 注册
 ├─ client.js            构建产物（单文件浏览器模块）
 ├─ data/*.json          符号表、例题、Lean 片段
 └─ assets/katex/        内置 KaTeX

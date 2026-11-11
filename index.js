@@ -24,7 +24,7 @@ export const name = 'mathlab';
  */
 export const inject = ['tools'];
 
-const VERSION = '0.2.1';
+const VERSION = '0.2.2';
 
 const STAGE_GUIDE = `MathLab is mounted (tools mathlab, mathlab_plot, mathlab_lean, mathlab_reference, mathlab_status, mathlab_stage; panel tab 数学研究台).
 

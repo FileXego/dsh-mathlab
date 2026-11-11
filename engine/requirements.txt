@@ -1,0 +1,8 @@
+# MathLab Python engine dependencies.
+# Install with the interpreter MathLab will use:
+#   python -m pip install -r engine/requirements.txt
+# Versions are pinned to the versions used for the test suite and release builds.
+sympy==1.14.0
+numpy==2.4.4
+scipy==1.17.1
+networkx==3.6.1

@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: engine/requirements.txt
+
+      - name: Install Python dependencies
+        run: python -m pip install --disable-pip-version-check -r engine/requirements.txt
+
+      - name: Engine unit tests
+        run: python -m unittest discover -s engine/tests -v
+
+      - name: Engine subprocess smoke
+        run: python engine/smoke.py
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build client under the size budget
+        run: node build-client.mjs
+
+      - name: Syntax checks
+        run: |
+          node --check client.js
+          node --check index.js
+          for file in lib/*.js; do node --check "$file"; done
+
+      - name: Client store unit tests
+        run: node --test scripts/test-stage.mjs
+
+      - name: Python bridge requirements contract
+        run: node --test scripts/test-bridge.mjs
+
+      - name: HTTP auth/default-deny contract
+        run: node scripts/test-http.mjs
+
+      - name: Execute all examples
+        run: node scripts/test-examples.mjs

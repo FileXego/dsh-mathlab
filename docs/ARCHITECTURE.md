@@ -9,8 +9,14 @@ user
  │    └─ client-src/90-root.js        plugin entry: registers main / sidebar / dock seats
  │         ├─ client-src/85-host.js   ONLY optional-DSH seam: native right-Sidebar tab,
  │         │                           composer draft, stage preferences
- │         ├─ client-src/60-stage.js  Live Stage UI (blocks, pinned header, zoom,
- │         │                           selection questions, symbol graph) + dock
+ │         ├─ client-src/60-stage-store.js  pure stage data: payload normalization,
+ │         │                                 block identity, Fitch lines, Markdown
+ │         ├─ client-src/61-stage-render.js block renderers + shared display pieces
+ │         ├─ client-src/62-stage-transport.js SSE stream + polling fallback
+ │         ├─ client-src/63-stage-extras.js symbol–step graph and optional widgets
+ │         ├─ client-src/64-stage-tab.js   StageTab: reading pane, annotations,
+ │         │                                export, selection-to-question
+ │         ├─ client-src/65-stage-dock.js  inline dock, placement prefs, registration
  │         └─ client-src/10..59       panel, tools, plots, algebra, logic, Lean views
  │
  ├─ Host plugin (index.js, lib/)
@@ -42,7 +48,7 @@ disposed when the right-sidebar preference is turned off; re-enabling installs i
 The stage protocol, block renderer, HTTP API, SSE stream, engine bridge, symbol atlas,
 algebra/category/logic/plot modules know nothing about DSH tabs or sessions. They communicate
 through plain data (`stage` JSON, `/api/mathlab/api` ops) in `lib/` and the client modules below
-`60-stage`. The host tools are defined with local plain-JSON tool definitions
+`60-stage-store`. The host tools are defined with local plain-JSON tool definitions
 (`lib/define-tool.js`) rather than importing private DSH tool packages, which keeps the host
 half installable on a stock DSH context.
 
@@ -54,7 +60,7 @@ adapter and the stylesheet rather than spread through the math engine.
 
 ## Cohesion rules
 
-- One module owns one domain: `50..59` are operation UIs, `60-stage` owns the teaching
+- One module owns one domain: `50..59` are operation UIs, `60..65` own the teaching
   surface, `85-host` owns host integration, `90-root` owns registration/shell.
 - Fail closed on optional services: every `ctx.get`/`ctx.inject` is capability-checked and
   has a visible fallback; a missing service never disables the math tools.

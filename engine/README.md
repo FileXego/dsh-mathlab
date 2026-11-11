@@ -42,6 +42,18 @@ Error codes: `parse-error`, `domain-error`, `unsupported`, `timeout`, `limit`,
 
 * Python ≥ 3.10 (developed and tested with **3.13.9**)
 * `sympy` **1.14.0**, `numpy` **2.4.4**, `scipy` **1.17.1**, `networkx` **3.6.1**
+
+Install the pinned versions with the interpreter that runs the engine:
+
+```bash
+python -m pip install -r engine/requirements.txt
+```
+
+The plugin's bridge probes all four imports before spawning the worker; if they
+are missing it reports this exact `pip install -r .../engine/requirements.txt`
+command (including the resolved interpreter path) instead of a vague spawn
+failure. Set `MATHLAB_PYTHON` to choose the interpreter explicitly.
+
 * Lean 4 is **optional** (see below)
 
 ## Files

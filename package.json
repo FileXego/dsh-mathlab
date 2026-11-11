@@ -1,6 +1,6 @@
 {
   "name": "dsh-mathlab",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": false,
   "type": "module",
   "description": "MathLab — a graduate-level mathematics research workbench for DeepSeek Harness: symbolic computation, abstract algebra, category theory, mathematical logic, Lean 4, plotting and a searchable symbol atlas.",
@@ -38,7 +38,10 @@
   },
   "scripts": {
     "build": "node build-client.mjs",
-    "test": "node scripts/test-http.mjs && node scripts/test-examples.mjs"
+    "test:stage": "node --test scripts/test-stage.mjs",
+    "test:engine": "python -m unittest discover -s engine/tests -v",
+    "test": "node --test scripts/test-stage.mjs scripts/test-bridge.mjs && node scripts/test-http.mjs && node scripts/test-examples.mjs",
+    "ci": "node build-client.mjs && node --test scripts/test-stage.mjs scripts/test-bridge.mjs && node scripts/test-http.mjs && node scripts/test-examples.mjs"
   },
   "exports": {
     ".": "./index.js",
@@ -60,6 +63,7 @@
     "cordis.patch.yml",
     "NOTICE.md",
     "SECURITY.md",
+    "CHANGELOG.md",
     "README.md"
   ],
   "dsh": {
