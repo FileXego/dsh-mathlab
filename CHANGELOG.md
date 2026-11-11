@@ -8,6 +8,7 @@ All notable changes to MathLab are documented here. The format follows
 
 ### Added
 
+- Published to npm as `dsh-mathlab@0.2.2` (`latest`); the `dsh plugin add dsh-mathlab` install path now works.
 - `engine/requirements.txt` with pinned SymPy/NumPy/SciPy/NetworkX versions, and a
   bridge probe that reports the exact `pip install -r engine/requirements.txt`
   command when imports are missing.
